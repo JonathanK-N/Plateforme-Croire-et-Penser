@@ -82,52 +82,36 @@
                 </div>
             </div>
 
-            <div class="recent__grid">
-                <!-- Carte 1 -->
+            <div class="recent__grid" id="recentGrid">
+                <!-- Chargé dynamiquement par home.js -->
                 <article class="card-content reveal" data-category="enseignement">
-                    <div class="card-content__img" aria-hidden="true">
-                        <i class="fas fa-book-open"></i>
-                    </div>
+                    <div class="card-content__img" aria-hidden="true"><i class="fas fa-book-open"></i></div>
                     <div class="card-content__bar"></div>
                     <div class="card-content__body">
                         <span class="card-content__cat">Enseignement</span>
                         <h3 class="card-content__title" data-edit-id="card1-title">La foi à l'épreuve du doute</h3>
                         <p class="card-content__desc" data-edit-id="card1-desc">Comment le doute honnête peut devenir un tremplin vers une foi plus profonde et plus authentique.</p>
-                        <a class="card-content__link" href="{{ url_for('contents') }}">
-                            Lire la suite <i class="fas fa-arrow-right"></i>
-                        </a>
+                        <a class="card-content__link" href="{{ url_for('contents') }}">Lire la suite <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </article>
-
-                <!-- Carte 2 -->
                 <article class="card-content reveal" data-category="meditation">
-                    <div class="card-content__img card-content__img--alt" aria-hidden="true">
-                        <i class="fas fa-dove"></i>
-                    </div>
+                    <div class="card-content__img card-content__img--alt" aria-hidden="true"><i class="fas fa-dove"></i></div>
                     <div class="card-content__bar"></div>
                     <div class="card-content__body">
                         <span class="card-content__cat">Méditation</span>
                         <h3 class="card-content__title" data-edit-id="card2-title">Silence et présence divine</h3>
                         <p class="card-content__desc" data-edit-id="card2-desc">Une méditation guidée pour cultiver l'écoute intérieure et accueillir la paix qui dépasse l'intelligence.</p>
-                        <a class="card-content__link" href="{{ url_for('prayers') }}">
-                            Lire la suite <i class="fas fa-arrow-right"></i>
-                        </a>
+                        <a class="card-content__link" href="{{ url_for('prayers') }}">Lire la suite <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </article>
-
-                <!-- Carte 3 -->
                 <article class="card-content reveal" data-category="reflexion">
-                    <div class="card-content__img card-content__img--warm" aria-hidden="true">
-                        <i class="fas fa-lightbulb"></i>
-                    </div>
+                    <div class="card-content__img card-content__img--warm" aria-hidden="true"><i class="fas fa-lightbulb"></i></div>
                     <div class="card-content__bar"></div>
                     <div class="card-content__body">
                         <span class="card-content__cat">Réflexion</span>
                         <h3 class="card-content__title" data-edit-id="card3-title">Raison et révélation</h3>
                         <p class="card-content__desc" data-edit-id="card3-desc">Quand la pensée philosophique rencontre la sagesse biblique : un dialogue fécond pour notre époque.</p>
-                        <a class="card-content__link" href="{{ url_for('contents') }}">
-                            Lire la suite <i class="fas fa-arrow-right"></i>
-                        </a>
+                        <a class="card-content__link" href="{{ url_for('contents') }}">Lire la suite <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </article>
             </div>

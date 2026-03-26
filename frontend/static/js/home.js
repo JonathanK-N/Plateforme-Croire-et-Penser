@@ -5,6 +5,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     initHeroCarousel();
+    loadRecentCMS();
     initScrollReveal();
     initContentFilters();
     initCardTilt();
@@ -41,6 +42,47 @@ function initHeroCarousel() {
             c.style.animation = '';
         });
     });
+}
+
+/* ── Charger contenu récent du CMS ───────── */
+async function loadRecentCMS() {
+    const grid = document.getElementById('recentGrid');
+    if (!grid) return;
+
+    try {
+        const res = await fetch('/api/cms/contents');
+        const items = await res.json();
+        const published = items.filter(c => c.published).slice(0, 6);
+        if (!published.length) return; // garder les cartes statiques
+
+        const typeMap = { article: 'enseignement', video: 'enseignement', podcast: 'meditation' };
+        const icons = { article: 'fa-book-open', video: 'fa-play-circle', podcast: 'fa-headphones' };
+        const imgClass = ['', 'card-content__img--alt', 'card-content__img--warm'];
+
+        grid.innerHTML = published.map((c, i) => {
+            const cat = typeMap[c.type] || 'reflexion';
+            const icon = icons[c.type] || 'fa-lightbulb';
+            const cls = imgClass[i % 3];
+            const excerpt = c.excerpt || (c.body ? c.body.substring(0, 100) + '...' : '');
+            return `
+            <article class="card-content visible" data-category="${cat}" style="cursor:pointer;" onclick="window.location.href='/contents'">
+                <div class="card-content__img ${cls}" aria-hidden="true"><i class="fas ${icon}"></i></div>
+                <div class="card-content__bar"></div>
+                <div class="card-content__body">
+                    <span class="card-content__cat">${c.type}</span>
+                    <h3 class="card-content__title">${c.title}</h3>
+                    <p class="card-content__desc">${excerpt}</p>
+                    <span class="card-content__link">Lire la suite <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </article>`;
+        }).join('');
+
+        // Re-init filters and tilt on new cards
+        initContentFilters();
+        initCardTilt();
+    } catch (e) {
+        // Garder les cartes statiques en cas d'erreur
+    }
 }
 
 /* ── Scroll Reveal (staggered) ──────────── */
