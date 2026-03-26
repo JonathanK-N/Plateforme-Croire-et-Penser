@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Accueil - Croire &amp; Penser{% endblock %}
+{% block title %}Accueil – Croire & Penser{% endblock %}
 
 {% block extra_head %}
 <link href="{{ url_for('static', filename='css/home.css') }}" rel="stylesheet">
@@ -8,348 +8,151 @@
 
 {% block content %}
 <div id="homePage">
-<section class="hero-section position-relative">
-    <div class="hero-particles"></div>
-    <div id="heroCarousel" class="carousel slide carousel-fade hero-carousel" data-bs-ride="carousel" data-bs-interval="6000">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Croire"></button>
-            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Dialoguer"></button>
-            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Penser"></button>
-        </div>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <div class="hero-slide">
-                    <div class="hero-slide-bg" style="background-image: url('{{ url_for('static', filename='img/hero/hero-croyance.jpg') }}')"></div>
-                    <div class="hero-overlay"></div>
-                    <div class="hero-content-wrapper">
-                        <div class="container">
-                            <h1 class="hero-title">Croire & Penser</h1>
-                            <p class="hero-subtitle">"Amener les croyants à penser, et les penseurs à croire"</p>
-                            <p class="hero-description">Une plateforme dédiée à l'exploration intelligente de la foi chrétienne, où raison et spiritualité se rencontrent pour nourrir votre réflexion.</p>
-                            <div class="d-flex flex-wrap justify-content-center gap-3 mt-4">
-                                <a class="hero-cta" href="{{ url_for('contents') }}">Découvrir</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="hero-slide">
-                    <div class="hero-slide-bg" style="background-image: url('{{ url_for('static', filename='img/hero/hero-sagesse.jpg') }}')"></div>
-                    <div class="hero-overlay"></div>
-                    <div class="hero-content-wrapper">
-                        <div class="container">
-                            <h1 class="hero-title">Contenus Récents</h1>
-                            <p class="hero-subtitle">Retrouvez nos récents contenus et restez toujours impactés</p>
-                            <p class="hero-description">Articles, vidéos, podcasts et études bibliques pour enrichir votre parcours spirituel et intellectuel au quotidien.</p>
-                            <div class="d-flex flex-wrap justify-content-center gap-3 mt-4">
-                                <a class="hero-cta" href="{{ url_for('contents') }}">Voir les contenus</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="hero-slide">
-                    <div class="hero-slide-bg" style="background-image: url('{{ url_for('static', filename='img/hero/hero-penser.jpg') }}')"></div>
-                    <div class="hero-overlay"></div>
-                    <div class="hero-content-wrapper">
-                        <div class="container">
-                            <h1 class="hero-title">Rejoignez Notre Communauté</h1>
-                            <p class="hero-subtitle">Vous avez des questions ou besoin d'une prière ?</p>
-                            <p class="hero-description">Rejoignez notre communauté dès maintenant et bénéficiez d'un accompagnement spirituel personnalisé dans votre cheminement de foi.</p>
-                            <div class="d-flex flex-wrap justify-content-center gap-3 mt-4">
-                                <a class="hero-cta" href="{{ url_for('qa') }}">Poser une question</a>
-                                <a class="btn btn-light btn-lg rounded-pill px-4 fw-semibold shadow-sm" href="{{ url_for('prayers') }}">Demander une prière</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Pr&eacute;c&eacute;dent</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Suivant</span>
-        </button>
-    </div>
-</section>
 
-<section class="section-modern bg-white">
-    <div class="container">
-        <div class="row align-items-center gy-4 mb-5">
-            <div class="col-lg-7">
-                <span class="section-kicker">Notre Mission</span>
-                <h2 class="section-title">Excellence & Authenticité</h2>
-                <p class="section-subtitle">Une plateforme d'excellence dédiée à l'approfondissement de la foi chrétienne par une approche rigoureuse et bienveillante.</p>
-            </div>
-            <div class="col-lg-5 text-lg-end">
-                <a class="btn btn-outline-primary rounded-pill px-4" href="{{ url_for('about') }}">Lire notre charte &eacute;ditoriale</a>
-            </div>
-        </div>
-        <div class="row g-4">
-            <div class="col-md-6 col-xl-3">
-                <div class="feature-card animate-fade-up h-100">
-                    <div class="feature-icon mb-4">
-                        <i class="fas fa-book-bible"></i>
-                    </div>
-                    <h3 class="h5 fw-semibold mb-3">Fondements Bibliques</h3>
-                    <p class="mb-0 text-muted">Une approche rigoureuse des Écritures pour édifier une foi solide et éclairée, ancrée dans la vérité biblique.</p>
-                </div>
-            </div>
-            <div class="col-md-6 col-xl-3">
-                <div class="feature-card animate-fade-up h-100 delay-1">
-                    <div class="feature-icon mb-4">
-                        <i class="fas fa-atom"></i>
-                    </div>
-                    <h3 class="h5 fw-semibold mb-3">Excellence Académique</h3>
-                    <p class="mb-0 text-muted">Un dialogue constructif entre théologie, sciences et philosophie pour une compréhension holistique de la foi.</p>
-                </div>
-            </div>
-            <div class="col-md-6 col-xl-3">
-                <div class="feature-card animate-fade-up h-100 delay-2">
-                    <div class="feature-icon mb-4">
-                        <i class="fas fa-scale-balanced"></i>
-                    </div>
-                    <h3 class="h5 fw-semibold mb-3">Application Pratique</h3>
-                    <p class="mb-0 text-muted">Des outils concrets et des parcours structurés pour intégrer la sagesse biblique dans la vie quotidienne.</p>
-                </div>
-            </div>
-            <div class="col-md-6 col-xl-3">
-                <div class="feature-card animate-fade-up h-100 delay-3">
-                    <div class="feature-icon mb-4">
-                        <i class="fas fa-brain"></i>
-                    </div>
-                    <h3 class="h5 fw-semibold mb-3">Pensée Critique</h3>
-                    <p class="mb-0 text-muted">Une réflexion approfondie sur les enjeux contemporains à la lumière de la sagesse chrétienne et du discernement spirituel.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+    <!-- ═══════════════════════════════════════════
+         HERO CAROUSEL – 4 slides, fondu, autoplay
+    ════════════════════════════════════════════ -->
+    <section class="hero" aria-label="Bannière principale">
+        <div class="hero__bokeh" aria-hidden="true"></div>
+        <div class="hero__particles" aria-hidden="true"></div>
 
-<section class="section-modern section-soft-blue">
-    <div class="container">
-        <div class="text-center mb-5">
-            <span class="section-kicker">Ressources</span>
-            <h2 class="section-title">Ressources en avant</h2>
-            <p class="section-subtitle mx-auto" style="max-width: 680px;">Chaque semaine, une s&eacute;lection d'articles, de formats audio-visuels et de parcours guid&eacute;s pour nourrir la m&eacute;ditation, l'enseignement et l'action.</p>
-        </div>
-        <div class="row g-4">
-            <div class="col-lg-4">
-                <div class="resource-card animate-fade-up h-100">
-                    <div class="resource-icon">
-                        <i class="fas fa-feather-pointed"></i>
-                    </div>
-                    <h3 class="h5 fw-semibold mb-3">Articles de fond</h3>
-                    <p class="mb-4 text-muted">Analyses th&eacute;ologiques, perspectives historiques et lectures culturelles audacieuses pour approfondir l'&Eacute;vangile.</p>
-                    <div class="d-flex align-items-center justify-content-between pt-3 border-top">
-                        <span class="badge rounded-pill bg-white text-primary px-3 py-2">Lecture guid&eacute;e</span>
-                        <a class="btn btn-link fw-semibold text-primary p-0" href="{{ url_for('contents') }}">Lire</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="resource-card animate-fade-up h-100 delay-1">
-                    <div class="resource-icon">
-                        <i class="fas fa-play-circle"></i>
-                    </div>
-                    <h3 class="h5 fw-semibold mb-3">Dialogues vid&eacute;o</h3>
-                    <p class="mb-4 text-muted">Entretiens avec chercheurs, pasteurs et penseurs pour nourrir le discernement et l'engagement.</p>
-                    <div class="d-flex align-items-center justify-content-between pt-3 border-top">
-                        <span class="badge rounded-pill bg-white text-primary px-3 py-2">Visionnage</span>
-                        <a class="btn btn-link fw-semibold text-primary p-0" href="{{ url_for('contents') }}">Regarder</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="resource-card animate-fade-up h-100 delay-2">
-                    <div class="resource-icon">
-                        <i class="fas fa-headphones"></i>
-                    </div>
-                    <h3 class="h5 fw-semibold mb-3">Podcasts &amp; pri&egrave;res</h3>
-                    <p class="mb-4 text-muted">M&eacute;ditations, temps de silence et formats immersifs pour soutenir la vie de pri&egrave;re personnelle ou communautaire.</p>
-                    <div class="d-flex align-items-center justify-content-between pt-3 border-top">
-                        <span class="badge rounded-pill bg-white text-primary px-3 py-2">&Eacute;coute</span>
-                        <a class="btn btn-link fw-semibold text-primary p-0" href="{{ url_for('prayers') }}">&Eacute;couter</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+        <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="8000" data-bs-pause="false">
+            <div class="carousel-inner">
 
-<section class="section-modern bg-white">
-    <div class="container">
-        <div class="row gy-5 align-items-center">
-            <div class="col-lg-5">
-                <span class="section-kicker">Impact</span>
-                <h2 class="section-title">Une communaut&eacute; en mouvement</h2>
-                <p class="section-subtitle">Croire &amp; Penser r&eacute;unit croyants, chercheuses, responsables d'&Eacute;glise et curieux engag&eacute;s pour comprendre le monde &agrave; la lumi&egrave;re de l'&Eacute;vangile.</p>
-                <ul class="list-unstyled mt-4 mb-0">
-                    <li class="d-flex align-items-center mb-3">
-                        <span class="me-3 text-primary fs-4"><i class="fas fa-check-circle"></i></span>
-                        <span>Accompagnement de groupes de r&eacute;flexion, cercles th&eacute;ologiques et parcours d'&eacute;tudes bibliques.</span>
-                    </li>
-                    <li class="d-flex align-items-center mb-3">
-                        <span class="me-3 text-primary fs-4"><i class="fas fa-check-circle"></i></span>
-                        <span>Ateliers, d&eacute;bats et masterclasses pour &eacute;tudiants, jeunes professionnels et responsables.</span>
-                    </li>
-                    <li class="d-flex align-items-center">
-                        <span class="me-3 text-primary fs-4"><i class="fas fa-check-circle"></i></span>
-                        <span>Guides pratiques pour soutenir les &Eacute;glises locales, les familles et les acteurs sociaux.</span>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-lg-7">
-                <div class="row g-4">
-                    <div class="col-sm-4">
-                        <div class="stat-card animate-fade-up h-100">
-                            <span class="stat-number">250+</span>
-                            <span class="stat-label">Questions trait&eacute;es</span>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="stat-card animate-fade-up h-100 delay-1">
-                            <span class="stat-number">80</span>
-                            <span class="stat-label">Contributeurs</span>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="stat-card animate-fade-up h-100 delay-2">
-                            <span class="stat-number">15k</span>
-                            <span class="stat-label">Lecteurs mensuels</span>
-                        </div>
+                <!-- Slide 1 -->
+                <div class="carousel-item active">
+                    <div class="container hero__inner">
+                        <h1 class="hero__title">Nourris ta foi.<br>Éveille ta pensée.</h1>
+                        <p class="hero__subtitle">Explore des enseignements riches et stimule ta réflexion spirituelle.</p>
+                        <a class="hero__cta" href="{{ url_for('contents') }}"><span>Explorer les enseignements</span> <i class="fas fa-chevron-right"></i></a>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</section>
 
-<section class="section-modern section-soft-blue">
-    <div class="container">
-        <div class="row g-4">
-            <div class="col-lg-5">
-                <span class="section-kicker">Questions cl&eacute;s</span>
-                <h2 class="section-title">R&eacute;pondre aux grandes questions</h2>
-                <p class="section-subtitle">Nos dossiers th&eacute;matiques accompagnent croyants et curieux face aux enjeux spirituels, culturels et soci&eacute;taux contemporains.</p>
-                <a class="btn btn-primary rounded-pill px-4 mt-4" href="{{ url_for('qa') }}">Voir les questions fr&eacute;quentes</a>
-            </div>
-            <div class="col-lg-7">
-                <div class="row g-4">
-                    <div class="col-md-6">
-                        <div class="insight-card animate-fade-up h-100">
-                            <div class="insight-icon">
-                                <i class="fas fa-infinity"></i>
-                            </div>
-                            <h3 class="h6 fw-semibold">Foi &amp; science</h3>
-                            <p class="mb-0 text-muted">Comprendre comment r&eacute;v&eacute;lation et recherche s&#39;&eacute;clairent mutuellement face aux questions actuelles.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="insight-card animate-fade-up h-100 delay-1">
-                            <div class="insight-icon">
-                                <i class="fas fa-earth-europe"></i>
-                            </div>
-                            <h3 class="h6 fw-semibold">Spiritualit&eacute; &amp; soci&eacute;t&eacute;</h3>
-                            <p class="mb-0 text-muted">Penser la justice, l'&eacute;cologie, la culture num&eacute;rique et l'engagement citoyen &agrave; la lumi&egrave;re de l'&Eacute;vangile.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="insight-card animate-fade-up h-100 delay-2">
-                            <div class="insight-icon">
-                                <i class="fas fa-heart"></i>
-                            </div>
-                            <h3 class="h6 fw-semibold">Accompagnement pastoral</h3>
-                            <p class="mb-0 text-muted">Outils pour l'&eacute;coute, la pr&eacute;vention et la croissance communautaire au service des &Eacute;glises.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="insight-card animate-fade-up h-100 delay-3">
-                            <div class="insight-icon">
-                                <i class="fas fa-graduation-cap"></i>
-                            </div>
-                            <h3 class="h6 fw-semibold">Formation continue</h3>
-                            <p class="mb-0 text-muted">Formations modulaires pour responsables, enseignants et animateurs de groupes de discussion.</p>
-                        </div>
+                <!-- Slide 2 -->
+                <div class="carousel-item">
+                    <div class="container hero__inner">
+                        <h1 class="hero__title">Des ressources<br>pour grandir.</h1>
+                        <p class="hero__subtitle">Articles, vidéos, podcasts et études bibliques pour enrichir votre parcours spirituel.</p>
+                        <a class="hero__cta" href="{{ url_for('contents') }}"><span>Voir les contenus</span> <i class="fas fa-chevron-right"></i></a>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</section>
 
-<section id="newsletterSection" class="newsletter-section py-5">
-    <div class="container position-relative text-white">
-        <div class="row align-items-center gy-4">
-            <div class="col-lg-7">
-                <h2 class="fw-bold mb-3 text-white">Rester en &eacute;veil</h2>
-                <p class="mb-0 text-white">Recevez chaque mois une s&eacute;lection d'articles, de m&eacute;ditations et de pistes d'engagement.</p>
-            </div>
-            <div class="col-lg-5">
-                <form class="newsletter-form">
-                    <input type="email" class="form-control newsletter-input text-white" placeholder="Votre e-mail" style="color: white !important;">
-                    <button type="submit" class="btn btn-light newsletter-btn w-100">Je m'inscris</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
+                <!-- Slide 3 -->
+                <div class="carousel-item">
+                    <div class="container hero__inner">
+                        <h1 class="hero__title">Rejoignez notre<br>communauté.</h1>
+                        <p class="hero__subtitle">Questions, prières et accompagnement spirituel personnalisé dans votre cheminement.</p>
+                        <a class="hero__cta" href="{{ url_for('qa') }}"><span>Poser une question</span> <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
 
-<!-- Section Verset Biblique -->
-<section class="py-5 bg-primary text-white text-center">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <i class="fas fa-quote-left fa-2x mb-4 text-white-50"></i>
-                <blockquote class="blockquote mb-4">
-                    <p class="fs-4 fw-light mb-3 text-white">"Car mes pensées ne sont pas vos pensées, et vos voies ne sont pas mes voies, dit l'Éternel. Autant les cieux sont élevés au-dessus de la terre, autant mes voies sont élevées au-dessus de vos voies, et mes pensées au-dessus de vos pensées."</p>
-                    <footer class="blockquote-footer text-white">
-                        <cite title="Source">Esaïe 55:8-9</cite>
-                    </footer>
-                </blockquote>
-                <p class="lead mb-0 text-white">Laissons-nous transformer par la sagesse divine qui dépasse notre entendement.</p>
+                <!-- Slide 4 -->
+                <div class="carousel-item">
+                    <div class="container hero__inner">
+                        <h1 class="hero__title">Chaque don<br>fait la différence.</h1>
+                        <p class="hero__subtitle">Participez à la diffusion d'une réflexion chrétienne accessible et rigoureuse.</p>
+                        <a class="hero__cta" href="{{ url_for('donation') }}"><span>Faire un don</span> <i class="fas fa-heart"></i></a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Indicateurs -->
+            <div class="carousel-indicators hero__dots">
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         CONTENU RÉCENT – Filtres + 3 cartes
+    ════════════════════════════════════════════ -->
+    <section class="recent" aria-label="Contenu récent">
+        <div class="container">
+            <div class="recent__header reveal">
+                <h2 class="recent__title">Contenu récent</h2>
+                <div class="recent__filters" role="tablist" aria-label="Filtrer le contenu">
+                    <button class="filter-pill filter-pill--active" data-filter="all" role="tab" aria-selected="true">Tous</button>
+                    <button class="filter-pill" data-filter="enseignement" role="tab" aria-selected="false">Enseignements</button>
+                    <button class="filter-pill" data-filter="meditation" role="tab" aria-selected="false">Méditations</button>
+                    <button class="filter-pill" data-filter="reflexion" role="tab" aria-selected="false">Réflexions</button>
+                </div>
+            </div>
+
+            <div class="recent__grid">
+                <!-- Carte 1 -->
+                <article class="card-content reveal" data-category="enseignement">
+                    <div class="card-content__img" aria-hidden="true">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <div class="card-content__bar"></div>
+                    <div class="card-content__body">
+                        <span class="card-content__cat">Enseignement</span>
+                        <h3 class="card-content__title">La foi à l'épreuve du doute</h3>
+                        <p class="card-content__desc">Comment le doute honnête peut devenir un tremplin vers une foi plus profonde et plus authentique.</p>
+                        <a class="card-content__link" href="{{ url_for('contents') }}">
+                            Lire la suite <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Carte 2 -->
+                <article class="card-content reveal" data-category="meditation">
+                    <div class="card-content__img card-content__img--alt" aria-hidden="true">
+                        <i class="fas fa-dove"></i>
+                    </div>
+                    <div class="card-content__bar"></div>
+                    <div class="card-content__body">
+                        <span class="card-content__cat">Méditation</span>
+                        <h3 class="card-content__title">Silence et présence divine</h3>
+                        <p class="card-content__desc">Une méditation guidée pour cultiver l'écoute intérieure et accueillir la paix qui dépasse l'intelligence.</p>
+                        <a class="card-content__link" href="{{ url_for('prayers') }}">
+                            Lire la suite <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Carte 3 -->
+                <article class="card-content reveal" data-category="reflexion">
+                    <div class="card-content__img card-content__img--warm" aria-hidden="true">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <div class="card-content__bar"></div>
+                    <div class="card-content__body">
+                        <span class="card-content__cat">Réflexion</span>
+                        <h3 class="card-content__title">Raison et révélation</h3>
+                        <p class="card-content__desc">Quand la pensée philosophique rencontre la sagesse biblique : un dialogue fécond pour notre époque.</p>
+                        <a class="card-content__link" href="{{ url_for('contents') }}">
+                            Lire la suite <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         CITATION / INSPIRATION
+    ════════════════════════════════════════════ -->
+    <section class="quote-section" aria-label="Citation biblique">
+        <div class="quote-section__glow" aria-hidden="true"></div>
+        <div class="container">
+            <blockquote class="quote-block reveal">
+                <i class="fas fa-quote-left quote-block__icon" aria-hidden="true"></i>
+                <p class="quote-block__text">
+                    Éclaire les yeux de notre cœur, pour que nous sachions quelle est l'espérance de notre appel.
+                </p>
+                <cite class="quote-block__ref">— Éphésiens 1:18</cite>
+            </blockquote>
+        </div>
+    </section>
+
 </div>
-
-
-
 {% endblock %}
 
 {% block extra_scripts %}
 <script src="{{ url_for('static', filename='js/home.js') }}"></script>
-<script src="{{ url_for('static', filename='js/simple-edit.js') }}"></script>
-<script src="{{ url_for('static', filename='js/cms-sync.js') }}"></script>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    const heroCarousel = document.getElementById('heroCarousel');
-    if (heroCarousel && typeof bootstrap !== 'undefined') {
-        const existing = bootstrap.Carousel.getInstance(heroCarousel);
-        if (existing) {
-            existing.dispose();
-        }
-        new bootstrap.Carousel(heroCarousel, {
-            interval: 8000,
-            ride: true,
-            pause: false,
-            touch: true,
-            wrap: true
-        });
-    }
-});
-</script>
 {% endblock %}
-
-
-
-
-
-
-

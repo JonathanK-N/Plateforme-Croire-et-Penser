@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block title %}Témoignages – Croire & Penser{% endblock %}
+
+{% block extra_head %}
+<link href="{{ url_for('static', filename='css/testimonies.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div id="testimoniesPage">
+
+    <!-- Hero -->
+    <section class="tm-hero">
+        <div class="tm-hero__bokeh" aria-hidden="true"></div>
+        <div class="container tm-hero__inner">
+            <h1 class="tm-hero__title">Témoignages</h1>
+            <p class="tm-hero__sub">Des vies transformées par la foi. Partagez votre histoire, encouragez la communauté.</p>
+        </div>
+    </section>
+
+    <!-- Filtres + liste -->
+    <section class="tm-list">
+        <div class="container">
+
+            <div class="tm-list__header reveal">
+                <div class="tm-list__filters">
+                    <button class="tm-pill tm-pill--active" data-filter="all">Tous</button>
+                    <button class="tm-pill" data-filter="text"><i class="fas fa-pen-fancy me-1"></i>Texte</button>
+                    <button class="tm-pill" data-filter="video"><i class="fas fa-video me-1"></i>Vidéo</button>
+                    <button class="tm-pill" data-filter="audio"><i class="fas fa-headphones me-1"></i>Audio</button>
+                </div>
+                <button class="tm-btn-submit" onclick="document.getElementById('tmFormSection').scrollIntoView({behavior:'smooth'})">
+                    <i class="fas fa-plus me-2"></i>Partager mon témoignage
+                </button>
+            </div>
+
+            <!-- Grille témoignages (remplie par JS) -->
+            <div id="tmGrid" class="tm-grid">
+                <div class="tm-empty reveal">
+                    <i class="fas fa-dove"></i>
+                    <p>Les témoignages approuvés apparaîtront ici.<br>Soyez le premier à partager votre histoire !</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Formulaire de soumission -->
+    <section id="tmFormSection" class="tm-form-section">
+        <div class="container">
+            <div class="tm-form-card reveal">
+                <h2 class="tm-form-card__title">Partagez votre témoignage</h2>
+                <p class="tm-form-card__sub">Votre histoire peut encourager et inspirer d'autres personnes. Choisissez le format qui vous convient.</p>
+
+                <form id="tmForm" novalidate>
+
+                    <div class="tm-form__row">
+                        <div class="tm-form__field">
+                            <label for="tmName">Votre nom (ou pseudonyme)</label>
+                            <input type="text" id="tmName" class="tm-input" placeholder="Ex : Marie D." required>
+                        </div>
+                    </div>
+
+                    <!-- Choix du type -->
+                    <div class="tm-form__types">
+                        <label class="tm-type tm-type--active" data-type="text">
+                            <input type="radio" name="mediaType" value="text" checked>
+                            <i class="fas fa-pen-fancy"></i>
+                            <span>Texte</span>
+                        </label>
+                        <label class="tm-type" data-type="video">
+                            <input type="radio" name="mediaType" value="video">
+                            <i class="fas fa-video"></i>
+                            <span>Vidéo</span>
+                        </label>
+                        <label class="tm-type" data-type="audio">
+                            <input type="radio" name="mediaType" value="audio">
+                            <i class="fas fa-headphones"></i>
+                            <span>Audio</span>
+                        </label>
+                    </div>
+
+                    <!-- Champ texte -->
+                    <div id="tmFieldText" class="tm-form__field">
+                        <label for="tmContent">Votre témoignage</label>
+                        <textarea id="tmContent" class="tm-input" rows="6" placeholder="Racontez comment Dieu a agi dans votre vie…"></textarea>
+                    </div>
+
+                    <!-- Champ URL vidéo -->
+                    <div id="tmFieldVideo" class="tm-form__field tm-form__field--hidden">
+                        <label for="tmVideoUrl">Lien de la vidéo (YouTube, Vimeo…)</label>
+                        <input type="url" id="tmVideoUrl" class="tm-input" placeholder="https://www.youtube.com/watch?v=...">
+                    </div>
+
+                    <!-- Champ URL audio -->
+                    <div id="tmFieldAudio" class="tm-form__field tm-form__field--hidden">
+                        <label for="tmAudioUrl">Lien audio (SoundCloud, fichier MP3…)</label>
+                        <input type="url" id="tmAudioUrl" class="tm-input" placeholder="https://soundcloud.com/...">
+                    </div>
+
+                    <button type="submit" class="tm-form__submit">
+                        <span>Envoyer mon témoignage</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+
+                    <p class="tm-form__note"><i class="fas fa-shield-alt me-1"></i>Votre témoignage sera relu avant publication.</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/testimonies.js') }}"></script>
+{% endblock %}

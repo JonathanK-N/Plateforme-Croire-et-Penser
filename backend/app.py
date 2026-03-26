@@ -129,6 +129,15 @@ class Newsletter(db.Model):
     subscribed_at = db.Column(db.DateTime, default=datetime.utcnow)
     preferences = db.Column(db.Text)  # JSON preferences
 
+class Testimony(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    author_name = db.Column(db.String(120), nullable=False)
+    content = db.Column(db.Text)  # texte du témoignage
+    media_type = db.Column(db.String(10), nullable=False)  # text, video, audio
+    media_url = db.Column(db.String(500))  # URL vidéo/audio
+    is_approved = db.Column(db.Boolean, default=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
 class ContentSeries(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200), nullable=False)
@@ -675,6 +684,39 @@ def admin():
 @app.route('/cms')
 def cms():
     return render_template('cms.html')
+
+@app.route('/testimonies')
+@app.route('/temoignages')
+def testimonies():
+    return render_template('testimonies.html')
+
+# API Témoignages
+@app.route('/api/testimonies', methods=['GET'])
+def get_testimonies():
+    testimonies = Testimony.query.filter_by(is_approved=True).order_by(Testimony.created_at.desc()).all()
+    return jsonify([{
+        'id': t.id,
+        'author_name': t.author_name,
+        'content': t.content,
+        'media_type': t.media_type,
+        'media_url': t.media_url,
+        'created_at': t.created_at.isoformat()
+    } for t in testimonies])
+
+@app.route('/api/testimonies', methods=['POST'])
+def create_testimony():
+    data = request.get_json()
+    if not data.get('author_name') or not data.get('media_type'):
+        return jsonify({'message': 'Nom et type requis'}), 400
+    testimony = Testimony(
+        author_name=data['author_name'],
+        content=data.get('content', ''),
+        media_type=data['media_type'],
+        media_url=data.get('media_url', '')
+    )
+    db.session.add(testimony)
+    db.session.commit()
+    return jsonify({'message': 'Témoignage soumis pour modération. Merci !'}), 201
 
 # API endpoints pour le CMS
 @app.route('/api/cms/contents', methods=['GET', 'POST'])
