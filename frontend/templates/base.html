@@ -18,11 +18,11 @@
     <div id="splashScreen" style="position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#e8f0f8 0%,#f7f9fc 40%,#dce9f5 100%);transition:opacity .6s ease,visibility .6s ease;">
         <div style="text-align:center;position:relative;">
             <!-- Anneau lumineux -->
-            <div id="splashRing" style="position:absolute;top:50%;left:50%;width:180px;height:180px;margin:-90px 0 0 -90px;border-radius:50%;border:3px solid transparent;border-top-color:#2E73B8;border-right-color:#8EC3DE;animation:splashSpin 1.2s linear infinite;"></div>
+            <div id="splashRing" style="position:absolute;top:50%;left:50%;width:280px;height:280px;margin:-140px 0 0 -140px;border-radius:50%;border:3px solid transparent;border-top-color:#2E73B8;border-right-color:#8EC3DE;animation:splashSpin 1.2s linear infinite;"></div>
             <!-- Halo -->
-            <div style="position:absolute;top:50%;left:50%;width:220px;height:220px;margin:-110px 0 0 -110px;border-radius:50%;background:radial-gradient(circle,rgba(46,115,184,.12),transparent 70%);animation:splashPulse 2s ease-in-out infinite;"></div>
+            <div style="position:absolute;top:50%;left:50%;width:340px;height:340px;margin:-170px 0 0 -170px;border-radius:50%;background:radial-gradient(circle,rgba(46,115,184,.12),transparent 70%);animation:splashPulse 2s ease-in-out infinite;"></div>
             <!-- Logo -->
-            <img src="{{ url_for('static', filename='img/logo-croire-penser.png') }}" alt="Croire et Penser" style="width:120px;height:auto;position:relative;z-index:2;animation:splashLogo 1s ease-out both;">
+            <img src="{{ url_for('static', filename='img/logo-croire-penser.png') }}" alt="Croire et Penser" style="width:220px;height:auto;position:relative;z-index:2;animation:splashLogo 1s ease-out both;display:block;margin:0 auto;">
             <!-- Texte -->
             <div style="margin-top:28px;position:relative;z-index:2;">
                 <div style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:#111;letter-spacing:-.01em;animation:splashFadeUp .8s ease .3s both;">Croire & Penser</div>
