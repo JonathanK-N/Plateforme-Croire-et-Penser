@@ -8,14 +8,12 @@
 
 {% block content %}
 <div class="container mt-5 pt-4">
-    <!-- Hero Section -->
     <section class="qa-hero animate-fade-up">
         <h1 class="display-4 fw-bold mb-4">Questions & Réponses</h1>
         <p class="lead mb-4">Explorez les grandes questions de la foi avec intelligence et bienveillance</p>
         <p class="mb-0">"Mon peuple périt faute de connaissance" - Osée 4:6</p>
     </section>
 
-    <!-- Filtres par catégorie -->
     <section class="category-filter animate-fade-up delay-1">
         <h5 class="mb-3">Filtrer par thème :</h5>
         <div class="d-flex flex-wrap">
@@ -24,119 +22,24 @@
             <button class="filter-btn" data-category="bible">Bible</button>
             <button class="filter-btn" data-category="jesus">Jésus-Christ</button>
             <button class="filter-btn" data-category="foi">Foi & Raison</button>
-            <button class="filter-btn" data-category="science">Science</button>
             <button class="filter-btn" data-category="ethique">Éthique</button>
         </div>
     </section>
 
-    <!-- Questions populaires -->
     <section class="mb-5">
-        <h2 class="h3 mb-4 animate-fade-up">Questions les plus fréquentes</h2>
-        <div class="row g-4">
-            <div class="col-lg-6">
-                <div class="question-card" data-category="dieu" onclick="openQuestion('existence-dieu', event)">
-                    <div class="question-icon">
-                        <i class="fas fa-infinity"></i>
-                    </div>
-                    <h4 class="mb-3">Peut-on prouver l'existence de Dieu ?</h4>
-                    <p class="mb-3 text-muted">Les arguments philosophiques et scientifiques en faveur de l'existence de Dieu : cosmologique, téléologique, moral...</p>
-                    <div class="answer-preview">
-                        "Bien que nous ne puissions pas 'prouver' Dieu comme un théorème mathématique, il existe des arguments rationnels solides..."
-                    </div>
-                    <div class="question-meta">
-                        <span class="question-badge">Théologie</span>
-                        <span><i class="fas fa-clock me-1"></i>Lecture</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="question-card" data-category="science" onclick="openQuestion('foi-science', event)">
-                    <div class="question-icon">
-                        <i class="fas fa-atom"></i>
-                    </div>
-                    <h4 class="mb-3">Foi et science sont-elles compatibles ?</h4>
-                    <p class="mb-3 text-muted">Comment concilier les découvertes scientifiques modernes avec la foi chrétienne ? Une exploration équilibrée.</p>
-                    <div class="answer-preview">
-                        "La science et la foi répondent à des questions différentes mais complémentaires sur la réalité..."
-                    </div>
-                    <div class="question-meta">
-                        <span class="question-badge">Science</span>
-                        <span><i class="fas fa-clock me-1"></i>Lecture</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="question-card" data-category="jesus" onclick="openQuestion('jesus-historique', event)">
-                    <div class="question-icon">
-                        <i class="fas fa-cross"></i>
-                    </div>
-                    <h4 class="mb-3">Jésus a-t-il vraiment existé ?</h4>
-                    <p class="mb-3 text-muted">Les preuves historiques de l'existence de Jésus de Nazareth et l'analyse critique des sources antiques.</p>
-                    <div class="answer-preview">
-                        "La quasi-totalité des historiens, chrétiens ou non, s'accordent sur l'existence historique de Jésus..."
-                    </div>
-                    <div class="question-meta">
-                        <span class="question-badge">Histoire</span>
-                        <span><i class="fas fa-clock me-1"></i>Lecture</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="question-card" data-category="ethique" onclick="openQuestion('mal-souffrance', event)">
-                    <div class="question-icon">
-                        <i class="fas fa-balance-scale"></i>
-                    </div>
-                    <h4 class="mb-3">Pourquoi Dieu permet-il le mal ?</h4>
-                    <p class="mb-3 text-muted">La question de la théodicée : comment concilier l'existence d'un Dieu bon et tout-puissant avec la réalité du mal.</p>
-                    <div class="answer-preview">
-                        "Cette question millénaire trouve des éléments de réponse dans la liberté humaine et le plan divin..."
-                    </div>
-                    <div class="question-meta">
-                        <span class="question-badge">Éthique</span>
-                        <span><i class="fas fa-clock me-1"></i>Lecture</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="question-card" data-category="bible" onclick="openQuestion('bible-fiable', event)">
-                    <div class="question-icon">
-                        <i class="fas fa-book-bible"></i>
-                    </div>
-                    <h4 class="mb-3">La Bible est-elle fiable historiquement ?</h4>
-                    <p class="mb-3 text-muted">Analyse de la transmission, de l'authenticité et de la fiabilité historique des textes bibliques.</p>
-                    <div class="answer-preview">
-                        "Les découvertes archéologiques et l'analyse textuelle confirment la remarquable préservation..."
-                    </div>
-                    <div class="question-meta">
-                        <span class="question-badge">Bible</span>
-                        <span><i class="fas fa-clock me-1"></i>Lecture</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="question-card" data-category="foi" onclick="openQuestion('autres-religions', event)">
-                    <div class="question-icon">
-                        <i class="fas fa-globe"></i>
-                    </div>
-                    <h4 class="mb-3">Pourquoi le christianisme et pas une autre religion ?</h4>
-                    <p class="mb-3 text-muted">Comparaison respectueuse des grandes religions et spécificités du christianisme.</p>
-                    <div class="answer-preview">
-                        "Chaque religion mérite le respect, mais le christianisme présente des caractéristiques uniques..."
-                    </div>
-                    <div class="question-meta">
-                        <span class="question-badge">Religions</span>
-                        <span><i class="fas fa-clock me-1"></i>Lecture</span>
-                    </div>
-                </div>
+        <h2 class="h3 mb-4 animate-fade-up">Questions fréquentes</h2>
+        <div class="row g-4" id="qaGrid">
+            <div class="col-12 text-center py-5 text-muted">
+                <i class="fas fa-question-circle fa-3x mb-3" style="opacity:.3;"></i>
+                <p>Les questions et réponses apparaîtront ici.<br>Posez votre première question ci-dessous !</p>
             </div>
         </div>
     </section>
 
-    <!-- Poser une question -->
     <section class="ask-question-card animate-fade-up">
         <h2 class="mb-4">Vous avez une question ?</h2>
-        <p class="lead mb-4">Notre équipe d'experts en théologie, philosophie et sciences est là pour vous accompagner dans votre réflexion</p>
-        <button class="btn-ask" onclick="openAskQuestionModal()">Poser ma question</button>
+        <p class="lead mb-4">Notre équipe est là pour vous accompagner dans votre réflexion</p>
+        <button class="btn-ask" data-bs-toggle="modal" data-bs-target="#questionModal">Poser ma question</button>
     </section>
 </div>
 
