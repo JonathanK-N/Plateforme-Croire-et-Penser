@@ -14,6 +14,59 @@
     {% block extra_head %}{% endblock %}
 </head>
 <body>
+    <!-- ========== SPLASH SCREEN ========== -->
+    <div id="splashScreen" style="position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#e8f0f8 0%,#f7f9fc 40%,#dce9f5 100%);transition:opacity .6s ease,visibility .6s ease;">
+        <div style="text-align:center;position:relative;">
+            <!-- Anneau lumineux -->
+            <div id="splashRing" style="position:absolute;top:50%;left:50%;width:180px;height:180px;margin:-90px 0 0 -90px;border-radius:50%;border:3px solid transparent;border-top-color:#2E73B8;border-right-color:#8EC3DE;animation:splashSpin 1.2s linear infinite;"></div>
+            <!-- Halo -->
+            <div style="position:absolute;top:50%;left:50%;width:220px;height:220px;margin:-110px 0 0 -110px;border-radius:50%;background:radial-gradient(circle,rgba(46,115,184,.12),transparent 70%);animation:splashPulse 2s ease-in-out infinite;"></div>
+            <!-- Logo -->
+            <img src="{{ url_for('static', filename='img/logo-croire-penser.png') }}" alt="Croire et Penser" style="width:120px;height:auto;position:relative;z-index:2;animation:splashLogo 1s ease-out both;">
+            <!-- Texte -->
+            <div style="margin-top:28px;position:relative;z-index:2;">
+                <div style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:#111;letter-spacing:-.01em;animation:splashFadeUp .8s ease .3s both;">Croire & Penser</div>
+                <div style="font-family:'Inter',sans-serif;font-size:.78rem;color:#6B7B8D;margin-top:6px;letter-spacing:.08em;text-transform:uppercase;animation:splashFadeUp .8s ease .6s both;">Nourris ta foi. Éveille ta pensée.</div>
+            </div>
+            <!-- Barre de progression -->
+            <div style="margin-top:32px;width:160px;height:3px;background:rgba(46,115,184,.12);border-radius:3px;overflow:hidden;position:relative;z-index:2;margin-left:auto;margin-right:auto;">
+                <div id="splashBar" style="width:0%;height:100%;background:linear-gradient(90deg,#2E73B8,#8EC3DE);border-radius:3px;transition:width .1s linear;"></div>
+            </div>
+            <!-- Particules -->
+            <div style="position:absolute;inset:-60px;pointer-events:none;z-index:1;">
+                <span style="position:absolute;width:4px;height:4px;border-radius:50%;background:#2E73B8;opacity:.3;top:10%;left:15%;animation:splashFloat 3s ease-in-out infinite;"></span>
+                <span style="position:absolute;width:3px;height:3px;border-radius:50%;background:#8EC3DE;opacity:.4;top:70%;left:80%;animation:splashFloat 2.5s ease-in-out .5s infinite;"></span>
+                <span style="position:absolute;width:5px;height:5px;border-radius:50%;background:#2E73B8;opacity:.2;top:20%;left:85%;animation:splashFloat 3.5s ease-in-out 1s infinite;"></span>
+                <span style="position:absolute;width:3px;height:3px;border-radius:50%;background:#8EC3DE;opacity:.35;top:80%;left:20%;animation:splashFloat 2.8s ease-in-out .3s infinite;"></span>
+                <span style="position:absolute;width:4px;height:4px;border-radius:50%;background:#2E73B8;opacity:.25;top:50%;left:5%;animation:splashFloat 3.2s ease-in-out .8s infinite;"></span>
+            </div>
+        </div>
+    </div>
+    <style>
+        @keyframes splashSpin { to { transform:rotate(360deg); } }
+        @keyframes splashPulse { 0%,100%{transform:scale(1);opacity:.5;} 50%{transform:scale(1.15);opacity:1;} }
+        @keyframes splashLogo { 0%{opacity:0;transform:scale(.7) translateY(10px);} 100%{opacity:1;transform:scale(1) translateY(0);} }
+        @keyframes splashFadeUp { 0%{opacity:0;transform:translateY(12px);} 100%{opacity:1;transform:translateY(0);} }
+        @keyframes splashFloat { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-12px);} }
+    </style>
+    <script>
+        (function(){
+            var bar=document.getElementById('splashBar');
+            var start=Date.now(), duration=4500;
+            function tick(){
+                var p=Math.min((Date.now()-start)/duration,1)*100;
+                if(bar) bar.style.width=p+'%';
+                if(p<100) requestAnimationFrame(tick);
+            }
+            requestAnimationFrame(tick);
+            setTimeout(function(){
+                var s=document.getElementById('splashScreen');
+                if(s){s.style.opacity='0';s.style.visibility='hidden';}
+                setTimeout(function(){if(s)s.remove();},600);
+            },5000);
+        })();
+    </script>
+
     <header class="site-header fixed-top">
         <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-2">
             <div class="container">
