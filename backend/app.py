@@ -108,6 +108,8 @@ class ThematicContent(db.Model):
     is_published = db.Column(db.Boolean, default=False)
     meta_description = db.Column(db.String(160))
     tags = db.Column(db.Text)  # JSON array of tags
+    video_url = db.Column(db.String(500))  # URL vidéo YouTube/Vimeo
+    audio_url = db.Column(db.String(500))  # URL audio/podcast
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
@@ -723,7 +725,7 @@ def create_testimony():
 def cms_contents():
     if request.method == 'GET':
         contents = ThematicContent.query.order_by(ThematicContent.updated_at.desc()).all()
-        print(f"📦 Envoi de {len(contents)} contenus CMS")
+        print(f"Envoi de {len(contents)} contenus CMS")
         return jsonify([{
             'id': c.id,
             'title': c.title,
@@ -735,8 +737,8 @@ def cms_contents():
             'tags': c.tags.split(',') if c.tags else [],
             'featured': c.is_featured,
             'published': c.is_published,
-            'videoUrl': '',
-            'audioUrl': '',
+            'videoUrl': c.video_url or '',
+            'audioUrl': c.audio_url or '',
             'created_at': c.created_at.isoformat(),
             'updated_at': c.updated_at.isoformat()
         } for c in contents])
@@ -768,12 +770,14 @@ def cms_contents():
             is_featured=data.get('featured', False),
             is_published=data.get('published', False),
             tags=','.join(data.get('tags', [])),
+            video_url=data.get('videoUrl', ''),
+            audio_url=data.get('audioUrl', ''),
             publication_date=datetime.utcnow() if data.get('published') else None
         )
         
         db.session.add(content)
         db.session.commit()
-        print(f"✅ Nouveau contenu créé: {content.title}")
+        print('Nouveau contenu cree:', content.title)
         
         return jsonify({'success': True, 'id': content.id}), 201
 
@@ -792,6 +796,8 @@ def cms_content_detail(content_id):
         content.is_featured = data.get('featured', False)
         content.is_published = data.get('published', False)
         content.tags = ','.join(data.get('tags', []))
+        content.video_url = data.get('videoUrl', '')
+        content.audio_url = data.get('audioUrl', '')
         content.updated_at = datetime.utcnow()
         
         if data.get('published') and not content.publication_date:
