@@ -5,7 +5,6 @@
 {% block extra_head %}
 <link href="{{ url_for('static', filename='css/donation.css') }}" rel="stylesheet">
 <script src="https://js.stripe.com/v3/"></script>
-<script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=CAD"></script>
 {% endblock %}
 
 {% block content %}
@@ -23,17 +22,17 @@
                 <p class="hero-subtitle">"Amener les croyants à penser, et les penseurs à croire"</p>
                 <p class="hero-description">Votre générosité nous permet de continuer à offrir des contenus de qualité et d'accompagner chacun dans sa quête de vérité.</p>
                 <div class="hero-stats">
-                    <div class="stat-item animate-counter" data-target="2847">
-                        <span class="stat-number">0</span>
+                    <div class="stat-item">
+                        <span class="stat-number">&nbsp;</span>
                         <span class="stat-label">Donateurs</span>
                     </div>
-                    <div class="stat-item animate-counter" data-target="156">
-                        <span class="stat-number">0</span>
-                        <span class="stat-label">k$ Collectés</span>
+                    <div class="stat-item">
+                        <span class="stat-number">&nbsp;</span>
+                        <span class="stat-label">Collectés</span>
                     </div>
-                    <div class="stat-item animate-counter" data-target="89">
-                        <span class="stat-number">0</span>
-                        <span class="stat-label">% Objectif</span>
+                    <div class="stat-item">
+                        <span class="stat-number">&nbsp;</span>
+                        <span class="stat-label">Objectif</span>
                     </div>
                 </div>
             </div>
@@ -238,7 +237,7 @@
         </section>
 
         <!-- Témoignages -->
-        <section class="testimonials animate-slide-up delay-6">
+        <section class="testimonials animate-slide-up delay-6" style="display:none;">
             <h2 class="text-center mb-5">Ils nous font confiance</h2>
             <div class="testimonials-slider">
                 <div class="testimonial-card active">
@@ -282,7 +281,7 @@
                 <div id="stripe-card-element"></div>
                 <div id="interac-info" class="interac-details">
                     <h4>Virement Interac</h4>
-                    <p><strong>Email:</strong> dons@foietraison.ca</p>
+                    <p><strong>Email:</strong> dons@croireetpenser.com</p>
                     <p><strong>Question:</strong> Mission</p>
                     <p><strong>Réponse:</strong> FoiRaison</p>
                 </div>

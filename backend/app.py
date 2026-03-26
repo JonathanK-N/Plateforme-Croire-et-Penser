@@ -529,10 +529,10 @@ def get_admin_stats():
     stats = {
         'total_users': User.query.count(),
         'total_content': Content.query.count() + ThematicContent.query.count(),
-        'total_prayers': 156,  # Simulate prayer count
+        'total_prayers': 0,  # Simulate prayer count
         'total_questions': Question.query.count(),
-        'total_donations': '12,450$',
-        'monthly_donations': '2,340$'
+        'total_donations': '0$',
+        'monthly_donations': '0$'
     }
     
     return jsonify(stats)
