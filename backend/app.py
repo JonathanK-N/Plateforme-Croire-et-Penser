@@ -844,6 +844,34 @@ def cms_users():
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
+@app.route('/api/cms/testimonies', methods=['GET'])
+def cms_testimonies_list():
+    testimonies = Testimony.query.order_by(Testimony.created_at.desc()).all()
+    return jsonify([{
+        'id': t.id,
+        'author_name': t.author_name,
+        'content': t.content,
+        'media_type': t.media_type,
+        'media_url': t.media_url,
+        'is_approved': t.is_approved,
+        'created_at': t.created_at.isoformat()
+    } for t in testimonies])
+
+@app.route('/api/cms/testimonies/<int:tid>', methods=['PUT', 'DELETE'])
+def cms_testimony_action(tid):
+    t = Testimony.query.get_or_404(tid)
+    if request.method == 'PUT':
+        data = request.get_json()
+        t.is_approved = data.get('is_approved', t.is_approved)
+        t.content = data.get('content', t.content)
+        t.author_name = data.get('author_name', t.author_name)
+        db.session.commit()
+        return jsonify({'success': True})
+    elif request.method == 'DELETE':
+        db.session.delete(t)
+        db.session.commit()
+        return jsonify({'success': True})
+
 @app.route('/api/cms/prayers', methods=['GET', 'POST'])
 def cms_prayers():
     # Simulation pour les prières (à implémenter avec un vrai modèle)

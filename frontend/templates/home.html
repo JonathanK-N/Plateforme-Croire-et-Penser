@@ -22,8 +22,8 @@
                 <!-- Slide 1 -->
                 <div class="carousel-item active">
                     <div class="container hero__inner">
-                        <h1 class="hero__title">Nourris ta foi.<br>Éveille ta pensée.</h1>
-                        <p class="hero__subtitle">Explore des enseignements riches et stimule ta réflexion spirituelle.</p>
+                        <h1 class="hero__title" data-edit-id="hero1-title">Nourris ta foi.<br>Éveille ta pensée.</h1>
+                        <p class="hero__subtitle" data-edit-id="hero1-sub">Explore des enseignements riches et stimule ta réflexion spirituelle.</p>
                         <a class="hero__cta" href="{{ url_for('contents') }}"><span>Explorer les enseignements</span> <i class="fas fa-chevron-right"></i></a>
                     </div>
                 </div>
@@ -31,8 +31,8 @@
                 <!-- Slide 2 -->
                 <div class="carousel-item">
                     <div class="container hero__inner">
-                        <h1 class="hero__title">Des ressources<br>pour grandir.</h1>
-                        <p class="hero__subtitle">Articles, vidéos, podcasts et études bibliques pour enrichir votre parcours spirituel.</p>
+                        <h1 class="hero__title" data-edit-id="hero2-title">Des ressources<br>pour grandir.</h1>
+                        <p class="hero__subtitle" data-edit-id="hero2-sub">Articles, vidéos, podcasts et études bibliques pour enrichir votre parcours spirituel.</p>
                         <a class="hero__cta" href="{{ url_for('contents') }}"><span>Voir les contenus</span> <i class="fas fa-chevron-right"></i></a>
                     </div>
                 </div>
@@ -40,8 +40,8 @@
                 <!-- Slide 3 -->
                 <div class="carousel-item">
                     <div class="container hero__inner">
-                        <h1 class="hero__title">Rejoignez notre<br>communauté.</h1>
-                        <p class="hero__subtitle">Questions, prières et accompagnement spirituel personnalisé dans votre cheminement.</p>
+                        <h1 class="hero__title" data-edit-id="hero3-title">Rejoignez notre<br>communauté.</h1>
+                        <p class="hero__subtitle" data-edit-id="hero3-sub">Questions, prières et accompagnement spirituel personnalisé dans votre cheminement.</p>
                         <a class="hero__cta" href="{{ url_for('qa') }}"><span>Poser une question</span> <i class="fas fa-chevron-right"></i></a>
                     </div>
                 </div>
@@ -49,8 +49,8 @@
                 <!-- Slide 4 -->
                 <div class="carousel-item">
                     <div class="container hero__inner">
-                        <h1 class="hero__title">Chaque don<br>fait la différence.</h1>
-                        <p class="hero__subtitle">Participez à la diffusion d'une réflexion chrétienne accessible et rigoureuse.</p>
+                        <h1 class="hero__title" data-edit-id="hero4-title">Chaque don<br>fait la différence.</h1>
+                        <p class="hero__subtitle" data-edit-id="hero4-sub">Participez à la diffusion d'une réflexion chrétienne accessible et rigoureuse.</p>
                         <a class="hero__cta" href="{{ url_for('donation') }}"><span>Faire un don</span> <i class="fas fa-heart"></i></a>
                     </div>
                 </div>
@@ -73,7 +73,7 @@
     <section class="recent" aria-label="Contenu récent">
         <div class="container">
             <div class="recent__header reveal">
-                <h2 class="recent__title">Contenu récent</h2>
+                <h2 class="recent__title" data-edit-id="recent-title">Contenu récent</h2>
                 <div class="recent__filters" role="tablist" aria-label="Filtrer le contenu">
                     <button class="filter-pill filter-pill--active" data-filter="all" role="tab" aria-selected="true">Tous</button>
                     <button class="filter-pill" data-filter="enseignement" role="tab" aria-selected="false">Enseignements</button>
@@ -91,8 +91,8 @@
                     <div class="card-content__bar"></div>
                     <div class="card-content__body">
                         <span class="card-content__cat">Enseignement</span>
-                        <h3 class="card-content__title">La foi à l'épreuve du doute</h3>
-                        <p class="card-content__desc">Comment le doute honnête peut devenir un tremplin vers une foi plus profonde et plus authentique.</p>
+                        <h3 class="card-content__title" data-edit-id="card1-title">La foi à l'épreuve du doute</h3>
+                        <p class="card-content__desc" data-edit-id="card1-desc">Comment le doute honnête peut devenir un tremplin vers une foi plus profonde et plus authentique.</p>
                         <a class="card-content__link" href="{{ url_for('contents') }}">
                             Lire la suite <i class="fas fa-arrow-right"></i>
                         </a>
@@ -107,8 +107,8 @@
                     <div class="card-content__bar"></div>
                     <div class="card-content__body">
                         <span class="card-content__cat">Méditation</span>
-                        <h3 class="card-content__title">Silence et présence divine</h3>
-                        <p class="card-content__desc">Une méditation guidée pour cultiver l'écoute intérieure et accueillir la paix qui dépasse l'intelligence.</p>
+                        <h3 class="card-content__title" data-edit-id="card2-title">Silence et présence divine</h3>
+                        <p class="card-content__desc" data-edit-id="card2-desc">Une méditation guidée pour cultiver l'écoute intérieure et accueillir la paix qui dépasse l'intelligence.</p>
                         <a class="card-content__link" href="{{ url_for('prayers') }}">
                             Lire la suite <i class="fas fa-arrow-right"></i>
                         </a>
@@ -123,8 +123,8 @@
                     <div class="card-content__bar"></div>
                     <div class="card-content__body">
                         <span class="card-content__cat">Réflexion</span>
-                        <h3 class="card-content__title">Raison et révélation</h3>
-                        <p class="card-content__desc">Quand la pensée philosophique rencontre la sagesse biblique : un dialogue fécond pour notre époque.</p>
+                        <h3 class="card-content__title" data-edit-id="card3-title">Raison et révélation</h3>
+                        <p class="card-content__desc" data-edit-id="card3-desc">Quand la pensée philosophique rencontre la sagesse biblique : un dialogue fécond pour notre époque.</p>
                         <a class="card-content__link" href="{{ url_for('contents') }}">
                             Lire la suite <i class="fas fa-arrow-right"></i>
                         </a>
@@ -142,10 +142,10 @@
         <div class="container">
             <blockquote class="quote-block reveal">
                 <i class="fas fa-quote-left quote-block__icon" aria-hidden="true"></i>
-                <p class="quote-block__text">
+                <p class="quote-block__text" data-edit-id="quote-text">
                     Éclaire les yeux de notre cœur, pour que nous sachions quelle est l'espérance de notre appel.
                 </p>
-                <cite class="quote-block__ref">— Éphésiens 1:18</cite>
+                <cite class="quote-block__ref" data-edit-id="quote-ref">— Éphésiens 1:18</cite>
             </blockquote>
         </div>
     </section>

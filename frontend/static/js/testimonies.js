@@ -19,9 +19,14 @@ async function loadTestimonies() {
         const res = await fetch('/api/testimonies');
         const data = await res.json();
 
-        if (!data.length) return; // garde l'empty state
+        if (!data.length) return;
 
         grid.innerHTML = data.map(t => buildCard(t)).join('');
+
+        // Observer les nouvelles cartes pour le reveal
+        grid.querySelectorAll('.reveal').forEach(el => {
+            el.classList.add('visible');
+        });
     } catch (e) {
         console.error('Erreur chargement témoignages:', e);
     }

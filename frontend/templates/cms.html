@@ -291,6 +291,7 @@
                 <a href="#" class="nav-item" data-section="events">📅 Événements</a>
                 <a href="#" class="nav-item" data-section="partnerships">🤝 Partenariats</a>
                 <a href="#" class="nav-item" data-section="donations">💝 Dons</a>
+                <a href="#" class="nav-item" data-section="testimonies">🗣️ Témoignages</a>
             </nav>
         </div>
         
@@ -468,6 +469,21 @@
                     <button class="btn btn-primary" onclick="openDonationModal()">+ Nouveau don</button>
                 </div>
                 <div class="content-list" id="donation-list"></div>
+            </div>
+            
+            <!-- Témoignages -->
+            <div id="testimonies" class="section">
+                <div class="header">
+                    <h1>Gestion des témoignages</h1>
+                </div>
+                <div style="display:flex;gap:10px;margin-bottom:20px;">
+                    <button class="btn btn-primary btn-sm tm-filter-btn active" data-f="all">Tous</button>
+                    <button class="btn btn-sm tm-filter-btn" data-f="pending" style="background:#f39c12;color:#fff;">⏳ En attente</button>
+                    <button class="btn btn-sm tm-filter-btn" data-f="approved" style="background:#27ae60;color:#fff;">✅ Approuvés</button>
+                </div>
+                <div class="content-list" id="testimony-list">
+                    <p style="text-align:center;color:#7f8c8d;padding:40px;">Chargement…</p>
+                </div>
             </div>
         </div>
     </div>
@@ -1300,6 +1316,99 @@
         
         // Charger les données au démarrage
         loadAllData();
+        
+        // ========== TÉMOIGNAGES ==========
+        let allTestimonies = [];
+        
+        async function loadTestimonyList(filter) {
+            const list = document.getElementById('testimony-list');
+            if (!list) return;
+            try {
+                const res = await fetch('/api/cms/testimonies');
+                allTestimonies = await res.json();
+            } catch(e) {
+                allTestimonies = [];
+            }
+            renderTestimonies(filter || 'all');
+        }
+        
+        function renderTestimonies(filter) {
+            const list = document.getElementById('testimony-list');
+            let items = allTestimonies;
+            if (filter === 'pending') items = items.filter(t => !t.is_approved);
+            if (filter === 'approved') items = items.filter(t => t.is_approved);
+            
+            if (!items.length) {
+                list.innerHTML = '<p style="text-align:center;color:#7f8c8d;padding:40px;">Aucun témoignage dans cette catégorie.</p>';
+                return;
+            }
+            
+            list.innerHTML = items.map(t => {
+                const date = new Date(t.created_at).toLocaleDateString('fr-CA');
+                const typeLabel = {text:'Texte',video:'Vidéo',audio:'Audio'}[t.media_type] || 'Texte';
+                const statusBadge = t.is_approved
+                    ? '<span style="background:#27ae60;color:#fff;padding:3px 10px;border-radius:12px;font-size:12px;">Approuvé</span>'
+                    : '<span style="background:#f39c12;color:#fff;padding:3px 10px;border-radius:12px;font-size:12px;">En attente</span>';
+                const preview = t.content ? (t.content.length > 120 ? t.content.substring(0,120) + '…' : t.content) : (t.media_url || '');
+                
+                return `
+                <div class="content-item" id="tm-${t.id}">
+                    <div class="content-info" style="flex:1;">
+                        <h3 style="margin-bottom:4px;">${t.author_name} ${statusBadge}</h3>
+                        <div class="content-meta">${typeLabel} • ${date}</div>
+                        <p style="margin:8px 0 0;color:#555;font-size:14px;">${preview}</p>
+                    </div>
+                    <div class="actions" style="display:flex;gap:8px;flex-shrink:0;">
+                        ${!t.is_approved ? '<button class="btn btn-success btn-sm" onclick="approveTestimony('+t.id+')">\u2705 Approuver</button>' : ''}
+                        ${t.is_approved ? '<button class="btn btn-sm" style="background:#f39c12;color:#fff;" onclick="unapproveTestimony('+t.id+')">\u23f3 Retirer</button>' : ''}
+                        <button class="btn btn-danger btn-sm" onclick="deleteTestimony(${t.id})">\ud83d\uddd1 Supprimer</button>
+                    </div>
+                </div>`;
+            }).join('');
+        }
+        
+        async function approveTestimony(id) {
+            await fetch('/api/cms/testimonies/' + id, {
+                method: 'PUT',
+                headers: {'Content-Type':'application/json'},
+                body: JSON.stringify({is_approved: true})
+            });
+            showNotification('Témoignage approuvé ✅', 'success');
+            loadTestimonyList();
+        }
+        
+        async function unapproveTestimony(id) {
+            await fetch('/api/cms/testimonies/' + id, {
+                method: 'PUT',
+                headers: {'Content-Type':'application/json'},
+                body: JSON.stringify({is_approved: false})
+            });
+            showNotification('Témoignage retiré de la publication', 'info');
+            loadTestimonyList();
+        }
+        
+        async function deleteTestimony(id) {
+            if (!confirm('Supprimer définitivement ce témoignage ?')) return;
+            await fetch('/api/cms/testimonies/' + id, { method: 'DELETE' });
+            showNotification('Témoignage supprimé', 'success');
+            loadTestimonyList();
+        }
+        
+        // Filtres témoignages
+        document.querySelectorAll('.tm-filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.tm-filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                renderTestimonies(this.dataset.f);
+            });
+        });
+        
+        // Charger les témoignages quand on clique sur la section
+        const origLoadSection = loadSectionData;
+        loadSectionData = async function() {
+            await origLoadSection();
+            if (currentSection === 'testimonies') await loadTestimonyList();
+        };
     </script>
 </body>
 </html>
