@@ -64,9 +64,12 @@ async function loadRecentCMS() {
             const icon = icons[c.type] || 'fa-lightbulb';
             const cls = imgClass[i % 3];
             const excerpt = c.excerpt || (c.body ? c.body.substring(0, 100) + '...' : '');
+            const visual = c.banner
+                ? `<div class="card-content__img ${cls}" style="background:url('${c.banner}') center/cover no-repeat;height:180px;"></div>`
+                : `<div class="card-content__img ${cls}" aria-hidden="true"><i class="fas ${icon}"></i></div>`;
             return `
             <article class="card-content visible" data-category="${cat}" style="cursor:pointer;" onclick="window.location.href='/contents'">
-                <div class="card-content__img ${cls}" aria-hidden="true"><i class="fas ${icon}"></i></div>
+                ${visual}
                 <div class="card-content__bar"></div>
                 <div class="card-content__body">
                     <span class="card-content__cat">${c.type}</span>
