@@ -26,46 +26,8 @@
                 <p class="text-muted mb-0">Réflexions approfondies sur la foi et la pensée chrétienne</p>
             </div>
         </div>
-        <div class="row g-4">
-            <div class="col-lg-4 col-md-6">
-                <div class="content-card h-100 clickable-card" onclick="openContent('foi-science', 'article')">
-                    <div class="content-icon">
-                        <i class="fas fa-cross"></i>
-                    </div>
-                    <h3 class="h5 fw-semibold mb-3">Foi et Science</h3>
-                    <p class="mb-3 text-muted">Comment concilier les découvertes scientifiques avec la foi chrétienne ? Une réflexion équilibrée.</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="badge-custom">Théologie</span>
-                        <small class="text-muted">5 min de lecture</small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="content-card h-100 clickable-card" onclick="openContent('etude-biblique', 'article')">
-                    <div class="content-icon">
-                        <i class="fas fa-book-bible"></i>
-                    </div>
-                    <h3 class="h5 fw-semibold mb-3">Étude Biblique</h3>
-                    <p class="mb-3 text-muted">Approfondissez votre compréhension des Écritures avec nos études guidées et structurées.</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="badge-custom">Bible</span>
-                        <small class="text-muted">8 min de lecture</small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="content-card h-100 clickable-card" onclick="openContent('vie-spirituelle', 'article')">
-                    <div class="content-icon">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                    <h3 class="h5 fw-semibold mb-3">Vie Spirituelle</h3>
-                    <p class="mb-3 text-muted">Conseils pratiques pour cultiver une relation authentique avec Dieu au quotidien.</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="badge-custom">Spiritualité</span>
-                        <small class="text-muted">6 min de lecture</small>
-                    </div>
-                </div>
-            </div>
+        <div class="row g-4" id="articles-grid">
+            <!-- Contenus dynamiques injectés ici -->
         </div>
     </section>
 
@@ -80,41 +42,8 @@
                 <p class="text-muted mb-0">Enseignements visuels et témoignages inspirants</p>
             </div>
         </div>
-        <div class="row g-4">
-            <div class="col-lg-6">
-                <div class="content-card h-100 clickable-card" onclick="openContent('foi-raison-conference', 'video')">
-                    <div class="position-relative mb-3 video-placeholder">
-                        <div class="ratio ratio-16x9 bg-light rounded">
-                            <div class="d-flex align-items-center justify-content-center">
-                                <i class="fas fa-play-circle fa-3x text-primary play-icon"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <h3 class="h5 fw-semibold mb-3">Conférence : Foi et Raison</h3>
-                    <p class="mb-3 text-muted">Une conférence captivante sur l'harmonie entre foi chrétienne et pensée rationnelle.</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="badge-custom">Conférence</span>
-                        <small class="text-muted">45 min</small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="content-card h-100 clickable-card" onclick="openContent('temoignage-transformation', 'video')">
-                    <div class="position-relative mb-3 video-placeholder">
-                        <div class="ratio ratio-16x9 bg-light rounded">
-                            <div class="d-flex align-items-center justify-content-center">
-                                <i class="fas fa-play-circle fa-3x text-primary play-icon"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <h3 class="h5 fw-semibold mb-3">Témoignage : Transformation</h3>
-                    <p class="mb-3 text-muted">Découvrez comment la foi peut transformer une vie et donner un sens nouveau à l'existence.</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="badge-custom">Témoignage</span>
-                        <small class="text-muted">20 min</small>
-                    </div>
-                </div>
-            </div>
+        <div class="row g-4" id="videos-grid">
+            <!-- Contenus dynamiques injectés ici -->
         </div>
     </section>
 
@@ -129,50 +58,21 @@
                 <p class="text-muted mb-0">Discussions et enseignements à écouter partout</p>
             </div>
         </div>
-        <div class="row g-4">
-            <div class="col-lg-4 col-md-6">
-                <div class="content-card h-100 clickable-card" onclick="openContent('questions-foi', 'podcast')">
-                    <div class="content-icon">
-                        <i class="fas fa-microphone"></i>
-                    </div>
-                    <h3 class="h5 fw-semibold mb-3">Questions de Foi</h3>
-                    <p class="mb-3 text-muted">Un podcast hebdomadaire qui répond aux questions les plus fréquentes sur la foi chrétienne.</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="badge-custom">Hebdomadaire</span>
-                        <small class="text-muted">30 min</small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="content-card h-100 clickable-card" onclick="openContent('meditations-quotidiennes', 'podcast')">
-                    <div class="content-icon">
-                        <i class="fas fa-praying-hands"></i>
-                    </div>
-                    <h3 class="h5 fw-semibold mb-3">Méditations Quotidiennes</h3>
-                    <p class="mb-3 text-muted">Des moments de réflexion spirituelle pour commencer ou terminer votre journée en paix.</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="badge-custom">Quotidien</span>
-                        <small class="text-muted">10 min</small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="content-card h-100 clickable-card" onclick="openContent('dialogues-theologiques', 'podcast')">
-                    <div class="content-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3 class="h5 fw-semibold mb-3">Dialogues Théologiques</h3>
-                    <p class="mb-3 text-muted">Des conversations approfondies avec des théologiens et penseurs chrétiens contemporains.</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="badge-custom">Mensuel</span>
-                        <small class="text-muted">60 min</small>
-                    </div>
-                </div>
-            </div>
+        <div class="row g-4" id="podcasts-grid">
+            <!-- Contenus dynamiques injectés ici -->
         </div>
     </section>
-    
+
     <div class="section-divider"></div>
+</div>
+
+<!-- Modale lecture contenu -->
+<div id="contentViewModal" class="cv-modal" style="display:none;">
+    <div class="cv-backdrop"></div>
+    <div class="cv-panel">
+        <button class="cv-close" aria-label="Fermer">&times;</button>
+        <div id="cvBody"></div>
+    </div>
 </div>
 
 <script src="{{ url_for('static', filename='js/contents.js') }}"></script>
