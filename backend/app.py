@@ -687,6 +687,10 @@ def admin():
 def cms():
     return render_template('cms.html')
 
+@app.route('/guide-cms')
+def guide_cms():
+    return send_from_directory('../docs', 'guide-cms-interactif.html')
+
 @app.route('/testimonies')
 @app.route('/temoignages')
 def testimonies():
