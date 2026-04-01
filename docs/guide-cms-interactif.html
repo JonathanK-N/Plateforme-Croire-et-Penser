@@ -3,313 +3,1105 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Guide CMS – Croire & Penser</title>
+<title>Guide CMS Complet – Croire & Penser</title>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Inter',sans-serif;background:#f7f9fc;color:#111;}
-:root{--blue:#2E73B8;--light:#8EC3DE;--bg:#F7F9FC;--white:#fff;--gray:#6B7B8D;}
+:root{--blue:#2E73B8;--light:#8EC3DE;--bg:#F7F9FC;--white:#fff;--gray:#6B7B8D;--green:#27ae60;--orange:#e67e22;--red:#e74c3c;}
 
 /* NAV */
-.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:#fff;border-bottom:1px solid rgba(46,115,184,.1);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;}
-.nav h1{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--blue);}
-.nav-dots{display:flex;gap:6px;}
-.nav-dot{width:10px;height:10px;border-radius:50%;background:var(--light);opacity:.4;cursor:pointer;transition:.3s;}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:#fff;border-bottom:1px solid rgba(46,115,184,.1);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.nav h1{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--blue);white-space:nowrap;}
+.nav-center{display:flex;align-items:center;gap:6px;flex:1;justify-content:center;flex-wrap:wrap;}
+.nav-dot{width:9px;height:9px;border-radius:50%;background:var(--light);opacity:.4;cursor:pointer;transition:.3s;}
 .nav-dot.active{background:var(--blue);opacity:1;transform:scale(1.2);}
+.nav-counter{font-size:.75rem;color:var(--gray);white-space:nowrap;}
 
 /* SLIDES */
-.slides{padding-top:70px;}
-.slide{min-height:calc(100vh - 70px);display:flex;align-items:center;justify-content:center;padding:3rem 2rem;opacity:0;transform:translateY(30px);transition:opacity .6s,transform .6s;}
+.slides{padding-top:60px;}
+.slide{min-height:calc(100vh - 60px);display:flex;align-items:center;justify-content:center;padding:3rem 2rem;opacity:0;transform:translateY(30px);transition:opacity .6s,transform .6s;}
 .slide.visible{opacity:1;transform:translateY(0);}
-.slide-inner{max-width:800px;width:100%;}
+.slide-inner{max-width:860px;width:100%;}
 .slide:nth-child(even){background:#fff;}
 
 /* TYPOGRAPHY */
-.slide h2{font-family:'Playfair Display',serif;font-size:2rem;color:var(--blue);margin-bottom:1rem;}
-.slide h3{font-size:1.2rem;font-weight:600;color:#111;margin:1.5rem 0 .8rem;}
-.slide p,.slide li{font-size:1rem;color:var(--gray);line-height:1.7;}
-.slide ul{padding-left:1.2rem;margin:.5rem 0;}
-.slide li{margin-bottom:.5rem;}
+.slide h2{font-family:'Playfair Display',serif;font-size:1.9rem;color:var(--blue);margin-bottom:1rem;}
+.slide h3{font-size:1.1rem;font-weight:600;color:#111;margin:1.5rem 0 .6rem;}
+.slide h4{font-size:.95rem;font-weight:600;color:#111;margin:.5rem 0 .3rem;}
+.slide p,.slide li{font-size:.95rem;color:var(--gray);line-height:1.7;}
+.slide ul,.slide ol{padding-left:1.3rem;margin:.5rem 0;}
+.slide li{margin-bottom:.4rem;}
+code{background:rgba(46,115,184,.08);color:var(--blue);padding:2px 7px;border-radius:5px;font-size:.83rem;font-family:monospace;}
 
 /* STEP CARDS */
-.step{background:var(--bg);border:1px solid rgba(46,115,184,.1);border-radius:14px;padding:1.5rem;margin:.8rem 0;display:flex;gap:1rem;align-items:flex-start;transition:transform .3s,box-shadow .3s;}
-.step:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(46,115,184,.1);}
-.step-num{width:36px;height:36px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem;flex-shrink:0;}
-.step-body h4{font-size:.95rem;font-weight:600;color:#111;margin-bottom:.3rem;}
-.step-body p{font-size:.88rem;margin:0;}
+.step{background:var(--bg);border:1px solid rgba(46,115,184,.1);border-radius:14px;padding:1.2rem 1.4rem;margin:.7rem 0;display:flex;gap:1rem;align-items:flex-start;transition:transform .3s,box-shadow .3s;}
+.step:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(46,115,184,.1);}
+.step-num{width:34px;height:34px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;flex-shrink:0;}
+.step-body h4{font-size:.92rem;font-weight:600;color:#111;margin-bottom:.25rem;}
+.step-body p{font-size:.86rem;margin:0;color:var(--gray);}
 
 /* BADGE */
-.badge-tip{display:inline-flex;align-items:center;gap:.4rem;background:rgba(46,115,184,.08);color:var(--blue);padding:.35rem .9rem;border-radius:50px;font-size:.78rem;font-weight:600;margin:.5rem 0;}
+.badge-tip{display:inline-flex;align-items:center;gap:.4rem;background:rgba(46,115,184,.08);color:var(--blue);padding:.35rem .9rem;border-radius:50px;font-size:.78rem;font-weight:600;margin:.4rem .3rem .4rem 0;}
+.badge-warn{background:rgba(230,126,34,.1);color:var(--orange);}
+.badge-ok{background:rgba(39,174,96,.1);color:var(--green);}
+.badge-danger{background:rgba(231,76,60,.08);color:var(--red);}
 
 /* TABLE */
-.tbl{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.88rem;}
+.tbl{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.85rem;}
 .tbl th{background:var(--blue);color:#fff;padding:.6rem .8rem;text-align:left;font-weight:600;}
-.tbl td{padding:.6rem .8rem;border-bottom:1px solid rgba(46,115,184,.08);}
+.tbl td{padding:.55rem .8rem;border-bottom:1px solid rgba(46,115,184,.08);color:var(--gray);}
 .tbl tr:hover td{background:rgba(46,115,184,.03);}
+.tbl td strong{color:#111;}
+
+/* GRID CARDS */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem;margin:1rem 0;}
+.card-item{background:var(--bg);border:1px solid rgba(46,115,184,.12);border-radius:12px;padding:1.1rem 1.2rem;transition:transform .3s,box-shadow .3s;}
+.card-item:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(46,115,184,.1);}
+.card-item .ci-icon{font-size:1.5rem;color:var(--blue);margin-bottom:.5rem;}
+.card-item h4{font-size:.9rem;font-weight:700;color:#111;margin-bottom:.3rem;}
+.card-item p{font-size:.82rem;color:var(--gray);}
 
 /* HERO SLIDE */
-.hero-slide{background:linear-gradient(135deg,var(--light) 0%,var(--bg) 50%,#fff 100%);text-align:center;}
-.hero-slide h2{font-size:2.6rem;margin-bottom:.5rem;}
-.hero-slide .sub{font-size:1.15rem;color:var(--gray);margin-bottom:2rem;}
-.hero-icon{font-size:4rem;color:var(--blue);margin-bottom:1.5rem;animation:float 3s ease-in-out infinite;}
+.hero-slide{background:linear-gradient(135deg,rgba(142,195,222,.35) 0%,var(--bg) 60%,#fff 100%);text-align:center;}
+.hero-slide h2{font-size:2.4rem;margin-bottom:.5rem;}
+.hero-slide .sub{font-size:1.05rem;color:var(--gray);margin-bottom:2rem;max-width:600px;margin-left:auto;margin-right:auto;}
+.hero-icon{font-size:3.5rem;color:var(--blue);margin-bottom:1.2rem;animation:float 3s ease-in-out infinite;}
 @keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
 
 /* BUTTONS */
-.btn-nav{display:flex;gap:.8rem;justify-content:center;margin-top:2rem;}
-.btn{padding:.7rem 1.8rem;border-radius:50px;font-weight:600;font-size:.9rem;cursor:pointer;border:none;transition:.3s;}
+.btn-nav{display:flex;gap:.8rem;justify-content:center;margin-top:1.8rem;flex-wrap:wrap;}
+.btn{padding:.65rem 1.6rem;border-radius:50px;font-weight:600;font-size:.88rem;cursor:pointer;border:none;transition:.3s;}
 .btn-primary{background:var(--blue);color:#fff;}
 .btn-primary:hover{background:#245f9a;transform:translateY(-2px);}
 .btn-outline{background:transparent;border:2px solid var(--blue);color:var(--blue);}
 .btn-outline:hover{background:var(--blue);color:#fff;}
+.btn-sm{padding:.45rem 1rem;font-size:.8rem;}
+
+/* PAGE MAP */
+.page-map{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:.8rem;margin:1rem 0;}
+.page-pill{background:#fff;border:2px solid rgba(46,115,184,.15);border-radius:12px;padding:.8rem 1rem;cursor:pointer;transition:.3s;text-align:center;}
+.page-pill:hover,.page-pill.sel{border-color:var(--blue);background:rgba(46,115,184,.06);}
+.page-pill .pp-icon{font-size:1.3rem;color:var(--blue);display:block;margin-bottom:.3rem;}
+.page-pill span{font-size:.82rem;font-weight:600;color:#111;}
+.page-pill small{display:block;font-size:.72rem;color:var(--gray);}
+
+/* DIVIDER */
+.divider{border:none;border-top:1px solid rgba(46,115,184,.1);margin:1.5rem 0;}
+
+/* STATUS BADGES */
+.status{display:inline-flex;align-items:center;gap:.3rem;padding:.25rem .7rem;border-radius:20px;font-size:.75rem;font-weight:600;}
+.status-pending{background:#fff3e0;color:#e67e22;}
+.status-approved{background:#e8f5e9;color:#27ae60;}
+.status-hidden{background:#fce4ec;color:#e91e63;}
+.status-deleted{background:#ffebee;color:#f44336;}
 
 /* AI CHAT */
-.chat-toggle{position:fixed;bottom:24px;right:24px;z-index:200;width:56px;height:56px;border-radius:50%;background:var(--blue);color:#fff;border:none;font-size:1.4rem;cursor:pointer;box-shadow:0 6px 24px rgba(46,115,184,.35);transition:.3s;display:flex;align-items:center;justify-content:center;}
+.chat-toggle{position:fixed;bottom:24px;right:24px;z-index:200;width:58px;height:58px;border-radius:50%;background:var(--blue);color:#fff;border:none;font-size:1.4rem;cursor:pointer;box-shadow:0 6px 24px rgba(46,115,184,.4);transition:.3s;display:flex;align-items:center;justify-content:center;}
 .chat-toggle:hover{transform:scale(1.08);}
-.chat-panel{position:fixed;bottom:90px;right:24px;z-index:200;width:380px;max-height:520px;background:#fff;border-radius:18px;box-shadow:0 12px 48px rgba(0,0,0,.15);display:none;flex-direction:column;overflow:hidden;}
+.chat-badge{position:absolute;top:-4px;right:-4px;background:#e74c3c;color:#fff;width:18px;height:18px;border-radius:50%;font-size:.65rem;display:flex;align-items:center;justify-content:center;font-weight:700;}
+.chat-panel{position:fixed;bottom:94px;right:24px;z-index:200;width:400px;max-height:560px;background:#fff;border-radius:20px;box-shadow:0 12px 48px rgba(0,0,0,.15);display:none;flex-direction:column;overflow:hidden;}
 .chat-panel.open{display:flex;}
-.chat-head{background:var(--blue);color:#fff;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;}
-.chat-head h4{font-size:.95rem;margin:0;}
-.chat-close{background:none;border:none;color:#fff;font-size:1.2rem;cursor:pointer;}
-.chat-body{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;max-height:360px;}
-.msg{max-width:85%;padding:10px 14px;border-radius:14px;font-size:.85rem;line-height:1.5;animation:msgIn .3s ease;}
+.chat-head{background:linear-gradient(135deg,var(--blue),#1a5a99);color:#fff;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;}
+.chat-head-info h4{font-size:.92rem;margin:0;}
+.chat-head-info small{font-size:.72rem;opacity:.8;}
+.chat-close{background:none;border:none;color:#fff;font-size:1.2rem;cursor:pointer;padding:4px 8px;}
+.chat-shortcuts{display:flex;flex-wrap:wrap;gap:.4rem;padding:10px 12px;border-bottom:1px solid rgba(46,115,184,.08);}
+.chat-shortcuts button{background:rgba(46,115,184,.08);border:1px solid rgba(46,115,184,.15);color:var(--blue);border-radius:20px;padding:.3rem .7rem;font-size:.72rem;cursor:pointer;transition:.2s;}
+.chat-shortcuts button:hover{background:var(--blue);color:#fff;}
+.chat-body{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px;max-height:340px;}
+.msg{max-width:88%;padding:9px 13px;border-radius:14px;font-size:.83rem;line-height:1.55;animation:msgIn .3s ease;}
 @keyframes msgIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
 .msg-bot{background:var(--bg);color:#111;align-self:flex-start;border-bottom-left-radius:4px;}
 .msg-user{background:var(--blue);color:#fff;align-self:flex-end;border-bottom-right-radius:4px;}
 .chat-input{display:flex;border-top:1px solid rgba(46,115,184,.1);padding:10px;}
-.chat-input input{flex:1;border:none;padding:8px 12px;font-size:.88rem;outline:none;}
-.chat-input button{background:var(--blue);color:#fff;border:none;padding:8px 14px;border-radius:10px;cursor:pointer;font-size:.85rem;}
+.chat-input input{flex:1;border:none;padding:8px 12px;font-size:.85rem;outline:none;background:transparent;}
+.chat-input button{background:var(--blue);color:#fff;border:none;padding:8px 14px;border-radius:10px;cursor:pointer;}
+.typing{display:flex;gap:4px;align-items:center;padding:8px 12px;}
+.typing span{width:6px;height:6px;background:var(--gray);border-radius:50%;animation:blink 1.2s infinite;}
+.typing span:nth-child(2){animation-delay:.2s;}
+.typing span:nth-child(3){animation-delay:.4s;}
+@keyframes blink{0%,80%,100%{opacity:.2;}40%{opacity:1;}}
 
 /* PRINT */
 @media print{.chat-toggle,.chat-panel,.nav{display:none!important;}.slide{opacity:1!important;transform:none!important;page-break-inside:avoid;min-height:auto;padding:1.5rem;}}
-@media(max-width:600px){.chat-panel{width:calc(100vw - 32px);right:16px;bottom:80px;}.hero-slide h2{font-size:1.8rem;}}
+@media(max-width:640px){.chat-panel{width:calc(100vw - 32px);right:16px;bottom:80px;}.hero-slide h2{font-size:1.7rem;}.card-grid{grid-template-columns:1fr 1fr;}.page-map{grid-template-columns:1fr 1fr;}}
 </style>
 </head>
 <body>
 
 <!-- NAV -->
 <div class="nav">
-    <h1><i class="fas fa-book-open" style="margin-right:8px;"></i>Guide CMS – Croire & Penser</h1>
-    <div class="nav-dots" id="navDots"></div>
+  <h1><i class="fas fa-book-open" style="margin-right:7px;"></i>Guide CMS – Croire & Penser</h1>
+  <div class="nav-center">
+    <div style="display:flex;gap:5px;flex-wrap:wrap;" id="navDots"></div>
+  </div>
+  <span class="nav-counter" id="navCounter">1 / 21</span>
 </div>
 
 <!-- SLIDES -->
 <div class="slides" id="slides">
 
-<!-- 1. ACCUEIL -->
+<!-- ===== SLIDE 1 : ACCUEIL ===== -->
 <div class="slide hero-slide">
 <div class="slide-inner">
-    <div class="hero-icon"><i class="fas fa-cogs"></i></div>
-    <h2>Guide de gestion du site</h2>
-    <p class="sub">Apprenez à gérer votre site Croire & Penser en toute autonomie.<br>Aucune compétence technique requise.</p>
-    <div class="btn-nav">
-        <button class="btn btn-primary" onclick="goSlide(1)">Commencer le guide <i class="fas fa-arrow-right" style="margin-left:6px;"></i></button>
+  <div class="hero-icon"><i class="fas fa-cogs"></i></div>
+  <h2>Guide complet de gestion du site</h2>
+  <p class="sub">Tout ce dont vous avez besoin pour gérer <strong>Croire & Penser</strong> en toute autonomie.<br>Aucune compétence technique requise.</p>
+  <div class="btn-nav">
+    <button class="btn btn-primary" onclick="goSlide(1)">Commencer <i class="fas fa-arrow-right" style="margin-left:6px;"></i></button>
+    <button class="btn btn-outline" onclick="goSlide(2)">Vue d'ensemble des pages</button>
+  </div>
+  <p style="margin-top:2rem;font-size:.8rem;color:var(--gray);">💡 Utilisez l'assistant IA (bouton bleu en bas à droite) pour toute question spécifique</p>
+  <p style="font-size:.75rem;color:var(--gray);margin-top:.5rem;">21 sections · Guide exhaustif · Toutes les pages couvertes</p>
+</div>
+</div>
+
+<!-- ===== SLIDE 2 : VUE D'ENSEMBLE DU SITE ===== -->
+<div class="slide">
+<div class="slide-inner">
+  <h2><i class="fas fa-sitemap" style="margin-right:10px;"></i>Le site Croire & Penser — Vue d'ensemble</h2>
+  <p>Le site est composé de <strong>11 pages principales</strong>. Chaque page a son propre contenu et sa propre gestion.</p>
+
+  <div class="page-map" style="margin-top:1.2rem;">
+    <div class="page-pill" onclick="goSlide(4)">
+      <span class="pp-icon"><i class="fas fa-home"></i></span>
+      <span>Accueil</span>
+      <small>Carousel + Contenus récents</small>
     </div>
-    <p style="margin-top:2rem;font-size:.82rem;color:var(--gray);">💡 Cliquez sur le bouton bleu en bas à droite pour poser vos questions à l'assistant IA</p>
+    <div class="page-pill" onclick="goSlide(5)">
+      <span class="pp-icon"><i class="fas fa-th-large"></i></span>
+      <span>Contenus</span>
+      <small>Articles · Vidéos · Podcasts</small>
+    </div>
+    <div class="page-pill" onclick="goSlide(9)">
+      <span class="pp-icon"><i class="fas fa-question-circle"></i></span>
+      <span>Q&amp;A</span>
+      <small>Questions &amp; Réponses</small>
+    </div>
+    <div class="page-pill" onclick="goSlide(10)">
+      <span class="pp-icon"><i class="fas fa-pray"></i></span>
+      <span>Prières</span>
+      <small>Demandes de prière</small>
+    </div>
+    <div class="page-pill" onclick="goSlide(11)">
+      <span class="pp-icon"><i class="fas fa-calendar-alt"></i></span>
+      <span>Événements</span>
+      <small>Agenda &amp; inscriptions</small>
+    </div>
+    <div class="page-pill" onclick="goSlide(12)">
+      <span class="pp-icon"><i class="fas fa-comment-dots"></i></span>
+      <span>Témoignages</span>
+      <small>Texte · Vidéo · Audio</small>
+    </div>
+    <div class="page-pill" onclick="goSlide(13)">
+      <span class="pp-icon"><i class="fas fa-info-circle"></i></span>
+      <span>À propos</span>
+      <small>Mission &amp; valeurs</small>
+    </div>
+    <div class="page-pill" onclick="goSlide(14)">
+      <span class="pp-icon"><i class="fas fa-envelope"></i></span>
+      <span>Contact</span>
+      <small>Formulaire &amp; coordonnées</small>
+    </div>
+    <div class="page-pill" onclick="goSlide(15)">
+      <span class="pp-icon"><i class="fas fa-heart"></i></span>
+      <span>Donation</span>
+      <small>PayPal · Stripe · Interac</small>
+    </div>
+    <div class="page-pill" onclick="goSlide(16)">
+      <span class="pp-icon"><i class="fas fa-handshake"></i></span>
+      <span>Partenariats</span>
+      <small>Collaborations</small>
+    </div>
+    <div class="page-pill" onclick="goSlide(3)">
+      <span class="pp-icon"><i class="fas fa-shield-alt"></i></span>
+      <span>CMS Admin</span>
+      <small>Interface de gestion</small>
+    </div>
+  </div>
+
+  <div class="badge-tip"><i class="fas fa-mouse-pointer"></i> Cliquez sur une page ci-dessus pour aller directement à sa section</div>
+
+  <hr class="divider">
+  <h3>Architecture technique (en résumé)</h3>
+  <table class="tbl">
+    <tr><th>Composant</th><th>Technologie</th></tr>
+    <tr><td><strong>Backend (serveur)</strong></td><td>Python Flask · PostgreSQL</td></tr>
+    <tr><td><strong>Frontend (interface)</strong></td><td>HTML + Bootstrap 5 + JavaScript</td></tr>
+    <tr><td><strong>Authentification</strong></td><td>JWT tokens · Rôles : user / admin / modérateur</td></tr>
+    <tr><td><strong>Paiements</strong></td><td>Stripe · PayPal · Interac e-Transfer</td></tr>
+    <tr><td><strong>Hébergement vidéos</strong></td><td>YouTube (intégration iFrame)</td></tr>
+    <tr><td><strong>Hébergement audio</strong></td><td>SoundCloud ou lien MP3 direct</td></tr>
+  </table>
 </div>
 </div>
 
-<!-- 2. CONNEXION -->
+<!-- ===== SLIDE 3 : CONNEXION AU CMS ===== -->
 <div class="slide">
 <div class="slide-inner">
-    <h2><i class="fas fa-key" style="margin-right:10px;"></i>Se connecter au CMS</h2>
-    <p>Le CMS est votre espace d'administration. C'est ici que vous gérez tout le contenu du site.</p>
-    <div class="step"><div class="step-num">1</div><div class="step-body"><h4>Ouvrez votre navigateur</h4><p>Allez sur <strong>votresite.com/cms</strong></p></div></div>
-    <div class="step"><div class="step-num">2</div><div class="step-body"><h4>Entrez vos identifiants</h4><p>Email : <code>admin@croireetpenser.ca</code><br>Mot de passe : <code>admin123</code></p></div></div>
-    <div class="step"><div class="step-num">3</div><div class="step-body"><h4>Cliquez "Se connecter"</h4><p>Vous arrivez sur le tableau de bord.</p></div></div>
-    <div class="badge-tip"><i class="fas fa-shield-alt"></i> Changez votre mot de passe après la première connexion</div>
+  <h2><i class="fas fa-key" style="margin-right:10px;"></i>Se connecter au CMS</h2>
+  <p>Le CMS (Système de Gestion de Contenu) est votre panneau d'administration. C'est depuis ici que vous gérez <strong>tout</strong> le contenu du site.</p>
+
+  <div class="step"><div class="step-num">1</div><div class="step-body"><h4>Ouvrez votre navigateur</h4><p>Accédez à <code>croireetpenser.com/cms</code> — cette page est réservée aux administrateurs.</p></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><h4>Entrez vos identifiants</h4><p>Email : <code>admin@croireetpenser.ca</code><br>Mot de passe : <code>admin123</code></p></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><h4>Tableau de bord</h4><p>Après connexion, vous accédez au tableau de bord avec les statistiques et raccourcis vers chaque section.</p></div></div>
+
+  <hr class="divider">
+  <h3>Structure du CMS — Les sections disponibles</h3>
+  <div class="card-grid">
+    <div class="card-item"><div class="ci-icon"><i class="fas fa-file-alt"></i></div><h4>Contenus</h4><p>Articles, vidéos, podcasts</p></div>
+    <div class="card-item"><div class="ci-icon"><i class="fas fa-question"></i></div><h4>Q&amp;A</h4><p>Questions &amp; réponses</p></div>
+    <div class="card-item"><div class="ci-icon"><i class="fas fa-comment-dots"></i></div><h4>Témoignages</h4><p>Modération et approbation</p></div>
+    <div class="card-item"><div class="ci-icon"><i class="fas fa-pray"></i></div><h4>Prières</h4><p>Demandes soumises</p></div>
+    <div class="card-item"><div class="ci-icon"><i class="fas fa-calendar"></i></div><h4>Événements</h4><p>Créer et gérer</p></div>
+    <div class="card-item"><div class="ci-icon"><i class="fas fa-page"></i></div><h4>Pages</h4><p>Édition des textes</p></div>
+  </div>
+
+  <div class="badge-tip badge-warn"><i class="fas fa-exclamation-triangle"></i> Changez votre mot de passe immédiatement après la première connexion</div>
 </div>
 </div>
 
-<!-- 3. CRÉER UN CONTENU -->
+<!-- ===== SLIDE 4 : TABLEAU DE BORD ===== -->
 <div class="slide">
 <div class="slide-inner">
-    <h2><i class="fas fa-plus-circle" style="margin-right:10px;"></i>Créer un contenu</h2>
-    <p>Articles, vidéos et podcasts — tout se crée depuis le même formulaire.</p>
-    <div class="step"><div class="step-num">1</div><div class="step-body"><h4>Menu → Contenus → + Nouveau contenu</h4><p>Le formulaire de création s'ouvre.</p></div></div>
-    <div class="step"><div class="step-num">2</div><div class="step-body"><h4>Remplissez les champs</h4><p>Titre, type (article/vidéo/podcast), catégorie, texte du contenu.</p></div></div>
-    <div class="step"><div class="step-num">3</div><div class="step-body"><h4>Ajoutez les médias</h4><p><strong>Vidéo</strong> : collez l'URL YouTube<br><strong>Podcast</strong> : collez l'URL du fichier audio<br><strong>Bannière</strong> : collez l'URL d'une image</p></div></div>
-    <div class="step"><div class="step-num">4</div><div class="step-body"><h4>Cochez "Publier immédiatement"</h4><p>Sans cette case, le contenu reste en brouillon (invisible sur le site).</p></div></div>
-    <div class="step"><div class="step-num">5</div><div class="step-body"><h4>Cliquez "Créer"</h4><p>Le contenu apparaît sur le site dans sa catégorie.</p></div></div>
+  <h2><i class="fas fa-tachometer-alt" style="margin-right:10px;"></i>Tableau de bord — Vue générale</h2>
+  <p>Le tableau de bord est la première chose que vous voyez après connexion. Il affiche les chiffres clés et les raccourcis.</p>
+
+  <h3>Statistiques disponibles</h3>
+  <table class="tbl">
+    <tr><th>Indicateur</th><th>Ce que ça mesure</th></tr>
+    <tr><td><strong>Contenus publiés</strong></td><td>Nombre total d'articles, vidéos et podcasts visibles sur le site</td></tr>
+    <tr><td><strong>Témoignages en attente</strong></td><td>Témoignages soumis par des visiteurs, non encore approuvés</td></tr>
+    <tr><td><strong>Questions en attente</strong></td><td>Questions posées par les visiteurs, non encore répondues</td></tr>
+    <tr><td><strong>Inscriptions newsletter</strong></td><td>Nombre d'abonnés à la liste email</td></tr>
+    <tr><td><strong>Dons reçus</strong></td><td>Montant total des donations reçues</td></tr>
+    <tr><td><strong>Événements à venir</strong></td><td>Nombre d'événements planifiés</td></tr>
+  </table>
+
+  <h3>Les 11 catégories thématiques du site</h3>
+  <p>Tous les contenus sont classés dans une de ces 11 catégories :</p>
+  <div class="card-grid">
+    <div class="card-item"><h4>1. Dieu</h4><p>Existence, attributs, nature de Dieu</p></div>
+    <div class="card-item"><h4>2. Bible</h4><p>Inspiration, autorité, interprétation</p></div>
+    <div class="card-item"><h4>3. Jésus-Christ</h4><p>Personne, résurrection, messie</p></div>
+    <div class="card-item"><h4>4. Saint-Esprit</h4><p>Rôle, dons, manifestations</p></div>
+    <div class="card-item"><h4>5. Salut</h4><p>Grâce, foi, justification</p></div>
+    <div class="card-item"><h4>6. Église</h4><p>Mission, structure, sacrement</p></div>
+    <div class="card-item"><h4>7. Être humain</h4><p>Nature, dignité, destin</p></div>
+    <div class="card-item"><h4>8. Le mal</h4><p>Souffrance, péché, mal moral</p></div>
+    <div class="card-item"><h4>9. Monde invisible</h4><p>Anges, démons, surnaturel</p></div>
+    <div class="card-item"><h4>10. La fin</h4><p>Eschatologie, éternité, jugement</p></div>
+    <div class="card-item"><h4>11. Éthique</h4><p>Morale chrétienne, questions sociétales</p></div>
+  </div>
 </div>
 </div>
 
-<!-- 4. OÙ APPARAÎT LE CONTENU -->
+<!-- ===== SLIDE 5 : PAGE ACCUEIL ===== -->
 <div class="slide">
 <div class="slide-inner">
-    <h2><i class="fas fa-eye" style="margin-right:10px;"></i>Où apparaît le contenu ?</h2>
-    <table class="tbl">
-        <tr><th>Endroit</th><th>Ce qui s'affiche</th></tr>
-        <tr><td><strong>Page d'accueil</strong></td><td>Les 6 derniers contenus publiés dans "Contenu récent"</td></tr>
-        <tr><td><strong>Page Contenus → Articles</strong></td><td>Tous les contenus de type "Article"</td></tr>
-        <tr><td><strong>Page Contenus → Vidéos</strong></td><td>Tous les contenus de type "Vidéo" avec player YouTube</td></tr>
-        <tr><td><strong>Page Contenus → Podcasts</strong></td><td>Tous les contenus de type "Podcast" avec lecteur audio</td></tr>
-    </table>
-    <div class="badge-tip"><i class="fas fa-lightbulb"></i> Les visiteurs peuvent poser des questions directement sur chaque contenu</div>
+  <h2><i class="fas fa-home" style="margin-right:10px;"></i>Page Accueil — Gestion complète</h2>
+  <p>L'accueil est composé de <strong>3 zones</strong> modifiables : le carousel hero, les contenus récents, et la citation biblique.</p>
+
+  <h3>Zone 1 — Carousel Hero (4 slides)</h3>
+  <table class="tbl">
+    <tr><th>Slide</th><th>Titre actuel</th><th>Sous-titre actuel</th><th>Comment modifier</th></tr>
+    <tr><td><strong>Slide 1</strong></td><td>Nourris ta foi. Éveille ta pensée.</td><td>—</td><td>Mode édition : <code>hero1-title</code></td></tr>
+    <tr><td><strong>Slide 2</strong></td><td>Des ressources pour grandir.</td><td>—</td><td>Mode édition : <code>hero2-title</code></td></tr>
+    <tr><td><strong>Slide 3</strong></td><td>Rejoignez notre communauté.</td><td>—</td><td>Mode édition : <code>hero3-title</code></td></tr>
+    <tr><td><strong>Slide 4</strong></td><td>Chaque don fait la différence.</td><td>—</td><td>Mode édition : <code>hero4-title</code></td></tr>
+  </table>
+
+  <h3>Zone 2 — Contenus récents (automatique)</h3>
+  <p>Cette section se remplit <strong>automatiquement</strong> avec les 6 derniers contenus publiés via le CMS. Vous n'avez rien à faire ici — il suffit de publier des contenus.</p>
+  <div class="badge-tip badge-ok"><i class="fas fa-magic"></i> Chaque nouveau contenu publié dans le CMS apparaît automatiquement ici</div>
+
+  <h3>Zone 3 — Citation biblique</h3>
+  <p>Citation actuelle : <em>"Éphésiens 1:18"</em><br>
+  Pour modifier : Mode édition → cliquez sur la citation → modifiez le texte et la référence.</p>
+  <div class="badge-tip">Identifiants : <code>quote-text</code> et <code>quote-ref</code></div>
+
+  <hr class="divider">
+  <h3>Comment activer le mode édition de l'accueil</h3>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><h4>Ajoutez <code>?edit=true</code> à l'URL</h4><p>Exemple : <code>croireetpenser.com/?edit=true</code></p></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><h4>Les zones éditables apparaissent en bleu</h4><p>Cliquez sur n'importe quel texte encadré en bleu pour le modifier.</p></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><h4>Tapez le nouveau texte dans la boîte de dialogue</h4><p>Validez → la modification est sauvegardée automatiquement.</p></div></div>
 </div>
 </div>
 
-<!-- 5. VIDÉOS -->
+<!-- ===== SLIDE 6 : PAGE CONTENUS – CRÉER ===== -->
 <div class="slide">
 <div class="slide-inner">
-    <h2><i class="fas fa-video" style="margin-right:10px;"></i>Ajouter une vidéo YouTube</h2>
-    <div class="step"><div class="step-num">1</div><div class="step-body"><h4>Copiez l'URL YouTube</h4><p>Exemple : <code>https://www.youtube.com/watch?v=dQw4w9WgXcQ</code></p></div></div>
-    <div class="step"><div class="step-num">2</div><div class="step-body"><h4>CMS → Nouveau contenu → Type : Vidéo</h4><p>Collez l'URL dans le champ "Lien vidéo".</p></div></div>
-    <div class="step"><div class="step-num">3</div><div class="step-body"><h4>Ajoutez une bannière (recommandé)</h4><p>L'image servira de miniature cliquable. Au clic, la vidéo se lance.</p></div></div>
-    <div class="badge-tip"><i class="fas fa-play-circle"></i> Sans bannière, le player YouTube s'affiche directement</div>
+  <h2><i class="fas fa-plus-circle" style="margin-right:10px;"></i>Page Contenus — Créer un contenu</h2>
+  <p>La page Contenus affiche trois types de ressources : <strong>Articles</strong>, <strong>Vidéos</strong> et <strong>Podcasts</strong>. Voici comment créer chaque type.</p>
+
+  <h3>Étapes pour créer n'importe quel contenu</h3>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><h4>CMS → Menu → Contenus → + Nouveau contenu</h4><p>Le formulaire de création s'ouvre.</p></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><h4>Remplissez les champs obligatoires</h4><p><strong>Titre</strong> : titre principal visible sur le site<br><strong>Type</strong> : Article / Vidéo / Podcast (détermine où il apparaît)<br><strong>Catégorie</strong> : une des 11 catégories thématiques<br><strong>Résumé</strong> : texte court affiché sur la carte (max 200 caractères)</p></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><h4>Rédigez le contenu principal</h4><p>Utilisez l'éditeur de texte pour écrire l'article ou la description. Accepte le HTML pour la mise en forme.</p></div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body"><h4>Ajoutez les médias (selon le type)</h4><p><strong>Article</strong> → Collez l'URL d'une image de bannière<br><strong>Vidéo</strong> → Collez l'URL YouTube dans "Lien vidéo"<br><strong>Podcast</strong> → Collez l'URL du fichier audio</p></div></div>
+  <div class="step"><div class="step-num">5</div><div class="step-body"><h4>Ajoutez des tags (optionnel)</h4><p>Tags séparés par des virgules. Exemple : <code>apologétique, foi, raison</code></p></div></div>
+  <div class="step"><div class="step-num">6</div><div class="step-body"><h4>Cochez "Publier immédiatement"</h4><p>⚠️ Sans cette case cochée, le contenu reste en <strong>brouillon</strong> et n'est PAS visible sur le site.</p></div></div>
+  <div class="step"><div class="step-num">7</div><div class="step-body"><h4>Cliquez "Créer"</h4><p>Le contenu est immédiatement visible sur le site dans sa section et dans les 6 derniers contenus de l'accueil.</p></div></div>
+
+  <div class="badge-tip badge-ok"><i class="fas fa-check"></i> Le contenu apparaît aussi automatiquement sur la page d'accueil</div>
+  <div class="badge-tip badge-warn"><i class="fas fa-exclamation-triangle"></i> L'URL de la bannière doit être un lien direct vers l'image (finissant par .jpg, .png, .webp)</div>
 </div>
 </div>
 
-<!-- 6. TÉMOIGNAGES -->
+<!-- ===== SLIDE 7 : PAGE CONTENUS – MODIFIER/SUPPRIMER ===== -->
 <div class="slide">
 <div class="slide-inner">
-    <h2><i class="fas fa-comment-dots" style="margin-right:10px;"></i>Gérer les témoignages</h2>
-    <p>Les visiteurs soumettent des témoignages (texte, vidéo ou audio). Vous les modérez avant publication.</p>
-    <div class="step"><div class="step-num">1</div><div class="step-body"><h4>Menu → Témoignages</h4><p>Vous voyez tous les témoignages avec leur statut.</p></div></div>
-    <div class="step"><div class="step-num">2</div><div class="step-body"><h4>Filtrez par statut</h4><p><strong>En attente</strong> = nouveaux, pas encore visibles<br><strong>Approuvés</strong> = visibles sur le site</p></div></div>
-    <div class="step"><div class="step-num">3</div><div class="step-body"><h4>Actions disponibles</h4><p>✅ <strong>Approuver</strong> → visible sur le site<br>⏳ <strong>Retirer</strong> → masqué du site<br>🗑 <strong>Supprimer</strong> → supprimé définitivement</p></div></div>
+  <h2><i class="fas fa-edit" style="margin-right:10px;"></i>Page Contenus — Modifier &amp; Supprimer</h2>
+
+  <h3>Modifier un contenu existant</h3>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><h4>CMS → Contenus</h4><p>Liste de tous vos contenus (publiés et brouillons).</p></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><h4>Trouvez le contenu à modifier</h4><p>Utilisez la barre de recherche ou filtrez par type/catégorie.</p></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><h4>Cliquez "Modifier" (icône crayon)</h4><p>Le formulaire s'ouvre avec les données actuelles pré-remplies.</p></div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body"><h4>Modifiez les champs souhaités</h4><p>Titre, texte, image, URL vidéo, catégorie, tags… tout est modifiable.</p></div></div>
+  <div class="step"><div class="step-num">5</div><div class="step-body"><h4>Cliquez "Mettre à jour"</h4><p>La modification est immédiatement visible sur le site.</p></div></div>
+
+  <hr class="divider">
+  <h3>Dépublier un contenu (sans le supprimer)</h3>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><h4>Ouvrez le contenu en modification</h4><p></p></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><h4>Décochez "Publier immédiatement"</h4><p>Le contenu passe en brouillon → disparaît du site mais reste dans le CMS.</p></div></div>
+
+  <hr class="divider">
+  <h3>Supprimer un contenu définitivement</h3>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><h4>CMS → Contenus → Cliquez l'icône poubelle</h4><p></p></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><h4>Confirmez la suppression</h4><p>⚠️ Cette action est <strong>irréversible</strong>. Le contenu et ses commentaires sont supprimés définitivement.</p></div></div>
+
+  <div class="badge-tip badge-danger"><i class="fas fa-trash"></i> Préférez "Dépublier" à "Supprimer" si vous avez un doute — vous pourrez toujours republier</div>
 </div>
 </div>
 
-<!-- 7. MODIFIER LES PAGES -->
+<!-- ===== SLIDE 8 : VIDÉOS ET PODCASTS ===== -->
 <div class="slide">
 <div class="slide-inner">
-    <h2><i class="fas fa-edit" style="margin-right:10px;"></i>Modifier les textes des pages</h2>
-    <div class="step"><div class="step-num">1</div><div class="step-body"><h4>Menu → Pages</h4><p>Sélectionnez la page à modifier (Accueil, À propos, Contact…).</p></div></div>
-    <div class="step"><div class="step-num">2</div><div class="step-body"><h4>Cliquez "Modifier"</h4><p>La page s'ouvre dans un nouvel onglet en mode édition.</p></div></div>
-    <div class="step"><div class="step-num">3</div><div class="step-body"><h4>Cliquez sur un texte → modifiez-le</h4><p>Les textes éditables sont entourés d'un cadre bleu.</p></div></div>
-    <div class="step"><div class="step-num">4</div><div class="step-body"><h4>Sauvegarde automatique</h4><p>Chaque modification est sauvegardée instantanément.</p></div></div>
+  <h2><i class="fas fa-play-circle" style="margin-right:10px;"></i>Ajouter une Vidéo YouTube ou un Podcast</h2>
+
+  <h3><i class="fab fa-youtube" style="color:#e74c3c;margin-right:6px;"></i>Vidéo YouTube — Étapes détaillées</h3>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><h4>Allez sur YouTube et copiez l'URL de la vidéo</h4><p>Format attendu : <code>https://www.youtube.com/watch?v=IDENTIFIANT</code><br>Exemple : <code>https://www.youtube.com/watch?v=dQw4w9WgXcQ</code></p></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><h4>CMS → Nouveau contenu → Sélectionnez Type : Vidéo</h4><p></p></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><h4>Collez l'URL dans le champ "Lien vidéo"</h4><p>Le système convertit automatiquement l'URL en lecteur intégré.</p></div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body"><h4>Ajoutez une image de miniature (recommandé)</h4><p>Collez l'URL d'une image JPG/PNG dans "Image de bannière". Elle s'affiche avant que la vidéo se lance.</p></div></div>
+  <div class="badge-tip badge-warn"><i class="fas fa-exclamation-triangle"></i> Les URLs courtes YouTube (<code>youtu.be/...</code>) fonctionnent aussi</div>
+
+  <hr class="divider">
+  <h3><i class="fas fa-podcast" style="color:var(--orange);margin-right:6px;"></i>Podcast Audio — Étapes</h3>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><h4>Hébergez votre fichier audio en ligne</h4><p>Options recommandées : <strong>SoundCloud</strong> (gratuit), <strong>Anchor/Spotify</strong>, ou tout lien MP3 public.</p></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><h4>Copiez l'URL directe du fichier ou du flux</h4><p>Doit se terminer par <code>.mp3</code> ou être un lien de streaming valide.</p></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><h4>CMS → Nouveau contenu → Type : Podcast → URL audio</h4><p>Collez l'URL dans le champ "URL audio".</p></div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body"><h4>Publiez</h4><p>Le lecteur audio apparaît sur la page Contenus → Podcasts. Les visiteurs peuvent écouter directement depuis leur navigateur.</p></div></div>
+
+  <hr class="divider">
+  <h3>Où s'affichent vidéos et podcasts ?</h3>
+  <table class="tbl">
+    <tr><th>Type</th><th>Page Accueil</th><th>Page Contenus</th><th>Modale de lecture</th></tr>
+    <tr><td><strong>Vidéo</strong></td><td>Carte avec miniature</td><td>Section "Vidéos"</td><td>Player YouTube intégré</td></tr>
+    <tr><td><strong>Podcast</strong></td><td>Carte avec icône audio</td><td>Section "Podcasts"</td><td>Lecteur HTML5 intégré</td></tr>
+  </table>
 </div>
 </div>
 
-<!-- 8. FAQ -->
+<!-- ===== SLIDE 9 : PAGE Q&A ===== -->
 <div class="slide">
 <div class="slide-inner">
-    <h2><i class="fas fa-question-circle" style="margin-right:10px;"></i>Questions fréquentes</h2>
-    <h3>Le contenu ne s'affiche pas ?</h3>
-    <p>→ Vérifiez que <strong>"Publier immédiatement"</strong> est coché dans le CMS.</p>
-    <h3>La vidéo ne se lance pas ?</h3>
-    <p>→ L'URL doit être au format : <code>https://www.youtube.com/watch?v=XXXXX</code></p>
-    <h3>Comment ajouter une image ?</h3>
-    <p>→ Hébergez l'image en ligne (Imgur, Google Photos) et copiez le lien direct.</p>
-    <h3>Le témoignage approuvé n'apparaît pas ?</h3>
-    <p>→ Rafraîchissez la page avec <strong>Ctrl + F5</strong>.</p>
-    <h3>Besoin d'aide ?</h3>
-    <p>→ Utilisez l'assistant IA (bouton bleu en bas à droite) ou contactez <strong>support@croireetpenser.com</strong></p>
+  <h2><i class="fas fa-question-circle" style="margin-right:10px;"></i>Page Q&A — Questions &amp; Réponses</h2>
+  <p>La page Q&A permet aux visiteurs de poser des questions théologiques et de voir les réponses publiées.</p>
+
+  <h3>Structure de la page Q&A</h3>
+  <table class="tbl">
+    <tr><th>Élément</th><th>Description</th></tr>
+    <tr><td><strong>Filtres par catégorie</strong></td><td>Dieu · Bible · Jésus-Christ · Foi &amp; Raison · Éthique</td></tr>
+    <tr><td><strong>Grille de Q&A</strong></td><td>Questions approuvées avec réponses, triées par popularité</td></tr>
+    <tr><td><strong>Formulaire "Poser une question"</strong></td><td>Les visiteurs soumettent une question → va en modération</td></tr>
+  </table>
+
+  <h3>Ajouter une nouvelle question/réponse manuellement</h3>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><h4>CMS → Q&amp;A → + Nouvelle Q&amp;A</h4><p></p></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><h4>Remplissez la question et la réponse</h4><p>Question : titre clair et direct<br>Réponse : texte détaillé (HTML accepté pour mise en forme)<br>Catégorie : Dieu / Bible / Jésus / Foi / Éthique</p></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><h4>Cochez "Approuver" → Publiez</h4><p>La Q&A apparaît sur la page Q&A dans la catégorie correspondante.</p></div></div>
+
+  <hr class="divider">
+  <h3>Modérer les questions soumises par les visiteurs</h3>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><h4>CMS → Q&amp;A → Onglet "En attente"</h4><p>Vous voyez toutes les questions soumises non encore approuvées.</p></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><h4>Lisez la question et décidez</h4><p>✅ <strong>Approuver</strong> → visible sur le site après que vous ayez ajouté une réponse<br>🗑 <strong>Rejeter</strong> → supprimée (question inappropriée ou hors sujet)</p></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><h4>Rédigez la réponse</h4><p>Ajoutez votre réponse dans le champ dédié, puis cochez "Approuver".</p></div></div>
+
+  <div class="badge-tip"><i class="fas fa-search"></i> Les visiteurs peuvent aussi poser des questions directement sous chaque contenu (article, vidéo, podcast)</div>
 </div>
 </div>
 
-<!-- 9. FIN -->
+<!-- ===== SLIDE 10 : PAGE PRIÈRES ===== -->
+<div class="slide">
+<div class="slide-inner">
+  <h2><i class="fas fa-pray" style="margin-right:10px;"></i>Page Prières — Gestion des demandes</h2>
+  <p>La page Prières permet aux visiteurs de soumettre des demandes de prière. Voici tout ce que vous pouvez faire.</p>
+
+  <h3>Ce que contient la page Prières</h3>
+  <table class="tbl">
+    <tr><th>Section</th><th>Description</th></tr>
+    <tr><td><strong>Verset du jour</strong></td><td>Josué 1:8 — modifiable via mode édition</td></tr>
+    <tr><td><strong>Types de prières</strong></td><td>4 cartes : Adoration · Confession · Gratitude · Supplication</td></tr>
+    <tr><td><strong>Formulaire de demande</strong></td><td>Prénom, type, description, option anonyme</td></tr>
+    <tr><td><strong>Espace méditation guidée</strong></td><td>4 étapes : Préparation → Lecture → Réflexion → Prière + minuteur</td></tr>
+  </table>
+
+  <h3>Voir et gérer les demandes de prière reçues</h3>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><h4>CMS → Prières</h4><p>Liste de toutes les demandes soumises par les visiteurs.</p></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><h4>Filtrez par type</h4><p>Adoration · Confession · Gratitude · Supplication · Toutes</p></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><h4>Actions disponibles</h4><p>📖 Lire la demande<br>✅ Marquer comme "Priée pour"<br>🗑 Supprimer si inappropriée</p></div></div>
+
+  <hr class="divider">
+  <h3>Modifier le verset du jour</h3>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><h4>Accédez à <code>croireetpenser.com/prayers?edit=true</code></h4><p></p></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><h4>Cliquez sur le verset encadré en bleu</h4><p>Entrez le nouveau verset et sa référence biblique.</p></div></div>
+
+  <h3>Types de prières — Modifier les 4 cartes</h3>
+  <p>Les cartes (Adoration, Confession, Gratitude, Supplication) peuvent être modifiées via le mode édition de la page. Leurs icônes sont issues de FontAwesome.</p>
+</div>
+</div>
+
+<!-- ===== SLIDE 11 : PAGE ÉVÉNEMENTS ===== -->
+<div class="slide">
+<div class="slide-inner">
+  <h2><i class="fas fa-calendar-alt" style="margin-right:10px;"></i>Page Événements — Créer &amp; Gérer</h2>
+  <p>La page Événements affiche les prochains événements et les événements passés, avec un formulaire d'inscription.</p>
+
+  <h3>Créer un événement</h3>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><h4>CMS → Événements → + Nouvel événement</h4><p></p></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><h4>Remplissez les informations</h4><p><strong>Titre</strong> : nom de l'événement<br><strong>Description</strong> : détails, programme, intervenants<br><strong>Date et heure</strong> : date de début et de fin<br><strong>Lieu</strong> : adresse physique ou lien Zoom/Teams<br><strong>Image</strong> : bannière ou affiche de l'événement</p></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><h4>Activez les inscriptions (optionnel)</h4><p>Si coché, un bouton "S'inscrire" apparaît. Les inscriptions arrivent dans CMS → Événements → Participants.</p></div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body"><h4>Publiez</h4><p>L'événement apparaît dans "Événements à venir" sur la page /events.</p></div></div>
+
+  <hr class="divider">
+  <h3>Gérer les inscriptions</h3>
+  <table class="tbl">
+    <tr><th>Action</th><th>Comment faire</th></tr>
+    <tr><td><strong>Voir la liste des inscrits</strong></td><td>CMS → Événements → Cliquez sur l'événement → "Participants"</td></tr>
+    <tr><td><strong>Exporter la liste</strong></td><td>Bouton "Exporter CSV" → fichier téléchargeable</td></tr>
+    <tr><td><strong>Fermer les inscriptions</strong></td><td>Modifiez l'événement → décochez "Inscriptions ouvertes"</td></tr>
+    <tr><td><strong>Supprimer un participant</strong></td><td>Liste participants → icône poubelle à côté du nom</td></tr>
+  </table>
+
+  <h3>Événements passés</h3>
+  <p>Les événements dont la date est passée basculent automatiquement dans la section "Événements passés" sur la page /events.</p>
+  <div class="badge-tip badge-ok"><i class="fas fa-clock"></i> Aucune action manuelle nécessaire — le changement est automatique</div>
+</div>
+</div>
+
+<!-- ===== SLIDE 12 : PAGE TÉMOIGNAGES ===== -->
+<div class="slide">
+<div class="slide-inner">
+  <h2><i class="fas fa-comment-dots" style="margin-right:10px;"></i>Page Témoignages — Modération complète</h2>
+  <p>Les visiteurs soumettent des témoignages (texte, vidéo ou audio). Vous les modérez avant qu'ils soient visibles.</p>
+
+  <h3>Types de témoignages acceptés</h3>
+  <div class="card-grid">
+    <div class="card-item"><div class="ci-icon"><i class="fas fa-align-left"></i></div><h4>Texte</h4><p>Témoignage écrit par le visiteur directement dans le formulaire.</p></div>
+    <div class="card-item"><div class="ci-icon"><i class="fab fa-youtube"></i></div><h4>Vidéo</h4><p>Lien vers une vidéo YouTube ou Vimeo fourni par le visiteur.</p></div>
+    <div class="card-item"><div class="ci-icon"><i class="fas fa-headphones"></i></div><h4>Audio</h4><p>Lien vers un fichier SoundCloud ou MP3 fourni par le visiteur.</p></div>
+  </div>
+
+  <h3>Workflow de modération</h3>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><h4>Le visiteur soumet un témoignage sur /testimonies</h4><p>Il remplit : nom/pseudo, type (texte/vidéo/audio), contenu, option anonyme.</p></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><h4>Le témoignage arrive dans CMS → Témoignages → "En attente"</h4><p>Statut initial : <span class="status status-pending">En attente</span> — non visible sur le site.</p></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><h4>Vous relisez le témoignage et prenez une décision</h4>
+    <p>
+      <span class="status status-approved">✅ Approuver</span> → visible sur /testimonies<br>
+      <span class="status status-hidden">⏸ Masquer</span> → non visible (peut être réactivé)<br>
+      <span class="status status-deleted">🗑 Supprimer</span> → supprimé définitivement
+    </p>
+  </div></div>
+
+  <h3>Ajouter un témoignage vous-même (sans attendre)</h3>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><h4>CMS → Témoignages → + Nouveau témoignage</h4><p></p></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><h4>Remplissez le formulaire</h4><p>Nom, type, contenu/URL, et cochez "Approuver immédiatement".</p></div></div>
+
+  <div class="badge-tip badge-warn"><i class="fas fa-shield-alt"></i> Lisez chaque témoignage avant approbation — vérifiez qu'il est approprié et édifiant</div>
+</div>
+</div>
+
+<!-- ===== SLIDE 13 : PAGE À PROPOS ===== -->
+<div class="slide">
+<div class="slide-inner">
+  <h2><i class="fas fa-info-circle" style="margin-right:10px;"></i>Page À Propos — Modifier le contenu</h2>
+  <p>La page "À propos" présente l'identité, la mission et les valeurs de Croire &amp; Penser. Elle est entièrement éditable via le mode édition.</p>
+
+  <h3>Structure de la page À propos</h3>
+  <table class="tbl">
+    <tr><th>Section</th><th>Contenu actuel</th><th>Identifiant édition</th></tr>
+    <tr><td><strong>Titre principal</strong></td><td>Qui sommes-nous ?</td><td><code>about-title</code></td></tr>
+    <tr><td><strong>Slogan</strong></td><td>Amener les croyants à penser, et les penseurs à croire</td><td><code>about-slogan</code></td></tr>
+    <tr><td><strong>Titre Mission</strong></td><td>Notre Mission - Réconcilier Foi &amp; Raison</td><td><code>mission-title</code></td></tr>
+    <tr><td><strong>Texte Mission</strong></td><td>Description de la mission (2-3 paragraphes)</td><td><code>mission-text</code></td></tr>
+    <tr><td><strong>Titre Valeurs</strong></td><td>Nos Valeurs</td><td><code>values-title</code></td></tr>
+    <tr><td><strong>Valeur 1</strong></td><td>Excellence Académique</td><td><code>value1-title</code></td></tr>
+    <tr><td><strong>Valeur 2</strong></td><td>Bienveillance</td><td><code>value2-title</code></td></tr>
+    <tr><td><strong>Valeur 3</strong></td><td>Accessibilité</td><td><code>value3-title</code></td></tr>
+    <tr><td><strong>Public cible</strong></td><td>4 catégories de personnes visées</td><td><code>audience-title</code></td></tr>
+  </table>
+
+  <h3>Timeline de l'histoire — Modifier</h3>
+  <table class="tbl">
+    <tr><th>Année</th><th>Événement actuel</th></tr>
+    <tr><td>2017</td><td>Formation en apologétique</td></tr>
+    <tr><td>2025</td><td>Naissance de Croire &amp; Penser</td></tr>
+  </table>
+  <p>Pour modifier ces entrées, activez le mode édition sur <code>/about?edit=true</code> et cliquez sur les textes de la timeline.</p>
+
+  <h3>Activer le mode édition de la page À propos</h3>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><h4>URL : <code>croireetpenser.com/about?edit=true</code></h4><p></p></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><h4>Cliquez sur n'importe quel texte encadré en bleu</h4><p>Une boîte de dialogue s'ouvre pour saisir le nouveau texte.</p></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><h4>Validez → sauvegarde automatique</h4><p></p></div></div>
+</div>
+</div>
+
+<!-- ===== SLIDE 14 : PAGE CONTACT ===== -->
+<div class="slide">
+<div class="slide-inner">
+  <h2><i class="fas fa-envelope" style="margin-right:10px;"></i>Page Contact — Informations &amp; Messages</h2>
+  <p>La page Contact permet aux visiteurs d'envoyer un message. Voici comment gérer les messages reçus et modifier les coordonnées.</p>
+
+  <h3>Coordonnées actuelles du site</h3>
+  <table class="tbl">
+    <tr><th>Information</th><th>Valeur actuelle</th><th>Comment modifier</th></tr>
+    <tr><td><strong>Email de contact</strong></td><td>contact@croireetpenser.com</td><td>Mode édition : <code>contact-email</code></td></tr>
+    <tr><td><strong>Téléphone</strong></td><td>+1 (438) 529-9073</td><td>Mode édition : <code>contact-phone</code></td></tr>
+    <tr><td><strong>Adresse</strong></td><td>Montréal, QC, Canada</td><td>Mode édition : <code>contact-address</code></td></tr>
+    <tr><td><strong>Horaires</strong></td><td>Lun-Ven 9h-17h · Sam 10h-14h</td><td>Mode édition : <code>contact-hours</code></td></tr>
+  </table>
+
+  <h3>Sujets de contact disponibles (select)</h3>
+  <ul>
+    <li><strong>question-foi</strong> : Question de foi</li>
+    <li><strong>partenariat</strong> : Partenariat</li>
+    <li><strong>événement</strong> : Événement</li>
+    <li><strong>technique</strong> : Problème technique</li>
+    <li><strong>autre</strong> : Autre</li>
+  </ul>
+
+  <h3>Voir et répondre aux messages reçus</h3>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><h4>CMS → Messages de contact</h4><p>Liste de tous les messages reçus avec date, email, sujet.</p></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><h4>Cliquez sur un message pour le lire</h4><p>Vous voyez : nom, email, téléphone, sujet, message complet.</p></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><h4>Répondez directement par email</h4><p>Cliquez "Répondre" → votre client email s'ouvre avec l'adresse pré-remplie.</p></div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body"><h4>Marquez comme traité</h4><p>Cliquez "Marquer comme lu/traité" pour suivre ce qui a été répondu.</p></div></div>
+
+  <h3>Réseaux sociaux — Modifier les liens</h3>
+  <p>Pour changer les liens Facebook, YouTube, Instagram, Twitter : mode édition → cliquez sur les icônes de réseaux sociaux.</p>
+</div>
+</div>
+
+<!-- ===== SLIDE 15 : PAGE DONATION ===== -->
+<div class="slide">
+<div class="slide-inner">
+  <h2><i class="fas fa-heart" style="margin-right:10px;"></i>Page Donation — Configuration &amp; Suivi</h2>
+  <p>La page Donation est équipée de trois méthodes de paiement. Voici comment tout gérer.</p>
+
+  <h3>Méthodes de paiement configurées</h3>
+  <div class="card-grid">
+    <div class="card-item"><div class="ci-icon"><i class="fab fa-paypal" style="color:#003087;"></i></div><h4>PayPal</h4><p>Paiement via compte PayPal ou carte bancaire</p></div>
+    <div class="card-item"><div class="ci-icon"><i class="fas fa-credit-card" style="color:#635bff;"></i></div><h4>Stripe</h4><p>Paiement par carte bancaire sécurisé</p></div>
+    <div class="card-item"><div class="ci-icon"><i class="fas fa-university" style="color:var(--orange);"></i></div><h4>Interac e-Transfer</h4><p>Transfert bancaire canadien</p></div>
+  </div>
+
+  <h3>Montants prédéfinis</h3>
+  <table class="tbl">
+    <tr><th>Montant</th><th>Description affichée</th></tr>
+    <tr><td>25$</td><td>L'équivalent d'un café par semaine</td></tr>
+    <tr><td>50$</td><td>Soutenez un article</td></tr>
+    <tr><td>100$</td><td>Financez une vidéo (Populaire)</td></tr>
+    <tr><td>250$</td><td>Produisez un podcast</td></tr>
+    <tr><td>500$</td><td>Organisez un événement</td></tr>
+    <tr><td>Personnalisé</td><td>Le donateur entre son propre montant</td></tr>
+  </table>
+
+  <h3>Types de dons</h3>
+  <ul>
+    <li><strong>Don unique</strong> : paiement ponctuel</li>
+    <li><strong>Don mensuel</strong> : paiement récurrent (+20% d'impact affiché)</li>
+  </ul>
+
+  <h3>Voir les dons reçus</h3>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><h4>CMS → Donations</h4><p>Tableau de tous les dons : montant, méthode, date, donateur (ou anonyme).</p></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><h4>Statistiques disponibles</h4><p>Total collecté · Nombre de donateurs · Objectif en cours</p></div></div>
+
+  <div class="badge-tip badge-warn"><i class="fas fa-exclamation-triangle"></i> Pour configurer les clés API PayPal et Stripe, contactez le développeur technique</div>
+</div>
+</div>
+
+<!-- ===== SLIDE 16 : PAGE PARTENARIATS ===== -->
+<div class="slide">
+<div class="slide-inner">
+  <h2><i class="fas fa-handshake" style="margin-right:10px;"></i>Page Partenariats — Gestion</h2>
+  <p>La page Partenariats présente les organisations collaboratrices et invite de nouveaux partenaires à rejoindre la plateforme.</p>
+
+  <h3>Contenu actuel de la page</h3>
+  <table class="tbl">
+    <tr><th>Section</th><th>Contenu</th></tr>
+    <tr><td><strong>Nos Partenaires</strong></td><td>3 catégories : Églises locales · Institutions académiques · Organisations chrétiennes</td></tr>
+    <tr><td><strong>Types de collaboration</strong></td><td>Partenariat Éducatif · Partenariat Média</td></tr>
+    <tr><td><strong>Appel à l'action</strong></td><td>3 boutons : Contactez-nous · Échangeons · Collaborons → redirige vers /contact</td></tr>
+  </table>
+
+  <h3>Ajouter un nouveau partenaire</h3>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><h4>CMS → Partenaires → + Nouveau partenaire</h4><p></p></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><h4>Remplissez les informations</h4><p><strong>Nom</strong> de l'organisation<br><strong>Type</strong> : Église / Académique / Organisation<br><strong>Logo</strong> : URL du logo<br><strong>Description</strong> : courte description du partenariat<br><strong>Lien</strong> : URL du site du partenaire</p></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><h4>Publiez</h4><p>La carte du partenaire apparaît dans la section correspondante.</p></div></div>
+
+  <h3>Retirer un partenaire</h3>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><h4>CMS → Partenaires → trouvez le partenaire</h4><p></p></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><h4>Cliquez "Désactiver" ou "Supprimer"</h4><p>Désactiver : disparaît du site mais reste dans le CMS. Supprimer : supprimé définitivement.</p></div></div>
+
+  <h3>Modifier les textes de la page</h3>
+  <p>Via <code>croireetpenser.com/partnerships?edit=true</code> → cliquez sur les textes à modifier.</p>
+</div>
+</div>
+
+<!-- ===== SLIDE 17 : MODE ÉDITION DES PAGES ===== -->
+<div class="slide">
+<div class="slide-inner">
+  <h2><i class="fas fa-magic" style="margin-right:10px;"></i>Mode Édition — Modifier les textes de chaque page</h2>
+  <p>Le mode édition vous permet de modifier directement le texte de n'importe quelle page sans passer par le CMS.</p>
+
+  <h3>Comment activer le mode édition</h3>
+  <table class="tbl">
+    <tr><th>Page</th><th>URL du mode édition</th></tr>
+    <tr><td>Accueil</td><td><code>croireetpenser.com/?edit=true</code></td></tr>
+    <tr><td>Contenus</td><td><code>croireetpenser.com/contents?edit=true</code></td></tr>
+    <tr><td>Q&amp;A</td><td><code>croireetpenser.com/qa?edit=true</code></td></tr>
+    <tr><td>Prières</td><td><code>croireetpenser.com/prayers?edit=true</code></td></tr>
+    <tr><td>Événements</td><td><code>croireetpenser.com/events?edit=true</code></td></tr>
+    <tr><td>À propos</td><td><code>croireetpenser.com/about?edit=true</code></td></tr>
+    <tr><td>Contact</td><td><code>croireetpenser.com/contact?edit=true</code></td></tr>
+    <tr><td>Donation</td><td><code>croireetpenser.com/donation?edit=true</code></td></tr>
+    <tr><td>Témoignages</td><td><code>croireetpenser.com/testimonies?edit=true</code></td></tr>
+    <tr><td>Partenariats</td><td><code>croireetpenser.com/partnerships?edit=true</code></td></tr>
+  </table>
+
+  <h3>Processus d'édition</h3>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><h4>Accédez à l'URL avec <code>?edit=true</code></h4><p>Vous devez être connecté en tant qu'admin pour que cela fonctionne.</p></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><h4>Les zones éditables sont entourées d'un cadre bleu</h4><p>Survolez pour voir l'effet de sélection.</p></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><h4>Cliquez sur un texte → boîte de dialogue</h4><p>Tapez le nouveau texte dans la boîte qui s'ouvre.</p></div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body"><h4>Cliquez "OK" → sauvegarde automatique</h4><p>La modification est sauvegardée dans <code>page_changes.json</code> et appliquée immédiatement.</p></div></div>
+  <div class="step"><div class="step-num">5</div><div class="step-body"><h4>Pour annuler : rechargez la page sans <code>?edit=true</code></h4><p>Les modifications sont persistantes entre les sessions.</p></div></div>
+
+  <div class="badge-tip badge-ok"><i class="fas fa-save"></i> Toutes les modifications sont sauvegardées automatiquement — pas besoin de cliquer sur "Enregistrer"</div>
+</div>
+</div>
+
+<!-- ===== SLIDE 18 : IMAGES ET MÉDIAS ===== -->
+<div class="slide">
+<div class="slide-inner">
+  <h2><i class="fas fa-image" style="margin-right:10px;"></i>Gérer les Images &amp; Médias</h2>
+  <p>Le site utilise des URLs pour les images et les médias. Voici tout ce qu'il faut savoir.</p>
+
+  <h3>Pour ajouter une image de bannière</h3>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><h4>Choisissez votre service d'hébergement</h4><p>Options recommandées :<br>
+  • <strong>Imgur</strong> (gratuit, pas de compte requis) — imgur.com<br>
+  • <strong>Google Photos</strong> (si vous avez un compte Google)<br>
+  • <strong>Cloudinary</strong> (professionnel, gratuit jusqu'à 10 Go)<br>
+  • <strong>ImgBB</strong> (gratuit, simple)</p></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><h4>Téléchargez votre image sur ce service</h4><p>Formats acceptés : JPG, PNG, WebP, GIF</p></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><h4>Copiez le lien direct de l'image</h4><p>Le lien doit pointer directement vers le fichier image, pas vers une page web.<br>Exemple valide : <code>https://i.imgur.com/abc123.jpg</code><br>Exemple invalide : <code>https://imgur.com/abc123</code></p></div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body"><h4>Collez ce lien dans le champ "Image de bannière" du CMS</h4><p></p></div></div>
+
+  <h3>Dimensions recommandées</h3>
+  <table class="tbl">
+    <tr><th>Usage</th><th>Dimensions recommandées</th><th>Format</th></tr>
+    <tr><td>Bannière de contenu</td><td>1200 × 630 px</td><td>JPG ou WebP</td></tr>
+    <tr><td>Miniature vidéo</td><td>640 × 360 px</td><td>JPG</td></tr>
+    <tr><td>Photo événement</td><td>800 × 450 px</td><td>JPG ou PNG</td></tr>
+    <tr><td>Logo partenaire</td><td>200 × 100 px</td><td>PNG (avec transparence)</td></tr>
+  </table>
+
+  <div class="badge-tip badge-warn"><i class="fas fa-exclamation-triangle"></i> N'utilisez pas d'images protégées par droits d'auteur. Utilisez Unsplash ou Pexels pour des images gratuites.</div>
+</div>
+</div>
+
+<!-- ===== SLIDE 19 : NEWSLETTER ET ABONNÉS ===== -->
+<div class="slide">
+<div class="slide-inner">
+  <h2><i class="fas fa-mail-bulk" style="margin-right:10px;"></i>Newsletter &amp; Abonnés</h2>
+  <p>Le site dispose d'un système d'inscription à la newsletter. Voici comment gérer votre liste d'abonnés.</p>
+
+  <h3>Comment les visiteurs s'inscrivent</h3>
+  <ul>
+    <li>Via le formulaire newsletter sur la page <strong>/events</strong></li>
+    <li>Via le footer du site (champ email + bouton S'abonner)</li>
+    <li>Lors d'une inscription à un événement (case à cocher)</li>
+  </ul>
+
+  <h3>Gérer la liste des abonnés</h3>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><h4>CMS → Newsletter</h4><p>Liste complète de tous les abonnés avec leur date d'inscription.</p></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><h4>Filtres disponibles</h4><p>• Actifs (reçoivent les emails)<br>• Désinscrits (se sont désinscrit)<br>• Date d'inscription</p></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><h4>Exporter la liste</h4><p>Bouton "Exporter CSV" → fichier avec tous les emails actifs, téléchargeable pour utilisation dans Mailchimp ou Brevo.</p></div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body"><h4>Désabonner manuellement</h4><p>Trouvez l'abonné → "Désactiver" → il ne recevra plus les emails.</p></div></div>
+
+  <hr class="divider">
+  <h3>Données enregistrées pour chaque abonné</h3>
+  <table class="tbl">
+    <tr><th>Champ</th><th>Description</th></tr>
+    <tr><td><strong>Email</strong></td><td>Adresse email de l'abonné</td></tr>
+    <tr><td><strong>Statut</strong></td><td>Actif / Désabonné</td></tr>
+    <tr><td><strong>Date d'inscription</strong></td><td>Quand l'abonné s'est inscrit</td></tr>
+    <tr><td><strong>Préférences</strong></td><td>Types de contenus souhaités (si configurés)</td></tr>
+  </table>
+</div>
+</div>
+
+<!-- ===== SLIDE 20 : FAQ COMPLÈTE ===== -->
+<div class="slide">
+<div class="slide-inner">
+  <h2><i class="fas fa-question-circle" style="margin-right:10px;"></i>Questions Fréquentes — FAQ Complète</h2>
+
+  <h3>Problèmes de publication</h3>
+  <h4>❓ Mon contenu ne s'affiche pas sur le site</h4>
+  <p>→ Vérifiez que <strong>"Publier immédiatement"</strong> est bien coché dans le CMS. Si coché, rafraîchissez la page avec <strong>Ctrl+F5</strong>.</p>
+
+  <h4>❓ Le contenu s'affiche dans le CMS mais pas sur le site</h4>
+  <p>→ Vérifiez le champ <strong>"is_published"</strong>. Si décoché, le contenu est en brouillon. Modifiez-le et cochez la case.</p>
+
+  <h4>❓ L'image de bannière ne s'affiche pas</h4>
+  <p>→ L'URL doit pointer directement vers le fichier image (finir par <code>.jpg</code>, <code>.png</code> ou <code>.webp</code>). Si vous utilisez Google Photos, générez un lien direct (pas un lien de partage).</p>
+
+  <h3>Problèmes avec les vidéos</h3>
+  <h4>❓ La vidéo YouTube ne se lance pas</h4>
+  <p>→ L'URL doit être au format : <code>https://www.youtube.com/watch?v=XXXXXXXX</code><br>
+  → Les URLs privées ou non répertoriées peuvent être bloquées. Vérifiez les paramètres de confidentialité YouTube.</p>
+
+  <h4>❓ Le podcast ne se lit pas</h4>
+  <p>→ Vérifiez que le lien MP3 est bien un lien direct vers le fichier (pas une page de téléchargement). Testez-le en le collant dans votre navigateur.</p>
+
+  <h3>Problèmes de modération</h3>
+  <h4>❓ Un témoignage approuvé n'apparaît pas</h4>
+  <p>→ Rafraîchissez la page avec <strong>Ctrl+F5</strong>. Si toujours absent, vérifiez que <strong>is_approved = true</strong> dans le CMS.</p>
+
+  <h4>❓ Une question Q&A n'apparaît pas après approbation</h4>
+  <p>→ Vérifiez qu'une réponse a bien été rédigée avant approbation. Une question sans réponse reste masquée.</p>
+
+  <h3>Problèmes de connexion</h3>
+  <h4>❓ Je n'arrive pas à me connecter au CMS</h4>
+  <p>→ Vérifiez l'URL : <code>croireetpenser.com/cms</code><br>
+  → Identifiants : <code>admin@croireetpenser.ca</code> / <code>admin123</code><br>
+  → Videz le cache du navigateur (Ctrl+Shift+Delete) et réessayez.</p>
+
+  <h4>❓ J'ai perdu mon mot de passe</h4>
+  <p>→ Contactez le développeur : <strong>jonathan.kakesa@cognito-inc.ca</strong></p>
+
+  <h3>Autres questions</h3>
+  <h4>❓ Comment ajouter une nouvelle catégorie thématique ?</h4>
+  <p>→ Les 11 catégories sont configurées dans la base de données. Pour en ajouter une, contactez le développeur.</p>
+
+  <h4>❓ Comment changer les informations de donation (compte PayPal, etc.) ?</h4>
+  <p>→ Ces informations sont dans les variables d'environnement du serveur. Contactez le développeur technique.</p>
+
+  <h4>❓ Besoin d'aide urgente ?</h4>
+  <p>→ Support : <strong>support@croireetpenser.com</strong><br>
+  → Développeur : <strong>jonathan.kakesa@cognito-inc.ca</strong></p>
+</div>
+</div>
+
+<!-- ===== SLIDE 21 : FIN ===== -->
 <div class="slide hero-slide">
 <div class="slide-inner">
-    <div class="hero-icon"><i class="fas fa-check-circle"></i></div>
-    <h2>Vous êtes prêt !</h2>
-    <p class="sub">Vous savez maintenant gérer votre site Croire & Penser.<br>N'hésitez pas à utiliser l'assistant IA pour toute question.</p>
-    <div class="btn-nav">
-        <button class="btn btn-outline" onclick="goSlide(0)"><i class="fas fa-redo" style="margin-right:6px;"></i>Revoir le guide</button>
-        <button class="btn btn-primary" onclick="window.print()"><i class="fas fa-print" style="margin-right:6px;"></i>Imprimer en PDF</button>
-    </div>
+  <div class="hero-icon"><i class="fas fa-check-circle" style="color:var(--green);"></i></div>
+  <h2>Vous maîtrisez votre site !</h2>
+  <p class="sub">Vous pouvez maintenant gérer chacune des <strong>11 pages</strong> de Croire & Penser en toute autonomie.<br>L'assistant IA est toujours disponible pour répondre à vos questions.</p>
+
+  <h3 style="text-align:center;margin-top:1.5rem;">Récapitulatif rapide</h3>
+  <table class="tbl" style="max-width:600px;margin:1rem auto;">
+    <tr><th>Pour…</th><th>Allez à</th></tr>
+    <tr><td>Créer un article/vidéo/podcast</td><td>CMS → Contenus → + Nouveau</td></tr>
+    <tr><td>Modérer un témoignage</td><td>CMS → Témoignages → En attente</td></tr>
+    <tr><td>Répondre à une question</td><td>CMS → Q&amp;A → En attente</td></tr>
+    <tr><td>Créer un événement</td><td>CMS → Événements → + Nouveau</td></tr>
+    <tr><td>Modifier un texte de page</td><td>URL de la page + <code>?edit=true</code></td></tr>
+    <tr><td>Voir les dons reçus</td><td>CMS → Donations</td></tr>
+    <tr><td>Gérer les abonnés newsletter</td><td>CMS → Newsletter</td></tr>
+  </table>
+
+  <div class="btn-nav">
+    <button class="btn btn-outline" onclick="goSlide(0)"><i class="fas fa-redo" style="margin-right:6px;"></i>Revoir le guide</button>
+    <button class="btn btn-primary" onclick="window.print()"><i class="fas fa-print" style="margin-right:6px;"></i>Imprimer en PDF</button>
+  </div>
 </div>
 </div>
 
-</div>
+</div><!-- end slides -->
 
 <!-- AI CHAT -->
-<button class="chat-toggle" id="chatToggle" title="Assistant IA"><i class="fas fa-robot"></i></button>
+<button class="chat-toggle" id="chatToggle" title="Assistant IA – Croire & Penser" style="position:fixed;">
+  <i class="fas fa-robot"></i>
+  <span class="chat-badge">IA</span>
+</button>
+
 <div class="chat-panel" id="chatPanel">
-    <div class="chat-head">
-        <h4><i class="fas fa-robot" style="margin-right:8px;"></i>Assistant CMS</h4>
-        <button class="chat-close" onclick="toggleChat()">×</button>
+  <div class="chat-head">
+    <div class="chat-head-info">
+      <h4><i class="fas fa-robot" style="margin-right:8px;"></i>Assistant CMS — Croire &amp; Penser</h4>
+      <small>Je connais tout le site. Posez-moi n'importe quelle question.</small>
     </div>
-    <div class="chat-body" id="chatBody">
-        <div class="msg msg-bot">Bonjour ! 👋 Je suis votre assistant pour le CMS Croire & Penser. Posez-moi n'importe quelle question sur la gestion de votre site.</div>
-    </div>
-    <div class="chat-input">
-        <input type="text" id="chatInput" placeholder="Posez votre question..." onkeydown="if(event.key==='Enter')sendMsg()">
-        <button onclick="sendMsg()"><i class="fas fa-paper-plane"></i></button>
-    </div>
+    <button class="chat-close" onclick="toggleChat()">×</button>
+  </div>
+  <div class="chat-shortcuts" id="chatShortcuts">
+    <button onclick="askShortcut('connexion cms')">🔑 Connexion</button>
+    <button onclick="askShortcut('créer un article')">✍️ Créer contenu</button>
+    <button onclick="askShortcut('ajouter une vidéo youtube')">▶️ Vidéo</button>
+    <button onclick="askShortcut('modérer témoignages')">💬 Témoignages</button>
+    <button onclick="askShortcut('modifier texte page')">✏️ Modifier page</button>
+    <button onclick="askShortcut('créer un événement')">📅 Événement</button>
+    <button onclick="askShortcut('pages du site')">🗺️ Pages du site</button>
+    <button onclick="askShortcut('catégories thématiques')">📂 Catégories</button>
+  </div>
+  <div class="chat-body" id="chatBody">
+    <div class="msg msg-bot">Bonjour ! 👋 Je suis l'assistant IA du site <strong>Croire & Penser</strong>.<br><br>Je connais toutes les <strong>11 pages</strong> du site et comment gérer chaque type de contenu. Posez-moi n'importe quelle question sur la gestion du site, ou cliquez sur un raccourci ci-dessus.</div>
+  </div>
+  <div class="chat-input">
+    <input type="text" id="chatInput" placeholder="Posez votre question..." onkeydown="if(event.key==='Enter')sendMsg()">
+    <button onclick="sendMsg()"><i class="fas fa-paper-plane"></i></button>
+  </div>
 </div>
 
 <script>
-// SLIDES
-var slides=document.querySelectorAll('.slide');
-var dots=document.getElementById('navDots');
-slides.forEach(function(_,i){
-    var d=document.createElement('div');
-    d.className='nav-dot'+(i===0?' active':'');
-    d.onclick=function(){goSlide(i);};
-    dots.appendChild(d);
+// ========== SLIDES ==========
+var slides = document.querySelectorAll('.slide');
+var dotsContainer = document.getElementById('navDots');
+var counter = document.getElementById('navCounter');
+var totalSlides = slides.length;
+
+slides.forEach(function(_, i) {
+  var d = document.createElement('div');
+  d.className = 'nav-dot' + (i === 0 ? ' active' : '');
+  d.onclick = function() { goSlide(i); };
+  d.title = 'Section ' + (i + 1);
+  dotsContainer.appendChild(d);
 });
 
-var io=new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-        if(e.isIntersecting){
-            e.target.classList.add('visible');
-            var idx=[].indexOf.call(slides,e.target);
-            document.querySelectorAll('.nav-dot').forEach(function(d,i){d.classList.toggle('active',i===idx);});
-        }
-    });
-},{threshold:.3});
-slides.forEach(function(s){io.observe(s);});
-
-function goSlide(i){slides[i].scrollIntoView({behavior:'smooth'});}
-
-// AI CHAT
-function toggleChat(){document.getElementById('chatPanel').classList.toggle('open');}
-document.getElementById('chatToggle').onclick=toggleChat;
-
-var KB={
-    'connexion|connecter|login|mot de passe|identifiant':
-        'Pour vous connecter :\n1. Allez sur votresite.com/cms\n2. Email : admin@croireetpenser.ca\n3. Mot de passe : admin123\n\n⚠️ Changez le mot de passe après la première connexion.',
-    'contenu|article|créer|ajouter|nouveau|publier':
-        'Pour créer un contenu :\n1. Menu → Contenus → + Nouveau contenu\n2. Remplissez titre, type, catégorie, texte\n3. Cochez "Publier immédiatement"\n4. Cliquez Créer\n\nLe contenu apparaît automatiquement sur le site.',
-    'vidéo|youtube|video|lancer|player':
-        'Pour ajouter une vidéo :\n1. Copiez l\'URL YouTube\n2. CMS → Nouveau contenu → Type : Vidéo\n3. Collez l\'URL dans "Lien vidéo"\n4. Ajoutez une bannière (optionnel)\n5. Publiez\n\nLa vidéo se lance directement sur le site.',
-    'podcast|audio|mp3|écouter':
-        'Pour ajouter un podcast :\n1. Hébergez votre fichier audio en ligne\n2. CMS → Nouveau contenu → Type : Podcast\n3. Collez l\'URL audio\n4. Publiez\n\nLe lecteur audio apparaît sur le site.',
-    'témoignage|temoignage|approuver|modérer':
-        'Pour gérer les témoignages :\n1. Menu → Témoignages\n2. Filtrez : En attente / Approuvés\n3. ✅ Approuver = visible sur le site\n4. ⏳ Retirer = masqué\n5. 🗑 Supprimer = définitif',
-    'page|modifier|texte|éditer|edit':
-        'Pour modifier une page :\n1. Menu → Pages\n2. Sélectionnez la page\n3. Cliquez Modifier\n4. Cliquez sur un texte pour le changer\n5. Sauvegarde automatique !',
-    'image|bannière|photo|illustration':
-        'Pour ajouter une image :\n1. Hébergez l\'image en ligne (Imgur, Google Photos)\n2. Copiez le lien direct de l\'image\n3. Collez-le dans le champ "Image de bannière"\n\nL\'image apparaîtra comme miniature du contenu.',
-    'affiche pas|visible|apparaît pas|marche pas':
-        'Si le contenu ne s\'affiche pas :\n1. Vérifiez que "Publier immédiatement" est coché\n2. Rafraîchissez la page (Ctrl+F5)\n3. Vérifiez l\'URL si c\'est une vidéo\n\nSi le problème persiste, contactez support@croireetpenser.com',
-    'question|q&a|faq':
-        'Pour gérer les Q&A :\n1. Menu → Q&A\n2. + Nouvelle question\n3. Ajoutez la question et la réponse\n\nLes questions des visiteurs arrivent aussi ici.',
-    'don|donation|paiement':
-        'La page Donation est déjà configurée avec PayPal, Stripe et Interac.\nLes visiteurs peuvent faire des dons directement sur le site.',
-    'support|aide|problème|contact':
-        'Pour obtenir de l\'aide :\n📧 support@croireetpenser.com\n👨‍💻 Développeur : Cognito Inc.\n📧 jonathan.kakesa@cognito-inc.ca'
-};
-
-function findAnswer(q){
-    q=q.toLowerCase();
-    var keys=Object.keys(KB);
-    for(var i=0;i<keys.length;i++){
-        var words=keys[i].split('|');
-        for(var j=0;j<words.length;j++){
-            if(q.indexOf(words[j])!==-1) return KB[keys[i]];
-        }
+var io = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      var idx = [].indexOf.call(slides, e.target);
+      document.querySelectorAll('.nav-dot').forEach(function(d, i) {
+        d.classList.toggle('active', i === idx);
+      });
+      counter.textContent = (idx + 1) + ' / ' + totalSlides;
     }
-    return 'Je ne suis pas sûr de comprendre votre question. Essayez de me demander :\n• Comment créer un contenu\n• Comment ajouter une vidéo\n• Comment gérer les témoignages\n• Comment modifier une page\n• Comment se connecter\n\nOu contactez support@croireetpenser.com';
+  });
+}, { threshold: 0.3 });
+
+slides.forEach(function(s) { io.observe(s); });
+
+function goSlide(i) {
+  if (slides[i]) slides[i].scrollIntoView({ behavior: 'smooth' });
 }
 
-function sendMsg(){
-    var input=document.getElementById('chatInput');
-    var body=document.getElementById('chatBody');
-    var q=input.value.trim();
-    if(!q)return;
+// ========== AI CHAT ==========
+function toggleChat() {
+  document.getElementById('chatPanel').classList.toggle('open');
+}
+document.getElementById('chatToggle').onclick = toggleChat;
 
-    body.innerHTML+='<div class="msg msg-user">'+q+'</div>';
-    input.value='';
-    body.scrollTop=body.scrollHeight;
+function askShortcut(q) {
+  document.getElementById('chatInput').value = q;
+  sendMsg();
+}
 
-    setTimeout(function(){
-        var a=findAnswer(q);
-        body.innerHTML+='<div class="msg msg-bot">'+a.replace(/\n/g,'<br>')+'</div>';
-        body.scrollTop=body.scrollHeight;
-    },600);
+// BASE DE CONNAISSANCES EXHAUSTIVE
+var KB = [
+
+  // ===== CONNEXION =====
+  {
+    keys: ['connexion', 'connecter', 'login', 'mot de passe', 'identifiant', 'admin', 'cms accès', 'se connecter'],
+    answer: '🔑 <strong>Connexion au CMS</strong><br><br>1. Allez sur <code>croireetpenser.com/cms</code><br>2. Email : <code>admin@croireetpenser.ca</code><br>3. Mot de passe : <code>admin123</code><br>4. Cliquez "Se connecter"<br><br>⚠️ Changez votre mot de passe après la première connexion.<br><br>Problème de connexion ? Videz le cache (Ctrl+Shift+Delete) et réessayez.'
+  },
+
+  // ===== VUE D'ENSEMBLE =====
+  {
+    keys: ['pages du site', 'combien de pages', 'liste des pages', 'pages composent', 'structure site', 'toutes les pages'],
+    answer: '🗺️ <strong>Le site Croire & Penser a 11 pages :</strong><br><br>1. <strong>/ — Accueil</strong> : Carousel + contenus récents<br>2. <strong>/contents — Contenus</strong> : Articles, vidéos, podcasts<br>3. <strong>/qa — Q&A</strong> : Questions & Réponses<br>4. <strong>/prayers — Prières</strong> : Demandes de prière<br>5. <strong>/events — Événements</strong> : Agenda<br>6. <strong>/testimonies — Témoignages</strong> : Modération<br>7. <strong>/about — À propos</strong> : Mission & valeurs<br>8. <strong>/contact — Contact</strong> : Formulaire<br>9. <strong>/donation — Donation</strong> : PayPal/Stripe/Interac<br>10. <strong>/partnerships — Partenariats</strong> : Collaborations<br>11. <strong>/cms — Admin</strong> : Votre panneau de gestion'
+  },
+
+  // ===== CATÉGORIES =====
+  {
+    keys: ['catégorie', 'catégories', 'thématique', 'thématiques', '11 catégories', 'classification'],
+    answer: '📂 <strong>Les 11 catégories thématiques</strong> du site :<br><br>1. Dieu<br>2. Bible<br>3. Jésus-Christ<br>4. Saint-Esprit<br>5. Salut<br>6. Église<br>7. Être humain<br>8. Le mal<br>9. Monde invisible<br>10. La fin<br>11. Éthique<br><br>Chaque contenu (article, vidéo, podcast) est classé dans une de ces catégories. Les visiteurs peuvent filtrer par catégorie sur la page Q&A.'
+  },
+
+  // ===== CRÉER CONTENU =====
+  {
+    keys: ['créer', 'nouveau contenu', 'ajouter contenu', 'publier', 'ajouter article', 'nouvel article', 'créer article'],
+    answer: '✍️ <strong>Créer un contenu</strong><br><br>1. CMS → Contenus → + Nouveau contenu<br>2. Remplissez :<br>&nbsp;&nbsp;• Titre (obligatoire)<br>&nbsp;&nbsp;• Type : Article / Vidéo / Podcast<br>&nbsp;&nbsp;• Catégorie (1 des 11)<br>&nbsp;&nbsp;• Résumé court (max 200 car.)<br>&nbsp;&nbsp;• Texte complet<br>&nbsp;&nbsp;• Image de bannière (URL)<br>&nbsp;&nbsp;• Tags (optionnel)<br>3. Cochez <strong>"Publier immédiatement"</strong><br>4. Cliquez "Créer"<br><br>✅ Le contenu apparaît sur /contents et sur l\'accueil (6 derniers contenus).'
+  },
+
+  // ===== MODIFIER CONTENU =====
+  {
+    keys: ['modifier contenu', 'modifier article', 'changer contenu', 'éditer contenu', 'mettre à jour contenu'],
+    answer: '✏️ <strong>Modifier un contenu existant</strong><br><br>1. CMS → Contenus<br>2. Trouvez le contenu (barre de recherche)<br>3. Cliquez l\'icône ✏️ (crayon)<br>4. Modifiez les champs souhaités<br>5. Cliquez "Mettre à jour"<br><br>La modification est immédiatement visible sur le site.<br><br>Pour <strong>dépublier</strong> (sans supprimer) : décochez "Publier immédiatement" → le contenu devient un brouillon.'
+  },
+
+  // ===== SUPPRIMER CONTENU =====
+  {
+    keys: ['supprimer contenu', 'effacer contenu', 'retirer article', 'supprimer article', 'enlever contenu'],
+    answer: '🗑️ <strong>Supprimer un contenu</strong><br><br><strong>Option 1 — Dépublier (recommandé)</strong><br>Modifiez le contenu → décochez "Publier" → le contenu disparaît du site mais reste dans le CMS.<br><br><strong>Option 2 — Suppression définitive</strong><br>CMS → Contenus → icône 🗑️ → Confirmez<br>⚠️ Irréversible ! Le contenu et ses commentaires sont supprimés définitivement.'
+  },
+
+  // ===== VIDÉO =====
+  {
+    keys: ['vidéo', 'youtube', 'video', 'lancer vidéo', 'player vidéo', 'ajouter vidéo', 'lien youtube'],
+    answer: '▶️ <strong>Ajouter une vidéo YouTube</strong><br><br>1. Copiez l\'URL YouTube :<br>&nbsp;&nbsp;<code>https://www.youtube.com/watch?v=ID</code><br>2. CMS → Nouveau contenu → Type : <strong>Vidéo</strong><br>3. Collez l\'URL dans "Lien vidéo"<br>4. Ajoutez une image de miniature (optionnel)<br>5. Cochez "Publier" → Créer<br><br>✅ La vidéo s\'affiche sur /contents section "Vidéos"<br>✅ Au clic, un player YouTube intégré s\'ouvre<br><br>⚠️ Les URLs courtes (<code>youtu.be/...</code>) fonctionnent aussi'
+  },
+
+  // ===== PODCAST =====
+  {
+    keys: ['podcast', 'audio', 'mp3', 'écouter', 'ajouter podcast', 'soundcloud'],
+    answer: '🎙️ <strong>Ajouter un podcast/audio</strong><br><br>1. Hébergez l\'audio en ligne :<br>&nbsp;&nbsp;• SoundCloud (gratuit)<br>&nbsp;&nbsp;• Anchor / Spotify<br>&nbsp;&nbsp;• Lien MP3 public direct<br>2. Copiez l\'URL du fichier audio<br>3. CMS → Nouveau contenu → Type : <strong>Podcast</strong><br>4. Collez l\'URL dans "URL audio"<br>5. Publiez<br><br>✅ Un lecteur audio HTML5 apparaît sur /contents section "Podcasts"'
+  },
+
+  // ===== TÉMOIGNAGES =====
+  {
+    keys: ['témoignage', 'temoignage', 'approuver', 'modérer témoignage', 'gérer témoignage', 'témoignages'],
+    answer: '💬 <strong>Gérer les témoignages</strong><br><br><strong>Workflow de modération :</strong><br>1. Le visiteur soumet sur /testimonies<br>2. CMS → Témoignages → "En attente"<br>3. Lisez le témoignage et décidez :<br>&nbsp;&nbsp;✅ <strong>Approuver</strong> → visible sur le site<br>&nbsp;&nbsp;⏸ <strong>Masquer</strong> → non visible (récupérable)<br>&nbsp;&nbsp;🗑️ <strong>Supprimer</strong> → définitif<br><br><strong>Types acceptés :</strong><br>• Texte (écrit dans le formulaire)<br>• Vidéo (lien YouTube/Vimeo)<br>• Audio (lien SoundCloud/MP3)<br><br><strong>Ajouter vous-même :</strong> CMS → Témoignages → + Nouveau → cochez "Approuver immédiatement"'
+  },
+
+  // ===== Q&A =====
+  {
+    keys: ['question', 'q&a', 'faq', 'répondre', 'approuver question', 'gérer questions', 'questions réponses'],
+    answer: '❓ <strong>Gérer les Q&A (Questions & Réponses)</strong><br><br><strong>Créer une Q&A manuellement :</strong><br>1. CMS → Q&A → + Nouvelle Q&A<br>2. Rédigez question + réponse<br>3. Choisissez une catégorie<br>4. Approuvez et publiez<br><br><strong>Modérer questions des visiteurs :</strong><br>1. CMS → Q&A → "En attente"<br>2. Lisez la question<br>3. Rédigez une réponse<br>4. Approuvez → visible sur /qa<br><br>⚠️ Une question sans réponse ne s\'affiche pas même si approuvée.<br><br><strong>Catégories Q&A :</strong> Dieu · Bible · Jésus · Foi & Raison · Éthique'
+  },
+
+  // ===== PRIÈRES =====
+  {
+    keys: ['prière', 'priere', 'demande de prière', 'gérer prières', 'page prières'],
+    answer: '🙏 <strong>Page Prières</strong><br><br><strong>Ce que les visiteurs peuvent faire :</strong><br>• Soumettre une demande de prière<br>• Types : Adoration / Confession / Gratitude / Supplication<br>• Option anonyme disponible<br>• Utiliser l\'espace de méditation guidée<br><br><strong>Gérer les demandes reçues :</strong><br>1. CMS → Prières<br>2. Filtrez par type<br>3. Actions : Lire · Marquer "Priée pour" · Supprimer<br><br><strong>Modifier le verset du jour :</strong><br>Accédez à <code>/prayers?edit=true</code> → cliquez sur le verset'
+  },
+
+  // ===== ÉVÉNEMENTS =====
+  {
+    keys: ['événement', 'evenement', 'créer événement', 'agenda', 'calendrier', 'inscription événement'],
+    answer: '📅 <strong>Page Événements</strong><br><br><strong>Créer un événement :</strong><br>1. CMS → Événements → + Nouvel événement<br>2. Titre, description, date/heure, lieu, image<br>3. Activez les inscriptions (optionnel)<br>4. Publiez<br><br>✅ Apparaît dans "Événements à venir" sur /events<br>✅ Passe automatiquement en "Événements passés" une fois la date dépassée<br><br><strong>Gérer les inscrits :</strong><br>CMS → Événements → Événement → "Participants"<br>→ Exportable en CSV<br><br><strong>Fermer les inscriptions :</strong><br>Modifiez l\'événement → décochez "Inscriptions ouvertes"'
+  },
+
+  // ===== PAGE ACCUEIL =====
+  {
+    keys: ['page accueil', 'accueil', 'carousel', 'hero', 'contenu récent', 'slide accueil'],
+    answer: '🏠 <strong>Page Accueil — 3 zones</strong><br><br><strong>Zone 1 — Carousel (4 slides) :</strong><br>Mode édition (<code>/?edit=true</code>) → modifiez les titres<br>IDs : hero1-title, hero2-title, hero3-title, hero4-title<br><br><strong>Zone 2 — Contenus récents :</strong><br>✅ Automatique ! Les 6 derniers contenus publiés s\'affichent ici. Rien à configurer.<br><br><strong>Zone 3 — Citation biblique :</strong><br>Mode édition → cliquez sur la citation<br>IDs : quote-text (verset) et quote-ref (référence)'
+  },
+
+  // ===== PAGE À PROPOS =====
+  {
+    keys: ['à propos', 'about', 'mission', 'valeurs', 'histoire', 'qui sommes', 'page à propos'],
+    answer: '👥 <strong>Page À propos</strong><br><br><strong>Sections modifiables :</strong><br>• Titre et slogan principal<br>• Texte de la mission<br>• Les 3 valeurs (Excellence · Bienveillance · Accessibilité)<br>• Timeline historique (2017 → 2025)<br>• Public cible (4 catégories)<br><br><strong>Comment modifier :</strong><br>1. URL : <code>croireetpenser.com/about?edit=true</code><br>2. Cliquez sur un texte encadré en bleu<br>3. Tapez le nouveau texte → validez<br><br>Modifications sauvegardées automatiquement.'
+  },
+
+  // ===== PAGE CONTACT =====
+  {
+    keys: ['contact', 'coordonnées', 'formulaire contact', 'téléphone', 'email contact', 'adresse'],
+    answer: '📧 <strong>Page Contact</strong><br><br><strong>Coordonnées actuelles :</strong><br>• Email : contact@croireetpenser.com<br>• Tél : +1 (438) 529-9073<br>• Adresse : Montréal, QC, Canada<br>• Horaires : Lun-Ven 9h-17h · Sam 10h-14h<br><br><strong>Modifier les coordonnées :</strong><br>URL : <code>/contact?edit=true</code><br><br><strong>Voir les messages reçus :</strong><br>CMS → Messages de contact<br>→ Lire, répondre par email, marquer traité<br><br><strong>Sujets du formulaire :</strong><br>Question de foi · Partenariat · Événement · Technique · Autre'
+  },
+
+  // ===== PAGE DONATION =====
+  {
+    keys: ['donation', 'don', 'paypal', 'stripe', 'interac', 'paiement', 'collecter des dons'],
+    answer: '💝 <strong>Page Donation</strong><br><br><strong>3 méthodes de paiement :</strong><br>• PayPal (compte PayPal ou carte)<br>• Stripe (carte bancaire)<br>• Interac e-Transfer (Canada)<br><br><strong>Montants prédéfinis :</strong><br>25$ · 50$ · 100$ (populaire) · 250$ · 500$ · Personnalisé<br><br><strong>Types :</strong> Don unique ou Don mensuel<br><br><strong>Voir les dons reçus :</strong><br>CMS → Donations → tableau récapitulatif<br><br>⚠️ Pour modifier les clés PayPal/Stripe : contactez le développeur (jonathan.kakesa@cognito-inc.ca)'
+  },
+
+  // ===== PAGE PARTENARIATS =====
+  {
+    keys: ['partenariat', 'partenaire', 'partnerships', 'collaborations', 'page partenariats'],
+    answer: '🤝 <strong>Page Partenariats</strong><br><br><strong>3 types de partenaires :</strong><br>• Églises locales<br>• Institutions académiques<br>• Organisations chrétiennes<br><br><strong>Ajouter un partenaire :</strong><br>1. CMS → Partenaires → + Nouveau<br>2. Nom, type, logo (URL), description, lien site<br>3. Publiez<br><br><strong>Retirer un partenaire :</strong><br>CMS → Partenaires → "Désactiver" ou "Supprimer"<br><br><strong>Modifier les textes :</strong><br>URL : <code>/partnerships?edit=true</code>'
+  },
+
+  // ===== MODE ÉDITION =====
+  {
+    keys: ['mode édition', 'éditer page', 'modifier page', 'modifier texte', 'edit true', 'édition page'],
+    answer: '✏️ <strong>Mode Édition des pages</strong><br><br><strong>Activez le mode édition :</strong><br>Ajoutez <code>?edit=true</code> à l\'URL de la page<br><br>Exemples :<br>• <code>/about?edit=true</code><br>• <code>/contact?edit=true</code><br>• <code>/?edit=true</code> (accueil)<br><br><strong>Processus :</strong><br>1. Les zones modifiables apparaissent en bleu<br>2. Cliquez sur un texte → boîte de dialogue<br>3. Tapez le nouveau texte → OK<br>4. Sauvegarde automatique !<br><br>✅ Fonctionne sur toutes les 10 pages publiques'
+  },
+
+  // ===== IMAGES =====
+  {
+    keys: ['image', 'bannière', 'photo', 'illustration', 'héberger image', 'télécharger image', 'imgur'],
+    answer: '🖼️ <strong>Ajouter une image</strong><br><br><strong>Services d\'hébergement gratuits :</strong><br>• Imgur (imgur.com) — simple et gratuit<br>• ImgBB (imgbb.com)<br>• Cloudinary — professionnel<br>• Google Photos (si compte Google)<br><br><strong>Étapes :</strong><br>1. Téléchargez votre image sur le service<br>2. Copiez le lien <strong>direct</strong> (finissant par .jpg/.png/.webp)<br>3. Collez dans "Image de bannière" du CMS<br><br><strong>Dimensions recommandées :</strong><br>• Bannière : 1200×630 px<br>• Miniature vidéo : 640×360 px<br>• Événement : 800×450 px'
+  },
+
+  // ===== NEWSLETTER =====
+  {
+    keys: ['newsletter', 'abonnés', 'liste email', 'emails', 'abonné', 'inscription newsletter'],
+    answer: '📬 <strong>Newsletter & Abonnés</strong><br><br><strong>Les visiteurs s\'inscrivent via :</strong><br>• Page /events (formulaire newsletter)<br>• Footer du site<br>• Inscription à un événement<br><br><strong>Gérer les abonnés :</strong><br>1. CMS → Newsletter<br>2. Voir liste complète (actifs + désinscrits)<br>3. Exporter en CSV (pour Mailchimp, Brevo...)<br>4. Désabonner manuellement si nécessaire<br><br><strong>Données enregistrées :</strong><br>Email · Statut · Date d\'inscription · Préférences'
+  },
+
+  // ===== VISIBILITÉ CONTENUS =====
+  {
+    keys: ['affiche pas', 'visible', 'apparaît pas', 'marche pas', 'contenu invisible', 'pas visible'],
+    answer: '🔍 <strong>Contenu qui ne s\'affiche pas</strong><br><br>Vérifiez dans cet ordre :<br><br>1. ✅ "Publier immédiatement" est-il coché ?<br>2. ✅ Rafraîchissez avec Ctrl+F5<br>3. ✅ L\'URL de l\'image est-elle un lien direct ?<br>4. ✅ Pour les vidéos : l\'URL YouTube est-elle correcte ?<br>5. ✅ Pour les témoignages : is_approved est-il true ?<br>6. ✅ Pour les Q&A : une réponse a-t-elle été rédigée ?<br><br>Toujours un problème ? Contactez support@croireetpenser.com'
+  },
+
+  // ===== SUPPORT =====
+  {
+    keys: ['aide', 'support', 'problème', 'développeur', 'contact support', 'bug', 'erreur'],
+    answer: '🆘 <strong>Obtenir de l\'aide</strong><br><br>📧 <strong>Support général :</strong><br>support@croireetpenser.com<br><br>👨‍💻 <strong>Développeur technique :</strong><br>Jonathan Kakesa<br>jonathan.kakesa@cognito-inc.ca<br>Cognito Inc.<br><br><strong>Pour les problèmes techniques</strong> (clés API, serveur, base de données), contactez directement le développeur.<br><br><strong>Pour les questions de contenu</strong>, utilisez cet assistant ou le guide ci-dessus.'
+  },
+
+  // ===== TABLEAU DE BORD =====
+  {
+    keys: ['tableau de bord', 'dashboard', 'statistiques', 'stats', 'chiffres'],
+    answer: '📊 <strong>Tableau de bord CMS</strong><br><br>Le tableau de bord (première page après connexion) affiche :<br><br>• 📄 Nombre de contenus publiés<br>• ⏳ Témoignages en attente de modération<br>• ❓ Questions en attente de réponse<br>• 📧 Abonnés newsletter actifs<br>• 💝 Total des donations reçues<br>• 📅 Événements à venir<br><br>Ces statistiques sont mises à jour en temps réel.'
+  },
+
+  // ===== RÔLES =====
+  {
+    keys: ['rôle', 'roles', 'utilisateur', 'modérateur', 'administrateur', 'droits', 'permissions'],
+    answer: '👤 <strong>Rôles et permissions</strong><br><br><strong>3 niveaux d\'accès :</strong><br><br>👑 <strong>Admin</strong> : accès total (votre rôle)<br>• Créer/modifier/supprimer tout contenu<br>• Gérer les utilisateurs<br>• Accéder au CMS complet<br><br>🔍 <strong>Modérateur</strong> :<br>• Approuver/rejeter témoignages et questions<br>• Pas de création de contenu<br><br>👥 <strong>User</strong> :<br>• Peut soumettre questions, témoignages, prières<br>• Pas d\'accès au CMS'
+  }
+
+];
+
+function findAnswer(q) {
+  q = q.toLowerCase()
+       .normalize('NFD')
+       .replace(/[\u0300-\u036f]/g, '');
+
+  // Chercher dans la base de connaissances
+  for (var i = 0; i < KB.length; i++) {
+    var entry = KB[i];
+    for (var j = 0; j < entry.keys.length; j++) {
+      var key = entry.keys[j]
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '');
+      if (q.indexOf(key) !== -1) return entry.answer;
+    }
+  }
+
+  // Réponse par défaut
+  return '🤔 Je ne trouve pas de réponse précise à votre question.<br><br><strong>Essayez de me demander :</strong><br>• "Comment créer un article ?"<br>• "Comment ajouter une vidéo ?"<br>• "Comment modérer les témoignages ?"<br>• "Comment modifier le texte d\'une page ?"<br>• "Quelles sont les pages du site ?"<br>• "Comment créer un événement ?"<br><br>Ou contactez : <strong>support@croireetpenser.com</strong>';
+}
+
+function sendMsg() {
+  var input = document.getElementById('chatInput');
+  var body = document.getElementById('chatBody');
+  var q = input.value.trim();
+  if (!q) return;
+
+  // Message utilisateur
+  body.innerHTML += '<div class="msg msg-user">' + q.replace(/</g,'&lt;') + '</div>';
+  input.value = '';
+  body.scrollTop = body.scrollHeight;
+
+  // Indicateur de frappe
+  var typingId = 'typing_' + Date.now();
+  body.innerHTML += '<div class="msg msg-bot typing" id="' + typingId + '"><span></span><span></span><span></span></div>';
+  body.scrollTop = body.scrollHeight;
+
+  setTimeout(function() {
+    var typingEl = document.getElementById(typingId);
+    if (typingEl) typingEl.remove();
+    var a = findAnswer(q);
+    body.innerHTML += '<div class="msg msg-bot">' + a + '</div>';
+    body.scrollTop = body.scrollHeight;
+  }, 700);
 }
 </script>
 </body>
