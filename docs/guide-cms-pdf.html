@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Guide CMS – Croire & Penser (PDF)</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;color:#111;max-width:800px;margin:0 auto;padding:40px;line-height:1.7;}
+h1{font-family:'Playfair Display',serif;font-size:2rem;color:#2E73B8;text-align:center;margin-bottom:8px;}
+.subtitle{text-align:center;color:#6B7B8D;font-size:1rem;margin-bottom:40px;}
+h2{font-family:'Playfair Display',serif;font-size:1.4rem;color:#2E73B8;margin:32px 0 12px;padding-bottom:8px;border-bottom:2px solid #e8f0f8;}
+h3{font-size:1rem;font-weight:600;margin:16px 0 6px;}
+p,li{font-size:.92rem;color:#333;}
+ul{padding-left:20px;margin:6px 0 12px;}
+li{margin-bottom:4px;}
+code{background:#e8f0f8;padding:2px 6px;border-radius:4px;font-size:.85rem;color:#2E73B8;}
+.step-box{background:#f7f9fc;border:1px solid #e8f0f8;border-radius:10px;padding:14px 18px;margin:8px 0;display:flex;gap:12px;align-items:flex-start;}
+.step-n{width:28px;height:28px;border-radius:50%;background:#2E73B8;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;flex-shrink:0;}
+.step-t{font-weight:600;margin-bottom:2px;}
+.step-d{font-size:.88rem;color:#6B7B8D;}
+.tip{background:#fff8e1;border-left:4px solid #f59e0b;padding:10px 14px;margin:12px 0;border-radius:0 8px 8px 0;font-size:.88rem;}
+.warn{background:#fef2f2;border-left:4px solid #ef4444;padding:10px 14px;margin:12px 0;border-radius:0 8px 8px 0;font-size:.88rem;}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.88rem;}
+th{background:#2E73B8;color:#fff;padding:8px 10px;text-align:left;}
+td{padding:8px 10px;border-bottom:1px solid #e8f0f8;}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #e8f0f8;color:#6B7B8D;font-size:.8rem;}
+.page-break{page-break-before:always;}
+.logo-header{text-align:center;margin-bottom:20px;}
+.logo-header img{width:80px;}
+@media print{body{padding:20px;}.page-break{page-break-before:always;}}
+.print-btn{display:block;margin:0 auto 30px;padding:12px 32px;background:#2E73B8;color:#fff;border:none;border-radius:50px;font-size:1rem;font-weight:600;cursor:pointer;}
+.print-btn:hover{background:#245f9a;}
+@media print{.print-btn{display:none;}}
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">📄 Enregistrer en PDF (Ctrl+P)</button>
+
+<div class="logo-header">
+    <div style="font-size:3rem;color:#2E73B8;">✝</div>
+</div>
+<h1>Guide de gestion du CMS</h1>
+<p class="subtitle">Croire & Penser — Manuel d'utilisation complet</p>
+
+<!-- SECTION 1 -->
+<h2>🔑 1. Se connecter au CMS</h2>
+<div class="step-box"><div class="step-n">1</div><div><div class="step-t">Ouvrez votre navigateur</div><div class="step-d">Allez sur <code>votresite.com/cms</code></div></div></div>
+<div class="step-box"><div class="step-n">2</div><div><div class="step-t">Entrez vos identifiants</div><div class="step-d">Email : <code>admin@croireetpenser.ca</code> — Mot de passe : <code>admin123</code></div></div></div>
+<div class="step-box"><div class="step-n">3</div><div><div class="step-t">Cliquez "Se connecter"</div><div class="step-d">Vous arrivez sur le tableau de bord.</div></div></div>
+<div class="warn">⚠️ Changez votre mot de passe après la première connexion pour sécuriser votre compte.</div>
+
+<!-- SECTION 2 -->
+<h2>📝 2. Créer un contenu (Article, Vidéo, Podcast)</h2>
+<div class="step-box"><div class="step-n">1</div><div><div class="step-t">Menu → Contenus → + Nouveau contenu</div><div class="step-d">Le formulaire de création s'ouvre.</div></div></div>
+<div class="step-box"><div class="step-n">2</div><div><div class="step-t">Remplissez les champs obligatoires</div><div class="step-d">Titre, Type (article/vidéo/podcast), Catégorie, Contenu principal.</div></div></div>
+<div class="step-box"><div class="step-n">3</div><div><div class="step-t">Ajoutez les médias (optionnel)</div><div class="step-d"><strong>Vidéo</strong> : URL YouTube — <strong>Podcast</strong> : URL audio — <strong>Bannière</strong> : URL image</div></div></div>
+<div class="step-box"><div class="step-n">4</div><div><div class="step-t">Cochez "Publier immédiatement"</div><div class="step-d">Sans cette case, le contenu reste en brouillon invisible.</div></div></div>
+<div class="step-box"><div class="step-n">5</div><div><div class="step-t">Cliquez "Créer"</div><div class="step-d">Le contenu apparaît sur le site.</div></div></div>
+
+<h3>Tableau des champs</h3>
+<table>
+<tr><th>Champ</th><th>Description</th><th>Obligatoire</th></tr>
+<tr><td>Titre</td><td>Le titre du contenu</td><td>✅</td></tr>
+<tr><td>Type</td><td>Article, Vidéo ou Podcast</td><td>✅</td></tr>
+<tr><td>Catégorie</td><td>Thème (Dieu, Bible, Jésus-Christ…)</td><td>✅</td></tr>
+<tr><td>Contenu</td><td>Le texte complet</td><td>✅</td></tr>
+<tr><td>Image bannière</td><td>URL d'une image</td><td>❌</td></tr>
+<tr><td>Lien vidéo</td><td>URL YouTube</td><td>❌</td></tr>
+<tr><td>Fichier audio</td><td>URL MP3</td><td>❌</td></tr>
+<tr><td>Résumé</td><td>Courte description</td><td>❌</td></tr>
+<tr><td>Tags</td><td>Mots-clés (virgules)</td><td>❌</td></tr>
+</table>
+
+<div class="page-break"></div>
+
+<!-- SECTION 3 -->
+<h2>📍 3. Où apparaît le contenu sur le site ?</h2>
+<table>
+<tr><th>Page</th><th>Ce qui s'affiche</th></tr>
+<tr><td><strong>Accueil</strong></td><td>Les 6 derniers contenus publiés</td></tr>
+<tr><td><strong>Contenus → Articles</strong></td><td>Tous les articles</td></tr>
+<tr><td><strong>Contenus → Vidéos</strong></td><td>Vidéos avec player YouTube intégré</td></tr>
+<tr><td><strong>Contenus → Podcasts</strong></td><td>Podcasts avec lecteur audio</td></tr>
+</table>
+<div class="tip">💡 Les visiteurs peuvent poser des questions directement sur chaque contenu.</div>
+
+<!-- SECTION 4 -->
+<h2>🎬 4. Ajouter une vidéo YouTube</h2>
+<div class="step-box"><div class="step-n">1</div><div><div class="step-t">Copiez l'URL YouTube</div><div class="step-d">Format : <code>https://www.youtube.com/watch?v=XXXXX</code></div></div></div>
+<div class="step-box"><div class="step-n">2</div><div><div class="step-t">CMS → Nouveau contenu → Type : Vidéo</div><div class="step-d">Collez l'URL dans le champ "Lien vidéo".</div></div></div>
+<div class="step-box"><div class="step-n">3</div><div><div class="step-t">Ajoutez une bannière (recommandé)</div><div class="step-d">L'image sert de miniature. Au clic, la vidéo se lance.</div></div></div>
+<div class="tip">💡 Sans bannière, le player YouTube s'affiche directement.</div>
+
+<!-- SECTION 5 -->
+<h2>🎧 5. Ajouter un podcast / audio</h2>
+<div class="step-box"><div class="step-n">1</div><div><div class="step-t">Hébergez votre fichier audio</div><div class="step-d">SoundCloud, Google Drive, ou tout hébergeur de fichiers.</div></div></div>
+<div class="step-box"><div class="step-n">2</div><div><div class="step-t">CMS → Nouveau contenu → Type : Podcast</div><div class="step-d">Collez l'URL du fichier MP3 dans le champ audio.</div></div></div>
+
+<div class="page-break"></div>
+
+<!-- SECTION 6 -->
+<h2>🗣️ 6. Gérer les témoignages</h2>
+<p>Les visiteurs soumettent des témoignages depuis <code>/temoignages</code>. Ils arrivent en attente de modération.</p>
+<div class="step-box"><div class="step-n">1</div><div><div class="step-t">Menu → Témoignages</div><div class="step-d">Liste de tous les témoignages avec statut.</div></div></div>
+<div class="step-box"><div class="step-n">2</div><div><div class="step-t">Filtrez par statut</div><div class="step-d">En attente / Approuvés.</div></div></div>
+<div class="step-box"><div class="step-n">3</div><div><div class="step-t">Actions</div><div class="step-d">✅ Approuver → visible — ⏳ Retirer → masqué — 🗑 Supprimer → définitif</div></div></div>
+
+<!-- SECTION 7 -->
+<h2>📄 7. Modifier les textes des pages</h2>
+<div class="step-box"><div class="step-n">1</div><div><div class="step-t">Menu → Pages → Sélectionnez une page</div><div class="step-d">Accueil, À propos, Contact, etc.</div></div></div>
+<div class="step-box"><div class="step-n">2</div><div><div class="step-t">Cliquez "Modifier"</div><div class="step-d">La page s'ouvre en mode édition (nouvel onglet).</div></div></div>
+<div class="step-box"><div class="step-n">3</div><div><div class="step-t">Cliquez sur un texte → modifiez-le</div><div class="step-d">Sauvegarde automatique à chaque modification.</div></div></div>
+
+<!-- SECTION 8 -->
+<h2>❓ 8. Questions fréquentes</h2>
+<h3>Le contenu ne s'affiche pas sur le site ?</h3>
+<p>→ Vérifiez que <strong>"Publier immédiatement"</strong> est coché.</p>
+<h3>La vidéo ne se lance pas ?</h3>
+<p>→ L'URL doit être au format : <code>https://www.youtube.com/watch?v=XXXXX</code></p>
+<h3>Comment ajouter une image de bannière ?</h3>
+<p>→ Hébergez l'image en ligne (Imgur, Google Photos) et copiez le lien direct.</p>
+<h3>Le témoignage approuvé n'apparaît pas ?</h3>
+<p>→ Rafraîchissez la page avec <strong>Ctrl + F5</strong>.</p>
+
+<!-- SECTION 9 -->
+<h2>📞 9. Support technique</h2>
+<table>
+<tr><th>Contact</th><th>Coordonnées</th></tr>
+<tr><td>Email support</td><td>support@croireetpenser.com</td></tr>
+<tr><td>Développeur</td><td>Cognito Inc.</td></tr>
+<tr><td>Email développeur</td><td>jonathan.kakesa@cognito-inc.ca</td></tr>
+</table>
+
+<div class="footer">
+    <strong>Croire & Penser</strong> — Guide CMS v1.0<br>
+    Développé par Cognito Inc. — 2025<br>
+    Tous droits réservés ©
+</div>
+
+</body>
+</html>
