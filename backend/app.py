@@ -940,24 +940,38 @@ def cms_prayers():
 @app.route('/api/cms/questions', methods=['GET', 'POST'])
 def cms_questions():
     if request.method == 'GET':
-        questions = Question.query.all()
+        questions = Question.query.order_by(Question.created_at.desc()).all()
         return jsonify([{
             'id': q.id,
             'title': q.title,
             'content': q.content,
+            'is_approved': q.is_approved,
             'created_at': q.created_at.isoformat()
         } for q in questions])
     elif request.method == 'POST':
         data = request.get_json()
         question = Question(
             title=data['title'],
-            content=data['answer'],
+            content=data.get('answer', data.get('content', '')),
             author_id=1,
             is_approved=True
         )
         db.session.add(question)
         db.session.commit()
         return jsonify({'success': True, 'id': question.id}), 201
+
+@app.route('/api/cms/questions/<int:qid>', methods=['PUT', 'DELETE'])
+def cms_question_detail(qid):
+    q = Question.query.get_or_404(qid)
+    if request.method == 'PUT':
+        data = request.get_json()
+        q.is_approved = data.get('is_approved', q.is_approved)
+        db.session.commit()
+        return jsonify({'success': True})
+    elif request.method == 'DELETE':
+        db.session.delete(q)
+        db.session.commit()
+        return jsonify({'success': True})
 
 @app.route('/api/cms/events', methods=['GET', 'POST'])
 def cms_events():
