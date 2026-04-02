@@ -899,23 +899,21 @@
         }
         
         async function deleteContent(id) {
-            if (confirm('Êtes-vous sûr de vouloir supprimer ce contenu ?')) {
+            if (!confirm('Êtes-vous sûr de vouloir supprimer ce contenu ?')) return;
+            try {
+                const result = await apiCall(`/api/cms/contents/${id}`, 'DELETE');
+                if (!result || !result.success) {
+                    alert('Erreur lors de la suppression.');
+                    return;
+                }
                 contents = contents.filter(c => c.id !== id);
-                localStorage.setItem('cms_contents', JSON.stringify(contents));
-                localStorage.setItem('cms_last_update', Date.now().toString());
-                
-                console.log('Contenu supprimé, reste:', contents.length);
-                
+                try { localStorage.setItem('cms_contents', JSON.stringify(contents)); } catch(e) {}
                 await loadContentList();
                 await updateStats();
                 showNotification('Contenu supprimé avec succès !', 'success');
-                
-                // Forcer le rechargement
-                setTimeout(() => {
-                    if (window.reloadCMSContent) {
-                        window.reloadCMSContent();
-                    }
-                }, 500);
+            } catch(e) {
+                console.error('Erreur deleteContent:', e);
+                alert('Erreur inattendue : ' + e.message);
             }
         }
         
