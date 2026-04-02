@@ -827,56 +827,48 @@
                 videoUrl: document.getElementById('video-url') ? document.getElementById('video-url').value : '',
                 audioUrl: document.getElementById('audio-url') ? document.getElementById('audio-url').value : ''
             };
-            
+
             if (!formData.title || !formData.type || !formData.category || !formData.body) {
-                alert('Veuillez remplir tous les champs obligatoires');
+                alert('Veuillez remplir tous les champs obligatoires (titre, type, catégorie, contenu)');
                 return;
             }
-            
-            let result;
-            if (contentId) {
-                // Modification
-                result = await apiCall(`/api/cms/contents/${contentId}`, 'PUT', formData);
-            } else {
-                // Création
-                result = await apiCall('/api/cms/contents', 'POST', formData);
-            }
-            
-            // Sauvegarder
-            if (contentId) {
-                const index = contents.findIndex(c => c.id === contentId);
-                if (index !== -1) {
-                    contents[index] = { ...contents[index], ...formData, updated_at: new Date().toISOString() };
+
+            try {
+                let result;
+                if (contentId) {
+                    result = await apiCall(`/api/cms/contents/${contentId}`, 'PUT', formData);
+                } else {
+                    result = await apiCall('/api/cms/contents', 'POST', formData);
                 }
-            } else {
-                const newContent = {
-                    id: Date.now(),
-                    ...formData,
-                    created_at: new Date().toISOString(),
-                    updated_at: new Date().toISOString()
-                };
-                contents.push(newContent);
-            }
-            
-            // Sauvegarder dans localStorage
-            localStorage.setItem('cms_contents', JSON.stringify(contents));
-            localStorage.setItem('cms_last_update', Date.now().toString());
-            
-            console.log('Contenu sauvegardé:', formData.title);
-            console.log('Total contenus:', contents.length);
-            
-            closeModal();
-            await loadContentList();
-            await updateStats();
-            
-            showNotification(`Contenu "${formData.title}" ${contentId ? 'modifié' : 'créé'} avec succès !`, 'success');
-            
-            // Forcer le rechargement sur le site
-            setTimeout(() => {
-                if (window.reloadCMSContent) {
-                    window.reloadCMSContent();
+
+                if (!result || !result.success) {
+                    alert('Erreur serveur lors de la sauvegarde. Vérifiez les logs Railway.');
+                    return;
                 }
-            }, 500);
+
+                // Mettre à jour le cache local sans les base64 (évite QuotaExceededError)
+                try {
+                    const lightFormData = { ...formData, banner: formData.banner.startsWith('data:') ? '' : formData.banner };
+                    if (contentId) {
+                        const index = contents.findIndex(c => c.id === contentId);
+                        if (index !== -1) contents[index] = { ...contents[index], ...lightFormData, updated_at: new Date().toISOString() };
+                    } else {
+                        contents.push({ id: result.id || Date.now(), ...lightFormData, created_at: new Date().toISOString(), updated_at: new Date().toISOString() });
+                    }
+                    localStorage.setItem('cms_contents', JSON.stringify(contents));
+                } catch(e) {
+                    console.warn('localStorage quota dépassé, cache ignoré:', e);
+                }
+
+                closeModal();
+                await loadContentList();
+                await updateStats();
+                showNotification(`Contenu "${formData.title}" ${contentId ? 'modifié' : 'créé'} avec succès !`, 'success');
+
+            } catch(e) {
+                console.error('Erreur saveContent:', e);
+                alert('Erreur inattendue : ' + e.message);
+            }
         }
         
         function toggleMediaFields() {
