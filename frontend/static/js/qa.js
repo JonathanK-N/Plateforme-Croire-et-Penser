@@ -1,9 +1,36 @@
 // Q&A Page JavaScript
 console.log('QA JavaScript loaded');
 
+// Charger et afficher les questions approuvées depuis l'API
+async function loadApprovedQuestions() {
+    const grid = document.getElementById('qaGrid');
+    if (!grid) return;
+    try {
+        const res = await fetch('/api/questions');
+        const questions = await res.json();
+        if (!questions.length) return; // garder le message placeholder
+        grid.innerHTML = questions.map(q => `
+            <div class="col-12">
+                <div class="card shadow-sm border-0 mb-3">
+                    <div class="card-body p-4">
+                        <h5 class="fw-bold mb-2">${q.title}</h5>
+                        <p class="text-muted mb-0">${q.content}</p>
+                        <div class="mt-2 text-end">
+                            <small class="text-muted">${new Date(q.created_at).toLocaleDateString('fr-CA')}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    } catch(e) {
+        console.error('Erreur chargement questions:', e);
+    }
+}
+
 // Attendre que le DOM soit complètement chargé
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM loaded, initializing QA page');
+    loadApprovedQuestions();
     
     // Animation observer
     const observerOptions = {
