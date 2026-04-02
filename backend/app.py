@@ -100,7 +100,7 @@ class ThematicContent(db.Model):
     format_type = db.Column(db.String(20))  # carrousel, teaser, long-form, interactive
     publication_date = db.Column(db.DateTime)
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    featured_image = db.Column(db.String(500))
+    featured_image = db.Column(db.Text)
     reading_time = db.Column(db.Integer)  # en minutes
     views = db.Column(db.Integer, default=0)
     likes = db.Column(db.Integer, default=0)
@@ -108,8 +108,8 @@ class ThematicContent(db.Model):
     is_published = db.Column(db.Boolean, default=False)
     meta_description = db.Column(db.String(160))
     tags = db.Column(db.Text)  # JSON array of tags
-    video_url = db.Column(db.String(500))  # URL vidéo YouTube/Vimeo
-    audio_url = db.Column(db.String(500))  # URL audio/podcast
+    video_url = db.Column(db.Text)  # URL vidéo YouTube/Vimeo
+    audio_url = db.Column(db.Text)  # URL audio/podcast
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
@@ -1000,6 +1000,15 @@ def init_thematic_categories():
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
+        # Migration: élargir les colonnes URL qui étaient limitées à 500 caractères
+        try:
+            with db.engine.connect() as conn:
+                conn.execute(db.text('ALTER TABLE thematic_content ALTER COLUMN featured_image TYPE TEXT'))
+                conn.execute(db.text('ALTER TABLE thematic_content ALTER COLUMN video_url TYPE TEXT'))
+                conn.execute(db.text('ALTER TABLE thematic_content ALTER COLUMN audio_url TYPE TEXT'))
+                conn.commit()
+        except Exception:
+            pass  # Colonnes déjà en TEXT ou migration déjà appliquée
         create_admin_user()
         init_thematic_categories()
     
