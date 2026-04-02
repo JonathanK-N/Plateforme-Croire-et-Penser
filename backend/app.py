@@ -39,38 +39,25 @@ jwt = JWTManager(app)
 CORS(app)
 
 def handle_image_field(value):
-    """Si la valeur est une image base64, l'uploader sur Cloudinary et retourner l'URL permanente."""
+    """Si la valeur est une image base64, l'uploader sur Cloudinary ou stocker en DB."""
     if not value or not str(value).startswith('data:image/'):
         return value
-    # Vérifier que Cloudinary est configuré
-    if not os.getenv('CLOUDINARY_CLOUD_NAME'):
-        # Fallback: sauvegarder localement si Cloudinary non configuré
+    # Cloudinary configuré → upload pour URL permanente
+    if os.getenv('CLOUDINARY_CLOUD_NAME'):
         try:
-            header, data = value.split(',', 1)
-            ext = header.split('/')[1].split(';')[0]
-            filename = f"{uuid.uuid4()}.{ext}"
-            upload_folder = app.config.get('UPLOAD_FOLDER', '/app/uploads')
-            os.makedirs(upload_folder, exist_ok=True)
-            filepath = os.path.join(upload_folder, filename)
-            with open(filepath, 'wb') as f:
-                f.write(base64.b64decode(data))
-            return f'/uploads/{filename}'
+            result = cloudinary.uploader.upload(
+                value,
+                folder='croire-et-penser',
+                resource_type='image'
+            )
+            url = result.get('secure_url', '')
+            print(f"Image uploadée sur Cloudinary: {url}")
+            return url
         except Exception as e:
-            print(f"Erreur sauvegarde image locale: {e}")
-            return ''
-    # Upload vers Cloudinary
-    try:
-        result = cloudinary.uploader.upload(
-            value,
-            folder='croire-et-penser',
-            resource_type='image'
-        )
-        url = result.get('secure_url', '')
-        print(f"Image uploadée sur Cloudinary: {url}")
-        return url
-    except Exception as e:
-        print(f"Erreur upload Cloudinary: {e}")
-        return ''
+            print(f"Erreur upload Cloudinary: {e}")
+    # Fallback: stocker le base64 directement en DB (persiste dans PostgreSQL)
+    print("Cloudinary non configuré — image stockée en base64 dans PostgreSQL")
+    return value
 
 # Modèles de base de données
 class User(db.Model):
