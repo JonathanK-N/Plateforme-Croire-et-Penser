@@ -299,18 +299,19 @@ def get_questions():
     } for q in questions])
 
 @app.route('/api/questions', methods=['POST'])
-@jwt_required()
 def create_question():
     data = request.get_json()
+    if not data or not data.get('title') or not data.get('content'):
+        return jsonify({'message': 'Titre et contenu requis'}), 400
     question = Question(
         title=data['title'],
         content=data['content'],
-        author_id=get_jwt_identity()
+        author_id=1
     )
-    
+
     db.session.add(question)
     db.session.commit()
-    
+
     return jsonify({'message': 'Question soumise pour modération'}), 201
 
 # Routes pour le contenu thématique
