@@ -712,6 +712,10 @@ def cms():
 def guide_cms():
     return send_from_directory('../docs', 'guide-cms-interactif.html')
 
+@app.route('/uploads/<path:filename>')
+def uploaded_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+
 @app.route('/testimonies')
 @app.route('/temoignages')
 def testimonies():
