@@ -6,6 +6,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta
 import os
+import base64
+import uuid
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -26,6 +28,25 @@ app.config['MAX_CONTENT_LENGTH'] = 500 * 1024 * 1024  # 500MB max
 db = SQLAlchemy(app)
 jwt = JWTManager(app)
 CORS(app)
+
+def handle_image_field(value):
+    """Si la valeur est une image base64, la sauvegarder sur disque et retourner l'URL."""
+    if not value or not str(value).startswith('data:image/'):
+        return value
+    try:
+        header, data = value.split(',', 1)
+        ext = header.split('/')[1].split(';')[0]  # png, jpg, jpeg, gif, webp
+        filename = f"{uuid.uuid4()}.{ext}"
+        upload_folder = app.config.get('UPLOAD_FOLDER', '/app/uploads')
+        os.makedirs(upload_folder, exist_ok=True)
+        filepath = os.path.join(upload_folder, filename)
+        with open(filepath, 'wb') as f:
+            f.write(base64.b64decode(data))
+        print(f"Image sauvegardée: {filename}")
+        return f'/uploads/{filename}'
+    except Exception as e:
+        print(f"Erreur sauvegarde image base64: {e}")
+        return ''
 
 # Modèles de base de données
 class User(db.Model):
@@ -770,7 +791,7 @@ def cms_contents():
             category_id=category_map.get(data['category'], 1),
             content_type=data['type'],
             author_id=1,  # Admin par défaut
-            featured_image=data.get('banner', ''),
+            featured_image=handle_image_field(data.get('banner', '')),
             is_featured=data.get('featured', False),
             is_published=data.get('published', False),
             tags=','.join(data.get('tags', [])),
@@ -796,7 +817,7 @@ def cms_content_detail(content_id):
         content.content = data['body']
         content.excerpt = data.get('excerpt', '')
         content.content_type = data['type']
-        content.featured_image = data.get('banner', '')
+        content.featured_image = handle_image_field(data.get('banner', ''))
         content.is_featured = data.get('featured', False)
         content.is_published = data.get('published', False)
         content.tags = ','.join(data.get('tags', []))
@@ -1001,14 +1022,15 @@ if __name__ == '__main__':
     with app.app_context():
         db.create_all()
         # Migration: élargir les colonnes URL qui étaient limitées à 500 caractères
-        try:
-            with db.engine.connect() as conn:
-                conn.execute(db.text('ALTER TABLE thematic_content ALTER COLUMN featured_image TYPE TEXT'))
-                conn.execute(db.text('ALTER TABLE thematic_content ALTER COLUMN video_url TYPE TEXT'))
-                conn.execute(db.text('ALTER TABLE thematic_content ALTER COLUMN audio_url TYPE TEXT'))
-                conn.commit()
-        except Exception:
-            pass  # Colonnes déjà en TEXT ou migration déjà appliquée
+        print("Vérification migration colonnes TEXT...")
+        for col in ['featured_image', 'video_url', 'audio_url']:
+            try:
+                with db.engine.connect() as conn:
+                    conn.execute(db.text(f'ALTER TABLE thematic_content ALTER COLUMN {col} TYPE TEXT USING {col}::TEXT'))
+                    conn.commit()
+                print(f"Migration OK: {col} -> TEXT")
+            except Exception as e:
+                print(f"Migration {col} (ignorée): {e}")
         create_admin_user()
         init_thematic_categories()
     
