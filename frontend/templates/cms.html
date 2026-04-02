@@ -592,6 +592,9 @@
                 case 'partnerships':
                     await loadPartnershipList();
                     break;
+                case 'qa':
+                    await loadQaList();
+                    break;
             }
         }
         
@@ -672,7 +675,43 @@
                 </div>
             `).join('');
         }
-        
+
+        async function loadQaList() {
+            const list = document.getElementById('qa-list');
+            const data = await apiCall('/api/cms/questions') || [];
+            if (data.length === 0) {
+                list.innerHTML = '<p style="text-align:center;color:#7f8c8d;padding:40px;">Aucune question soumise.</p>';
+                return;
+            }
+            list.innerHTML = data.map(q => `
+                <div class="content-item" style="border-left:4px solid ${q.is_approved ? '#27ae60' : '#f39c12'};">
+                    <div class="content-info">
+                        <h3>${q.title}</h3>
+                        <div class="content-meta">${q.content.substring(0, 120)}${q.content.length > 120 ? '…' : ''}</div>
+                        <div class="content-meta">${new Date(q.created_at).toLocaleDateString('fr-CA')} &nbsp;•&nbsp; ${q.is_approved ? '<span style="color:#27ae60;">✅ Approuvée</span>' : '<span style="color:#f39c12;">⏳ En attente</span>'}</div>
+                    </div>
+                    <div class="actions">
+                        ${!q.is_approved ? `<button class="btn btn-success btn-sm" onclick="approveQuestion(${q.id})">✅ Approuver</button>` : `<button class="btn btn-sm" style="background:#f39c12;color:#fff;" onclick="unapproveQuestion(${q.id})">⏳ Retirer</button>`}
+                        <button class="btn btn-danger btn-sm" onclick="deleteQuestion(${q.id})">Supprimer</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function approveQuestion(id) {
+            await fetch('/api/cms/questions/' + id, { method: 'PUT', headers: {'Content-Type':'application/json'}, body: JSON.stringify({is_approved: true}) });
+            await loadQaList();
+        }
+        async function unapproveQuestion(id) {
+            await fetch('/api/cms/questions/' + id, { method: 'PUT', headers: {'Content-Type':'application/json'}, body: JSON.stringify({is_approved: false}) });
+            await loadQaList();
+        }
+        async function deleteQuestion(id) {
+            if (!confirm('Supprimer cette question ?')) return;
+            await fetch('/api/cms/questions/' + id, { method: 'DELETE' });
+            await loadQaList();
+        }
+
         // Modal de contenu
         function openContentModal(contentId = null) {
             const isEdit = contentId !== null;
