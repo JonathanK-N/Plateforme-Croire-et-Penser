@@ -599,21 +599,18 @@
         }
         
         async function updateStats() {
-            await loadAllData();
+            const [apiContents, apiQuestions] = await Promise.all([
+                fetch('/api/cms/contents').then(r => r.json()).catch(() => []),
+                fetch('/api/cms/questions').then(r => r.json()).catch(() => [])
+            ]);
+            contents = apiContents;
+            questions = apiQuestions;
             document.getElementById('total-contents').textContent = contents.length;
+            document.getElementById('total-questions').textContent = questions.length;
         }
-        
+
         async function loadAllData() {
-            // Charger depuis localStorage d'abord, puis synchroniser avec l'API
             contents = JSON.parse(localStorage.getItem('cms_contents') || '[]');
-            users = JSON.parse(localStorage.getItem('cms_users') || '[]');
-            prayers = JSON.parse(localStorage.getItem('cms_prayers') || '[]');
-            questions = JSON.parse(localStorage.getItem('cms_questions') || '[]');
-            events = JSON.parse(localStorage.getItem('cms_events') || '[]');
-            donations = JSON.parse(localStorage.getItem('cms_donations') || '[]');
-            partnerships = JSON.parse(localStorage.getItem('cms_partnerships') || '[]');
-            
-            // Essayer de synchroniser avec l'API en arrière-plan
             try {
                 const apiContents = await fetch('/api/cms/contents').then(r => r.json()).catch(() => null);
                 if (apiContents) {
