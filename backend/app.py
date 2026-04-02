@@ -8,9 +8,18 @@ from datetime import datetime, timedelta
 import os
 import base64
 import uuid
+import cloudinary
+import cloudinary.uploader
 from dotenv import load_dotenv
 
 load_dotenv()
+
+# Configuration Cloudinary pour le stockage des images
+cloudinary.config(
+    cloud_name=os.getenv('CLOUDINARY_CLOUD_NAME'),
+    api_key=os.getenv('CLOUDINARY_API_KEY'),
+    api_secret=os.getenv('CLOUDINARY_API_SECRET')
+)
 
 app = Flask(__name__, template_folder='../frontend/templates', static_folder='../frontend/static')
 # Configuration base de données pour Railway
@@ -30,22 +39,37 @@ jwt = JWTManager(app)
 CORS(app)
 
 def handle_image_field(value):
-    """Si la valeur est une image base64, la sauvegarder sur disque et retourner l'URL."""
+    """Si la valeur est une image base64, l'uploader sur Cloudinary et retourner l'URL permanente."""
     if not value or not str(value).startswith('data:image/'):
         return value
+    # Vérifier que Cloudinary est configuré
+    if not os.getenv('CLOUDINARY_CLOUD_NAME'):
+        # Fallback: sauvegarder localement si Cloudinary non configuré
+        try:
+            header, data = value.split(',', 1)
+            ext = header.split('/')[1].split(';')[0]
+            filename = f"{uuid.uuid4()}.{ext}"
+            upload_folder = app.config.get('UPLOAD_FOLDER', '/app/uploads')
+            os.makedirs(upload_folder, exist_ok=True)
+            filepath = os.path.join(upload_folder, filename)
+            with open(filepath, 'wb') as f:
+                f.write(base64.b64decode(data))
+            return f'/uploads/{filename}'
+        except Exception as e:
+            print(f"Erreur sauvegarde image locale: {e}")
+            return ''
+    # Upload vers Cloudinary
     try:
-        header, data = value.split(',', 1)
-        ext = header.split('/')[1].split(';')[0]  # png, jpg, jpeg, gif, webp
-        filename = f"{uuid.uuid4()}.{ext}"
-        upload_folder = app.config.get('UPLOAD_FOLDER', '/app/uploads')
-        os.makedirs(upload_folder, exist_ok=True)
-        filepath = os.path.join(upload_folder, filename)
-        with open(filepath, 'wb') as f:
-            f.write(base64.b64decode(data))
-        print(f"Image sauvegardée: {filename}")
-        return f'/uploads/{filename}'
+        result = cloudinary.uploader.upload(
+            value,
+            folder='croire-et-penser',
+            resource_type='image'
+        )
+        url = result.get('secure_url', '')
+        print(f"Image uploadée sur Cloudinary: {url}")
+        return url
     except Exception as e:
-        print(f"Erreur sauvegarde image base64: {e}")
+        print(f"Erreur upload Cloudinary: {e}")
         return ''
 
 # Modèles de base de données
