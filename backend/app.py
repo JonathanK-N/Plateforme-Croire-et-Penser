@@ -39,38 +39,25 @@ jwt = JWTManager(app)
 CORS(app)
 
 def handle_image_field(value):
-    """Si la valeur est une image base64, l'uploader sur Cloudinary et retourner l'URL permanente."""
+    """Si la valeur est une image base64, l'uploader sur Cloudinary ou stocker en DB."""
     if not value or not str(value).startswith('data:image/'):
         return value
-    # Vérifier que Cloudinary est configuré
-    if not os.getenv('CLOUDINARY_CLOUD_NAME'):
-        # Fallback: sauvegarder localement si Cloudinary non configuré
+    # Cloudinary configuré → upload pour URL permanente
+    if os.getenv('CLOUDINARY_CLOUD_NAME'):
         try:
-            header, data = value.split(',', 1)
-            ext = header.split('/')[1].split(';')[0]
-            filename = f"{uuid.uuid4()}.{ext}"
-            upload_folder = app.config.get('UPLOAD_FOLDER', '/app/uploads')
-            os.makedirs(upload_folder, exist_ok=True)
-            filepath = os.path.join(upload_folder, filename)
-            with open(filepath, 'wb') as f:
-                f.write(base64.b64decode(data))
-            return f'/uploads/{filename}'
+            result = cloudinary.uploader.upload(
+                value,
+                folder='croire-et-penser',
+                resource_type='image'
+            )
+            url = result.get('secure_url', '')
+            print(f"Image uploadée sur Cloudinary: {url}")
+            return url
         except Exception as e:
-            print(f"Erreur sauvegarde image locale: {e}")
-            return ''
-    # Upload vers Cloudinary
-    try:
-        result = cloudinary.uploader.upload(
-            value,
-            folder='croire-et-penser',
-            resource_type='image'
-        )
-        url = result.get('secure_url', '')
-        print(f"Image uploadée sur Cloudinary: {url}")
-        return url
-    except Exception as e:
-        print(f"Erreur upload Cloudinary: {e}")
-        return ''
+            print(f"Erreur upload Cloudinary: {e}")
+    # Fallback: stocker le base64 directement en DB (persiste dans PostgreSQL)
+    print("Cloudinary non configuré — image stockée en base64 dans PostgreSQL")
+    return value
 
 # Modèles de base de données
 class User(db.Model):
@@ -797,42 +784,56 @@ def cms_contents():
         } for c in contents])
     
     elif request.method == 'POST':
-        data = request.get_json()
-        
-        # Générer un slug unique
-        import re
-        slug = re.sub(r'[^a-zA-Z0-9\s-]', '', data['title'].lower())
-        slug = re.sub(r'\s+', '-', slug)
-        
-        # Trouver la catégorie par nom
-        category_map = {
-            'dieu': 1, 'bible': 2, 'jesus-christ': 3, 'saint-esprit': 4,
-            'salut': 5, 'eglise': 6, 'etre-humain': 7, 'le-mal': 8,
-            'monde-invisible': 9, 'la-fin': 10, 'ethique': 11
-        }
-        
-        content = ThematicContent(
-            title=data['title'],
-            slug=slug,
-            content=data['body'],
-            excerpt=data.get('excerpt', ''),
-            category_id=category_map.get(data['category'], 1),
-            content_type=data['type'],
-            author_id=1,  # Admin par défaut
-            featured_image=handle_image_field(data.get('banner', '')),
-            is_featured=data.get('featured', False),
-            is_published=data.get('published', False),
-            tags=','.join(data.get('tags', [])),
-            video_url=data.get('videoUrl', ''),
-            audio_url=data.get('audioUrl', ''),
-            publication_date=datetime.utcnow() if data.get('published') else None
-        )
-        
-        db.session.add(content)
-        db.session.commit()
-        print('Nouveau contenu cree:', content.title)
-        
-        return jsonify({'success': True, 'id': content.id}), 201
+        try:
+            data = request.get_json()
+            if not data:
+                return jsonify({'error': 'JSON invalide'}), 400
+
+            # Générer un slug unique
+            import re
+            base_slug = re.sub(r'[^a-zA-Z0-9\s-]', '', data['title'].lower())
+            base_slug = re.sub(r'\s+', '-', base_slug)
+            slug = base_slug
+            counter = 1
+            while ThematicContent.query.filter_by(slug=slug).first():
+                slug = f"{base_slug}-{counter}"
+                counter += 1
+
+            # Trouver la catégorie par nom
+            category_map = {
+                'dieu': 1, 'bible': 2, 'jesus-christ': 3, 'saint-esprit': 4,
+                'salut': 5, 'eglise': 6, 'etre-humain': 7, 'le-mal': 8,
+                'monde-invisible': 9, 'la-fin': 10, 'ethique': 11
+            }
+
+            content = ThematicContent(
+                title=data['title'],
+                slug=slug,
+                content=data.get('body', ''),
+                excerpt=data.get('excerpt', ''),
+                category_id=category_map.get(data.get('category', ''), 1),
+                content_type=data.get('type', 'article'),
+                author_id=1,
+                featured_image=handle_image_field(data.get('banner', '')),
+                is_featured=data.get('featured', False),
+                is_published=data.get('published', False),
+                tags=','.join(data.get('tags', [])),
+                video_url=data.get('videoUrl', ''),
+                audio_url=data.get('audioUrl', ''),
+                publication_date=datetime.utcnow() if data.get('published') else None
+            )
+
+            db.session.add(content)
+            db.session.commit()
+            print('Nouveau contenu cree:', content.title)
+
+            return jsonify({'success': True, 'id': content.id}), 201
+        except Exception as e:
+            db.session.rollback()
+            print(f"Erreur création contenu: {e}")
+            import traceback
+            traceback.print_exc()
+            return jsonify({'error': str(e)}), 500
 
 @app.route('/api/cms/contents/<int:content_id>', methods=['PUT', 'DELETE'])
 def cms_content_detail(content_id):
