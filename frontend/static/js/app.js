@@ -429,14 +429,12 @@ async function handleQuestionSubmit(e) {
     
     const title = document.getElementById('questionTitle').value;
     const content = document.getElementById('questionContent').value;
-    const token = localStorage.getItem('access_token');
-    
+
     try {
         const response = await fetch(`${API_BASE}/questions`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({ title, content })
         });
